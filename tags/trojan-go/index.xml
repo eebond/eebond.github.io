@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>trojan-go - 标签 - EEBOND</title>
+        <link>https://eebond.github.io/tags/trojan-go/</link>
+        <description>trojan-go - 标签 - EEBOND</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 07 Apr 2022 18:05:43 &#43;0000</lastBuildDate><atom:link href="https://eebond.github.io/tags/trojan-go/" rel="self" type="application/rss+xml" /><item>
+    <title>CentOS7安装部署Trojan-go</title>
+    <link>https://eebond.github.io/posts/centos7%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2trojan-go/</link>
+    <pubDate>Thu, 07 Apr 2022 18:05:43 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://eebond.github.io/posts/centos7%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2trojan-go/</guid>
+    <description><![CDATA[前言 Trojan-goTrojan-Go是使用Go语言实现的完整的Trojan代理，和Trojan协议以及原版的配置文件格式兼容。支持并且兼]]></description>
+</item></channel>
+</rss>
