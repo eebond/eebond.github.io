@@ -1,0 +1,49 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Linux - 分类 - EEBOND</title>
+        <link>http://eebond.github.io/categories/linux/</link>
+        <description>Linux - 分类 - EEBOND</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 17 Apr 2022 20:01:48 &#43;0000</lastBuildDate><atom:link href="http://eebond.github.io/categories/linux/" rel="self" type="application/rss+xml" /><item>
+    <title>Linux中安装配置JDK8</title>
+    <link>http://eebond.github.io/posts/linux%E4%B8%AD%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEjdk8/</link>
+    <pubDate>Sun, 17 Apr 2022 20:01:48 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>http://eebond.github.io/posts/linux%E4%B8%AD%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEjdk8/</guid>
+    <description><![CDATA[nothting]]></description>
+</item><item>
+    <title>vps上挂载阿里云盘并用aria2实现离线下载</title>
+    <link>http://eebond.github.io/posts/vps%E4%B8%8A%E6%8C%82%E8%BD%BD%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98%E5%B9%B6%E7%94%A8aria2%E5%AE%9E%E7%8E%B0%E7%A6%BB%E7%BA%BF%E4%B8%8B%E8%BD%BD/</link>
+    <pubDate>Wed, 30 Mar 2022 16:06:46 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>http://eebond.github.io/posts/vps%E4%B8%8A%E6%8C%82%E8%BD%BD%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98%E5%B9%B6%E7%94%A8aria2%E5%AE%9E%E7%8E%B0%E7%A6%BB%E7%BA%BF%E4%B8%8B%E8%BD%BD/</guid>
+    <description><![CDATA[nothting]]></description>
+</item><item>
+    <title>wget命令使用教程</title>
+    <link>http://eebond.github.io/posts/wget%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</link>
+    <pubDate>Mon, 28 Mar 2022 16:39:30 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>http://eebond.github.io/posts/wget%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</guid>
+    <description><![CDATA[nothting]]></description>
+</item><item>
+    <title>curl命令使用教程</title>
+    <link>http://eebond.github.io/posts/curl%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</link>
+    <pubDate>Mon, 28 Mar 2022 16:20:27 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>http://eebond.github.io/posts/curl%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</guid>
+    <description><![CDATA[nothting]]></description>
+</item><item>
+    <title>Linux下使用mail工具发送邮件</title>
+    <link>http://eebond.github.io/posts/linux%E4%B8%8B%E4%BD%BF%E7%94%A8mail%E5%B7%A5%E5%85%B7%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/</link>
+    <pubDate>Thu, 09 Dec 2021 16:07:41 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>http://eebond.github.io/posts/linux%E4%B8%8B%E4%BD%BF%E7%94%A8mail%E5%B7%A5%E5%85%B7%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/</guid>
+    <description><![CDATA[nothting]]></description>
+</item><item>
+    <title>lrzsz工具 Linux和Windows之间互传文件</title>
+    <link>http://eebond.github.io/posts/lrzsz%E5%B7%A5%E5%85%B7-linux%E5%92%8Cwindows%E4%B9%8B%E9%97%B4%E4%BA%92%E4%BC%A0%E6%96%87%E4%BB%B6/</link>
+    <pubDate>Tue, 16 Nov 2021 23:04:38 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>http://eebond.github.io/posts/lrzsz%E5%B7%A5%E5%85%B7-linux%E5%92%8Cwindows%E4%B9%8B%E9%97%B4%E4%BA%92%E4%BC%A0%E6%96%87%E4%BB%B6/</guid>
+    <description><![CDATA[该工具需要在支持文件传输的终端工具中使用，如xshell可以，而putty不能]]></description>
+</item></channel>
+</rss>

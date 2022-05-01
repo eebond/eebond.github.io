@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>lrzsz - 标签 - EEBOND</title>
+        <link>http://eebond.github.io/tags/lrzsz/</link>
+        <description>lrzsz - 标签 - EEBOND</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 16 Nov 2021 23:04:38 &#43;0000</lastBuildDate><atom:link href="http://eebond.github.io/tags/lrzsz/" rel="self" type="application/rss+xml" /><item>
+    <title>lrzsz工具 Linux和Windows之间互传文件</title>
+    <link>http://eebond.github.io/posts/lrzsz%E5%B7%A5%E5%85%B7-linux%E5%92%8Cwindows%E4%B9%8B%E9%97%B4%E4%BA%92%E4%BC%A0%E6%96%87%E4%BB%B6/</link>
+    <pubDate>Tue, 16 Nov 2021 23:04:38 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>http://eebond.github.io/posts/lrzsz%E5%B7%A5%E5%85%B7-linux%E5%92%8Cwindows%E4%B9%8B%E9%97%B4%E4%BA%92%E4%BC%A0%E6%96%87%E4%BB%B6/</guid>
+    <description><![CDATA[该工具需要在支持文件传输的终端工具中使用，如xshell可以，而putty不能]]></description>
+</item></channel>
+</rss>

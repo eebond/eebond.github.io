@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Git版本控制教程（高级篇） - EEBOND</title><meta name="Description" content=""><meta property="og:title" content="Git版本控制教程（高级篇）" />
+<meta property="og:description" content="Git版本控制简明教程" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://eebond.github.io/posts/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E6%95%99%E7%A8%8B%E9%AB%98%E7%BA%A7%E7%AF%87/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-11-24T20:26:32+00:00" />
+<meta property="article:modified_time" content="2021-11-24T20:26:32+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git版本控制教程（高级篇）"/>
+<meta name="twitter:description" content="Git版本控制简明教程"/>
+<meta name="application-name" content="EEBOND">
+<meta name="apple-mobile-web-app-title" content="EEBOND"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://eebond.github.io/posts/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E6%95%99%E7%A8%8B%E9%AB%98%E7%BA%A7%E7%AF%87/" /><link rel="prev" href="http://eebond.github.io/posts/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E6%95%99%E7%A8%8B%E5%85%A5%E9%97%A8%E7%AF%87/" /><link rel="next" href="http://eebond.github.io/posts/centos7%E9%81%87%E5%88%B0-boot%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E7%9A%84%E6%8A%A5%E9%94%99%E6%97%A0%E6%B3%95%E8%BF%9B%E8%A1%8Ckernel%E6%9B%B4%E6%96%B0/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Git版本控制教程（高级篇）",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/eebond.github.io\/posts\/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E6%95%99%E7%A8%8B%E9%AB%98%E7%BA%A7%E7%AF%87\/"
+        },"genre": "posts","keywords": "Git","wordcount":  3275 ,
+        "url": "http:\/\/eebond.github.io\/posts\/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E6%95%99%E7%A8%8B%E9%AB%98%E7%BA%A7%E7%AF%87\/","datePublished": "2021-11-24T20:26:32+00:00","dateModified": "2021-11-24T20:26:32+00:00","publisher": {
+            "@type": "Organization",
+            "name": "作者"},"author": {
+                "@type": "Person",
+                "name": "作者"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="EEBOND">EEBOND</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="EEBOND">EEBOND</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Git版本控制教程（高级篇）</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>作者</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/git/"><i class="far fa-folder fa-fw"></i>Git</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-11-24">2021-11-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3275 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一操作分支">一、操作分支</a>
+      <ul>
+        <li><a href="#0-事前预备">0. 事前预备</a></li>
+        <li><a href="#1-建立分支">1. 建立分支</a></li>
+        <li><a href="#2-切换分支">2. 切换分支</a></li>
+        <li><a href="#3-合并分支">3. 合并分支</a></li>
+        <li><a href="#4-删除分支">4. 删除分支</a></li>
+        <li><a href="#5-并行操作">5. 并行操作</a></li>
+        <li><a href="#6-解决合并的冲突">6. 解决合并的冲突</a></li>
+        <li><a href="#7-用rebase合并">7. 用rebase合并</a></li>
+      </ul>
+    </li>
+    <li><a href="#二操作标签">二、操作标签</a>
+      <ul>
+        <li><a href="#1-添加轻标签">1. 添加轻标签</a></li>
+        <li><a href="#2-添加注解标签">2. 添加注解标签</a></li>
+        <li><a href="#3-删除标签">3. 删除标签</a></li>
+      </ul>
+    </li>
+    <li><a href="#三改写提交">三、改写提交！</a>
+      <ul>
+        <li><a href="#1-commit---amend">1. commit &ndash;amend</a></li>
+        <li><a href="#2-revert">2. revert</a></li>
+        <li><a href="#3-reset">3. reset</a></li>
+        <li><a href="#4-cherry-pick">4. cherry-pick</a></li>
+        <li><a href="#5-用rebase--i-汇总提交">5. 用rebase -i 汇总提交</a></li>
+        <li><a href="#6-用rebase--i-修改提交">6. 用rebase -i 修改提交</a></li>
+        <li><a href="#7-merge---squash">7. merge &ndash;squash</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><a href="https://backlog.com/git-tutorial/cn/" target="_blank" rel="noopener noreffer">参考文章：猴子都能懂得GIT入门</a></p>
+<h2 id="一操作分支">一、操作分支</h2>
+<h3 id="0-事前预备">0. 事前预备</h3>
+<p>首先建立一个新目录，并在里面建立一个空数据库。这里我们创建一个名为tutorial的目录。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ mkdir tutorial
+</span></span><span class="line"><span class="cl">$ <span class="nb">cd</span> tutorial
+</span></span><span class="line"><span class="cl">$ git init
+</span></span><span class="line"><span class="cl">Initialized empty Git repository in /Users/eguchi/Desktop/tutorial/.git/
+</span></span></code></pre></div><p>在tutorial目录创建一个名为myfile.txt的档案，然后提交。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">连猴子都懂的Git命令
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git add myfile.txt
+</span></span><span class="line"><span class="cl">$ git commit -m <span class="s2">&#34;first commit&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>master <span class="o">(</span>root-commit<span class="o">)</span> a73ae49<span class="o">]</span> first commit
+</span></span><span class="line"><span class="cl"> <span class="m">1</span> files changed, <span class="m">1</span> insertions<span class="o">(</span>+<span class="o">)</span>, <span class="m">0</span> deletions<span class="o">(</span>-<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> create mode <span class="m">100644</span> myfile.txt
+</span></span></code></pre></div><p>目前的历史记录是这样的。<br>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211136.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211136.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211136.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211136.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211136.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211136.png" /></p>
+<h3 id="1-建立分支">1. 建立分支</h3>
+<p>创建名为issue1的分支。</p>
+<p>您可以通过branch命令来创建分支。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git branch &lt;branchname&gt;
+</span></span></code></pre></div><p>创建名为issue1的分支。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git branch issue1
+</span></span></code></pre></div><p>不指定参数直接执行branch命令的话，可以显示分支列表。 前面有*的就是现在的分支。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git branch
+</span></span><span class="line"><span class="cl">  issue1
+</span></span><span class="line"><span class="cl">* master
+</span></span></code></pre></div><p>目前的历史记录是这样的。<br>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211444.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211444.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211444.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211444.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211444.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211444.png" /></p>
+<h3 id="2-切换分支">2. 切换分支</h3>
+<p>若要在新建的issue1分支进行提交，需要切换到issue1分支。</p>
+<p>要执行checkout命令以退出分支。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git checkout &lt;branch&gt;
+</span></span></code></pre></div><p>切换到issue1分支。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git checkout issue1
+</span></span><span class="line"><span class="cl">Switched to branch <span class="s1">&#39;issue1&#39;</span>
+</span></span></code></pre></div><p>目前的历史记录是这样的。<br>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211820.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211820.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211820.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211820.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211820.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211820.png" /></p>
+<p>在checkout命令指定 -b选项执行，可以创建分支并进行切换。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git checkout -b &lt;branch&gt;
+</span></span></code></pre></div><p>在切换到issue1分支的状态下提交，历史记录会被记录到issue1分支。在myfile.txt添加add命令的说明后再提交。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">连猴子都懂的Git命令
+</span></span><span class="line"><span class="cl">add 把变更录入到索引中
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ git add myfile.txt
+</span></span><span class="line"><span class="cl">$ git commit -m <span class="s2">&#34;添加add的说明&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>issue1 b2b23c4<span class="o">]</span> 添加add的说明
+</span></span><span class="line"><span class="cl"> <span class="m">1</span> files changed, <span class="m">1</span> insertions<span class="o">(</span>+<span class="o">)</span>, <span class="m">0</span> deletions<span class="o">(</span>-<span class="o">)</span>
+</span></span></code></pre></div><p>目前的历史记录是这样的。<br>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125212104.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125212104.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125212104.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125212104.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125212104.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125212104.png" /></p>
+<h3 id="3-合并分支">3. 合并分支</h3>
+<p>向master分支合并issue1分支的修改。<br>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125212104.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125212104.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125212104.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125212104.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125212104.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125212104.png" /></p>
+<p>执行merge命令以合并分支</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git merge &lt;commit&gt;
+</span></span></code></pre></div><p>该命令将指定分支导入到HEAD指定的分支。先切换master分支，然后把issue1分支导入到master分支。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git checkout master
+</span></span><span class="line"><span class="cl">Switched to branch <span class="s1">&#39;master&#39;</span>
+</span></span></code></pre></div><p>打开myfile.txt档案以确认内容。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">连猴子都懂的Git命令
+</span></span></code></pre></div><p>已经在issue1分支进行了编辑上一页的档案，所以master分支的myfile.txt的内容没有更改。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git merge issue1
+</span></span><span class="line"><span class="cl">Updating 1257027..b2b23c4
+</span></span><span class="line"><span class="cl">Fast-forward
+</span></span><span class="line"><span class="cl"> myfile.txt <span class="p">|</span>    <span class="m">1</span> +
+</span></span><span class="line"><span class="cl"> <span class="m">1</span> files changed, <span class="m">1</span> insertions<span class="o">(</span>+<span class="o">)</span>, <span class="m">0</span> deletions<span class="o">(</span>-<span class="o">)</span>
+</span></span></code></pre></div><p>master分支指向的提交移动到和issue1同样的位置。这个是fast-forward（快进）合并。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214034.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214034.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214034.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214034.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214034.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214034.png" /></p>
+<p>打开myfile.txt档案，确认内容。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">连猴子都懂的Git命令
+</span></span><span class="line"><span class="cl">add 把变更录入到索引中
+</span></span></code></pre></div><p>已添加「add 把变更录入到索引中」。</p>
+<h3 id="4-删除分支">4. 删除分支</h3>
+<p>既然issue1分支的内容已经顺利地合并到master分支了，现在可以将其删除了。</p>
+<p>在branch命令指定-d选项执行，以删除分支。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git branch -d &lt;branchname&gt;
+</span></span></code></pre></div><p>执行以下的命令以删除issue1分支。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git branch -d issue1
+</span></span><span class="line"><span class="cl">Deleted branch issue1 <span class="o">(</span>was b2b23c4<span class="o">)</span>.
+</span></span></code></pre></div><p>issue1分支被删除了。您可以用branch命令来确认分支是否已被删除。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git branch
+</span></span><span class="line"><span class="cl">* master
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214652.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214652.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214652.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214652.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214652.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214652.png" /></p>
+<h3 id="5-并行操作">5. 并行操作</h3>
+<p>接下来，创建2个分支来尝试并行操作吧。</p>
+<p>首先创建issue2分支和issue3分支，并切换到issue2分支。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git branch issue2
+</span></span><span class="line"><span class="cl">$ git branch issue3
+</span></span><span class="line"><span class="cl">$ git checkout issue2
+</span></span><span class="line"><span class="cl">Switched to branch <span class="s1">&#39;issue2&#39;</span>
+</span></span><span class="line"><span class="cl">$ git branch
+</span></span><span class="line"><span class="cl">* issue2
+</span></span><span class="line"><span class="cl">  issue3
+</span></span><span class="line"><span class="cl">  master
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214850.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214850.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214850.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214850.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214850.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214850.png" /><br>
+在issue2分支的myfile.txt添加commit命令的说明后提交。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">连猴子都懂的Git命令
+</span></span><span class="line"><span class="cl">add 把变更录入到索引中
+</span></span><span class="line"><span class="cl">commit 记录索引的状态
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git add myfile.txt
+</span></span><span class="line"><span class="cl">$ git commit -m <span class="s2">&#34;添加commit的说明&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>issue2 8f7aa27<span class="o">]</span> 添加commit的说明
+</span></span><span class="line"><span class="cl"> <span class="m">1</span> files changed, <span class="m">2</span> insertions<span class="o">(</span>+<span class="o">)</span>, <span class="m">0</span> deletions<span class="o">(</span>-<span class="o">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125215801.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125215801.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125215801.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125215801.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125215801.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125215801.png" /></p>
+<p>接着，切换到issue3分支。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git checkout issue3
+</span></span><span class="line"><span class="cl">Switched to branch <span class="s1">&#39;issue3&#39;</span>
+</span></span></code></pre></div><p>打开myfile.txt档案。由于在issue2分支添加了commit命令的说明，所以issue3分支的myfile.txt里只有add命令的说明。</p>
+<p>添加pull命令的说明后提交。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">连猴子都懂的Git命令
+</span></span><span class="line"><span class="cl">add 把变更录入到索引中
+</span></span><span class="line"><span class="cl">pull 取得远端数据库的内容
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git add myfile.txt
+</span></span><span class="line"><span class="cl">$ git commit -m <span class="s2">&#34;添加pull的说明&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>issue3 e5f91ac<span class="o">]</span> 添加pull的说明
+</span></span><span class="line"><span class="cl"> <span class="m">1</span> files changed, <span class="m">2</span> insertions<span class="o">(</span>+<span class="o">)</span>, <span class="m">0</span> deletions<span class="o">(</span>-<span class="o">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126124912.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126124912.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126124912.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126124912.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126124912.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126124912.png" /><br>
+这样，添加commit的说明的操作，和添加pull的说明的操作就并行进行了。</p>
+<h3 id="6-解决合并的冲突">6. 解决合并的冲突</h3>
+<p>把issue2分支和issue3分支的修改合并到master。</p>
+<p>切换master分支后，与issue2分支合并。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git checkout master
+</span></span><span class="line"><span class="cl">Switched to branch <span class="s1">&#39;master&#39;</span>
+</span></span><span class="line"><span class="cl">$ git merge issue2
+</span></span><span class="line"><span class="cl">Updating b2b23c4..8f7aa27
+</span></span><span class="line"><span class="cl">Fast-forward
+</span></span><span class="line"><span class="cl"> myfile.txt <span class="p">|</span>    <span class="m">2</span> ++
+</span></span><span class="line"><span class="cl"> <span class="m">1</span> files changed, <span class="m">2</span> insertions<span class="o">(</span>+<span class="o">)</span>, <span class="m">0</span> deletions<span class="o">(</span>-<span class="o">)</span>
+</span></span></code></pre></div><p>执行fast-forward（快进）合并。<br>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126125942.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126125942.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126125942.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126125942.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126125942.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126125942.png" /></p>
+<p>接着合并issue3分支。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git merge issue3
+</span></span><span class="line"><span class="cl">Auto-merging myfile.txt
+</span></span><span class="line"><span class="cl">CONFLICT <span class="o">(</span>content<span class="o">)</span>: Merge conflict in myfile.txt
+</span></span><span class="line"><span class="cl">Automatic merge failed<span class="p">;</span> fix conflicts and <span class="k">then</span> commit the result.
+</span></span></code></pre></div><p>自动合并失败。由于在同一行进行了修改，所以产生了冲突。这时myfile.txt的内容如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">连猴子都懂的Git命令
+</span></span><span class="line"><span class="cl">add 把变更录入到索引中
+</span></span><span class="line"><span class="cl">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+</span></span><span class="line"><span class="cl">commit 记录索引的状态
+</span></span><span class="line"><span class="cl">=======
+</span></span><span class="line"><span class="cl">pull 取得远端数据库的内容
+</span></span><span class="line"><span class="cl">&gt;&gt;&gt;&gt;&gt;&gt;&gt; issue3
+</span></span></code></pre></div><p>在发生冲突的地方，Git生成了内容的差异。请做以下修改：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">连猴子都懂的Git命令
+</span></span><span class="line"><span class="cl">add 把变更录入到索引中
+</span></span><span class="line"><span class="cl">commit 记录索引的状态
+</span></span><span class="line"><span class="cl">pull 取得远端数据库的内容
+</span></span></code></pre></div><p>修改冲突的部分，重新提交。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git add myfile.txt
+</span></span><span class="line"><span class="cl">$ git commit -m <span class="s2">&#34;合并issue3分支&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># On branch master</span>
+</span></span><span class="line"><span class="cl">nothing to commit <span class="o">(</span>working directory clean<span class="o">)</span>
+</span></span></code></pre></div><p>历史记录如下图所示。因为在这次合并中修改了冲突部分，所以会重新创建合并修改的提交记录。这样，master的HEAD就移动到这里了。这种合并不是fast-forward合并，而是non fast-forward合并。<br>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126130834.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126130834.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126130834.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126130834.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126130834.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126130834.png" /></p>
+<h3 id="7-用rebase合并">7. 用rebase合并</h3>
+<p>合并issue3分支的时候，使用rebase可以使提交的历史记录显得更简洁。</p>
+<p>现在暂时取消刚才的合并。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git reset --hard HEAD~
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126145149.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126145149.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126145149.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126145149.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126145149.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126145149.png" /></p>
+<p>切换到issue3分支后，对master执行rebase。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git checkout issue3
+</span></span><span class="line"><span class="cl">Switched to branch <span class="s1">&#39;issue3&#39;</span>
+</span></span><span class="line"><span class="cl">$ git rebase master
+</span></span><span class="line"><span class="cl">First, rewinding head to replay your work on top of it...
+</span></span><span class="line"><span class="cl">Applying: 添加pull的说明
+</span></span><span class="line"><span class="cl">Using index info to reconstruct a base tree...
+</span></span><span class="line"><span class="cl">&lt;stdin&gt;:13: new blank line at EOF.
+</span></span><span class="line"><span class="cl">+
+</span></span><span class="line"><span class="cl">warning: <span class="m">1</span> line adds whitespace errors.
+</span></span><span class="line"><span class="cl">Falling back to patching base and 3-way merge...
+</span></span><span class="line"><span class="cl">Auto-merging myfile.txt
+</span></span><span class="line"><span class="cl">CONFLICT <span class="o">(</span>content<span class="o">)</span>: Merge conflict in myfile.txt
+</span></span><span class="line"><span class="cl">Failed to merge in the changes.
+</span></span><span class="line"><span class="cl">Patch failed at <span class="m">0001</span> 添加pull的说明
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">When you have resolved this problem run <span class="s2">&#34;git rebase --continue&#34;</span>.
+</span></span><span class="line"><span class="cl">If you would prefer to skip this patch, instead run <span class="s2">&#34;git rebase --skip&#34;</span>.
+</span></span><span class="line"><span class="cl">To check out the original branch and stop rebasing run <span class="s2">&#34;git rebase --abort&#34;</span>.
+</span></span></code></pre></div><p>和merge时的操作相同，修改在myfile.txt发生冲突的部分。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">连猴子都懂的Git命令
+</span></span><span class="line"><span class="cl">add 把变更录入到索引中
+</span></span><span class="line"><span class="cl">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+</span></span><span class="line"><span class="cl">commit 记录索引的状态
+</span></span><span class="line"><span class="cl">=======
+</span></span><span class="line"><span class="cl">pull 取得远端数据库的内容
+</span></span><span class="line"><span class="cl">&gt;&gt;&gt;&gt;&gt;&gt;&gt; issue3
+</span></span></code></pre></div><p>rebase的时候，修改冲突后的提交不是使用commit命令，而是执行rebase命令指定 &ndash;continue选项。若要取消rebase，指定 &ndash;abort选项。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git add myfile.txt
+</span></span><span class="line"><span class="cl">$ git rebase --continue
+</span></span><span class="line"><span class="cl">Applying: 添加pull的说明
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126150215.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126150215.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126150215.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126150215.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126150215.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126150215.png" /></p>
+<p>这样，在master分支的issue3分支就可以fast-forward合并了。切换到master分支后执行合并。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git checkout master
+</span></span><span class="line"><span class="cl">Switched to branch <span class="s1">&#39;master&#39;</span>
+</span></span><span class="line"><span class="cl">$ git merge issue3
+</span></span><span class="line"><span class="cl">Updating 8f7aa27..96a0ff0
+</span></span><span class="line"><span class="cl">Fast-forward
+</span></span><span class="line"><span class="cl"> myfile.txt <span class="p">|</span>    <span class="m">1</span> +
+</span></span><span class="line"><span class="cl"> <span class="m">1</span> files changed, <span class="m">1</span> insertions<span class="o">(</span>+<span class="o">)</span>, <span class="m">0</span> deletions<span class="o">(</span>-<span class="o">)</span>  
+</span></span></code></pre></div><p>myfile.txt的最终内容和merge是一样的，但是历史记录如下。<br>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126150327.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126150327.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126150327.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126150327.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126150327.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126150327.png" /></p>
+<h2 id="二操作标签">二、操作标签</h2>
+<h3 id="1-添加轻标签">1. 添加轻标签</h3>
+<p>使用tag命令来添加标签，在&lt; tagname &gt;执行标签的名称</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git tag &lt;tagname&gt;
+</span></span></code></pre></div><p>在HEAD指向的提交里添加名为apple的标签，请执行以下的命令。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git tag apple
+</span></span></code></pre></div><p>如果没有使用参数而执行tag，可以显示标签列表。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git tag
+</span></span><span class="line"><span class="cl">apple
+</span></span></code></pre></div><p>如果在log命令添加 &ndash;decorate选项执行，可以显示包含标签资料的历史记录。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git log --decorate
+</span></span><span class="line"><span class="cl">commit e7978c94d2104e3e0e6e4a5b4a8467b1d2a2ba19 <span class="o">(</span>HEAD, tag: apple, master<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Author: yourname &lt;yourname@yourmail.com&gt;
+</span></span><span class="line"><span class="cl">Date:   Wed Jul <span class="m">18</span> 16:43:27 <span class="m">2012</span> +0900
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    first commit
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128160811.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128160811.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128160811.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128160811.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128160811.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128160811.png" /></p>
+<h3 id="2-添加注解标签">2. 添加注解标签</h3>
+<p>若要添加注解标签，可以在tag命令指定 -a选项执行。执行后会启动编辑区，请输入注解，也可以指定-m选项来添加注解。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git tag -a &lt;tagname&gt;
+</span></span></code></pre></div><p>在HEAD指向的提交里添加名为banana的标签，请执行以下的命令。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git tag -am <span class="s2">&#34;连猴子都懂的Git&#34;</span> banana  
+</span></span></code></pre></div><p>如果在tag命令指定-n选项执行，可以显示标签的列表和注解。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ git tag -n
+</span></span><span class="line"><span class="cl">apple           first commit
+</span></span><span class="line"><span class="cl">banana          连猴子都懂的Git
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128161512.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128161512.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128161512.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128161512.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128161512.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128161512.png" /></p>
+<h3 id="3-删除标签">3. 删除标签</h3>
+<p>若要删除标签，在tag命令指定 -d选项执行。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git tag -d &lt;tagname&gt;
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128164422.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128164422.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128164422.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128164422.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128164422.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128164422.png" /></p>
+<h2 id="三改写提交">三、改写提交！</h2>
+<p>为了节省时间，这个教程使用现有的历史记录作为本地数据库。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://backlog.com/git-tutorial/cn/download/stepup-tutorial.zip
+</span></span></code></pre></div><h3 id="1-commit---amend">1. commit &ndash;amend</h3>
+<p>我们将修改最近一次的提交。</p>
+<p>首先进入stepup-tutorial/tutorial1目录。本地端的历史记录状态如下图显示。<br>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195201.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195201.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195201.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195201.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195201.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195201.png" /></p>
+<p>用log命令确认历史记录。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ git log
+</span></span><span class="line"><span class="cl">commit 326fc9f70d022afdd31b0072dbbae003783d77ed
+</span></span><span class="line"><span class="cl">Author: yourname &lt;yourname@yourmail.com&gt;
+</span></span><span class="line"><span class="cl">Date:   Mon Jul <span class="m">16</span> 23:17:56 <span class="m">2012</span> +0900
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    添加add的说明
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">commit 48eec1ddf73a7fb508ef664efd6b3d873631742f
+</span></span><span class="line"><span class="cl">Author: yourname &lt;yourname@yourmail.com&gt;
+</span></span><span class="line"><span class="cl">Date:   Mon Jul <span class="m">16</span> 23:16:14 <span class="m">2012</span> +0900
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    first commit
+</span></span></code></pre></div><p>首先打开sample.txt档案，并添加commit的注释。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">连猴子都懂的Git命令
+</span></span><span class="line"><span class="cl">add 把变更录入到索引中
+</span></span><span class="line"><span class="cl">commit 记录索引的状态
+</span></span></code></pre></div><p>添加 &ndash;amend 选项，然后提交。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git add sample.txt
+</span></span><span class="line"><span class="cl">git commit --amend
+</span></span></code></pre></div><p>编辑工具会显示最近一次提交的提交消息，把消息修改为「<strong>添加add和commit的讲解</strong>」并进行保存。</p>
+<p>现在已经修改了提交的内容，然后用log命令确认历史记录和提交消息。<br>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195423.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195423.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195423.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195423.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195423.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195423.png" /></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ git log
+</span></span><span class="line"><span class="cl">commit e9d75a02e62814541ee0410d9c1d1bf47ab1c057
+</span></span><span class="line"><span class="cl">Author: yourname &lt;yourname@yourmail.com&gt;
+</span></span><span class="line"><span class="cl">Date:   Mon Jul <span class="m">16</span> 23:17:56 <span class="m">2012</span> +0900
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    添加add和commit的讲解
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">commit 48eec1ddf73a7fb508ef664efd6b3d873631742f
+</span></span><span class="line"><span class="cl">Author: yourname &lt;yourname@yourmail.com&gt;
+</span></span><span class="line"><span class="cl">Date:   Mon Jul <span class="m">16</span> 23:16:14 <span class="m">2012</span> +0900
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    first commit
+</span></span></code></pre></div><h3 id="2-revert">2. revert</h3>
+<p>我们将用revert命令来取消「添加pull的讲解」提交。</p>
+<p>首先进入stepup-tutorial/tutorial2目录。本地端的历史记录的状态如下图显示。<br>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195640.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195640.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195640.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195640.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195640.png"
+        title="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195640.png" /></p>
+<h3 id="3-reset">3. reset</h3>
+<h3 id="4-cherry-pick">4. cherry-pick</h3>
+<h3 id="5-用rebase--i-汇总提交">5. 用rebase -i 汇总提交</h3>
+<h3 id="6-用rebase--i-修改提交">6. 用rebase -i 修改提交</h3>
+<h3 id="7-merge---squash">7. merge &ndash;squash</h3>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2021-11-24</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/git/">Git</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E6%95%99%E7%A8%8B%E5%85%A5%E9%97%A8%E7%AF%87/" class="prev" rel="prev" title="Git版本控制教程（入门篇）"><i class="fas fa-angle-left fa-fw"></i>Git版本控制教程（入门篇）</a>
+            <a href="/posts/centos7%E9%81%87%E5%88%B0-boot%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E7%9A%84%E6%8A%A5%E9%94%99%E6%97%A0%E6%B3%95%E8%BF%9B%E8%A1%8Ckernel%E6%9B%B4%E6%96%B0/" class="next" rel="next" title="centos7遇到/boot空间不足的报错，无法进行kernel更新">centos7遇到/boot空间不足的报错，无法进行kernel更新<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

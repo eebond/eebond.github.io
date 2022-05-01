@@ -1,14 +1,35 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>科学上网 - 分类 - EEBOND</title>
-        <link>https://eebond.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</link>
+        <link>http://eebond.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</link>
         <description>科学上网 - 分类 - EEBOND</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 07 Apr 2022 18:05:43 &#43;0000</lastBuildDate><atom:link href="https://eebond.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 07 Apr 2022 18:05:43 &#43;0000</lastBuildDate><atom:link href="http://eebond.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="self" type="application/rss+xml" /><item>
     <title>CentOS7安装部署Trojan-go</title>
-    <link>https://eebond.github.io/posts/centos7%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2trojan-go/</link>
+    <link>http://eebond.github.io/posts/centos7%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2trojan-go/</link>
     <pubDate>Thu, 07 Apr 2022 18:05:43 &#43;0000</pubDate>
     <author>作者</author>
-    <guid>https://eebond.github.io/posts/centos7%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2trojan-go/</guid>
-    <description><![CDATA[前言 Trojan-goTrojan-Go是使用Go语言实现的完整的Trojan代理，和Trojan协议以及原版的配置文件格式兼容。支持并且兼]]></description>
+    <guid>http://eebond.github.io/posts/centos7%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2trojan-go/</guid>
+    <description><![CDATA[nothting]]></description>
+</item><item>
+    <title>CentOS7 安装部署Shadowsocks</title>
+    <link>http://eebond.github.io/posts/centos7-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2shadowsocks/</link>
+    <pubDate>Thu, 07 Apr 2022 09:05:53 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>http://eebond.github.io/posts/centos7-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2shadowsocks/</guid>
+    <description><![CDATA[nothting]]></description>
+</item><item>
+    <title>V2ray&#43;WS&#43;TLS手动配置教程</title>
+    <link>http://eebond.github.io/posts/v2ray-ws-tls%E6%89%8B%E5%8A%A8%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/</link>
+    <pubDate>Fri, 19 Nov 2021 22:52:40 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>http://eebond.github.io/posts/v2ray-ws-tls%E6%89%8B%E5%8A%A8%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/</guid>
+    <description><![CDATA[根据官方脚本和Nginx知识，在CentOS 7上手动配置V2ray+WS+TLS教程]]></description>
+</item><item>
+    <title>CentOS 7 安装部署Shadowsocks-libev</title>
+    <link>http://eebond.github.io/posts/centos-7-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2shadowsocks-libev/</link>
+    <pubDate>Fri, 19 Nov 2021 20:08:12 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>http://eebond.github.io/posts/centos-7-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2shadowsocks-libev/</guid>
+    <description><![CDATA[手动部署Shadowsocks-libev]]></description>
 </item></channel>
 </rss>

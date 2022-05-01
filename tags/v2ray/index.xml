@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>v2ray - 标签 - EEBOND</title>
+        <link>http://eebond.github.io/tags/v2ray/</link>
+        <description>v2ray - 标签 - EEBOND</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 19 Nov 2021 22:52:40 &#43;0000</lastBuildDate><atom:link href="http://eebond.github.io/tags/v2ray/" rel="self" type="application/rss+xml" /><item>
+    <title>V2ray&#43;WS&#43;TLS手动配置教程</title>
+    <link>http://eebond.github.io/posts/v2ray-ws-tls%E6%89%8B%E5%8A%A8%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/</link>
+    <pubDate>Fri, 19 Nov 2021 22:52:40 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>http://eebond.github.io/posts/v2ray-ws-tls%E6%89%8B%E5%8A%A8%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/</guid>
+    <description><![CDATA[根据官方脚本和Nginx知识，在CentOS 7上手动配置V2ray+WS+TLS教程]]></description>
+</item></channel>
+</rss>
