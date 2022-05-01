@@ -1,28 +1,29 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Centos7 - 分类 - EEBOND</title>
-        <link>http://eebond.github.io/categories/centos7/</link>
-        <description>Centos7 - 分类 - EEBOND</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 17 Apr 2022 20:01:48 &#43;0000</lastBuildDate><atom:link href="http://eebond.github.io/categories/centos7/" rel="self" type="application/rss+xml" /><item>
+        <title>Centos7 - 分类 - EEBONDの博客</title>
+        <link>https://eebond.github.io/categories/centos7/</link>
+        <description>Centos7 - 分类 - EEBONDの博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>eebond0327@gmail.com (eebond)</managingEditor>
+            <webMaster>eebond0327@gmail.com (eebond)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 17 Apr 2022 20:01:48 &#43;0000</lastBuildDate><atom:link href="https://eebond.github.io/categories/centos7/" rel="self" type="application/rss+xml" /><item>
     <title>Linux中安装配置JDK8</title>
-    <link>http://eebond.github.io/posts/linux%E4%B8%AD%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEjdk8/</link>
+    <link>https://eebond.github.io/linux%E4%B8%AD%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEjdk8/</link>
     <pubDate>Sun, 17 Apr 2022 20:01:48 &#43;0000</pubDate>
     <author>作者</author>
-    <guid>http://eebond.github.io/posts/linux%E4%B8%AD%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEjdk8/</guid>
+    <guid>https://eebond.github.io/linux%E4%B8%AD%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEjdk8/</guid>
     <description><![CDATA[nothting]]></description>
 </item><item>
     <title>centos7遇到/boot空间不足的报错，无法进行kernel更新</title>
-    <link>http://eebond.github.io/posts/centos7%E9%81%87%E5%88%B0-boot%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E7%9A%84%E6%8A%A5%E9%94%99%E6%97%A0%E6%B3%95%E8%BF%9B%E8%A1%8Ckernel%E6%9B%B4%E6%96%B0/</link>
+    <link>https://eebond.github.io/centos7%E9%81%87%E5%88%B0-boot%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E7%9A%84%E6%8A%A5%E9%94%99%E6%97%A0%E6%B3%95%E8%BF%9B%E8%A1%8Ckernel%E6%9B%B4%E6%96%B0/</link>
     <pubDate>Thu, 25 Nov 2021 22:29:57 &#43;0000</pubDate>
     <author>作者</author>
-    <guid>http://eebond.github.io/posts/centos7%E9%81%87%E5%88%B0-boot%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E7%9A%84%E6%8A%A5%E9%94%99%E6%97%A0%E6%B3%95%E8%BF%9B%E8%A1%8Ckernel%E6%9B%B4%E6%96%B0/</guid>
+    <guid>https://eebond.github.io/centos7%E9%81%87%E5%88%B0-boot%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E7%9A%84%E6%8A%A5%E9%94%99%E6%97%A0%E6%B3%95%E8%BF%9B%E8%A1%8Ckernel%E6%9B%B4%E6%96%B0/</guid>
     <description><![CDATA[centos7遇到/boot空间不足的报错，无法进行kernel更新]]></description>
 </item><item>
     <title>CentOS下使用certbot申请、部署Let&#39;s Encrypt免费SSL证书（Ngingx服务器)</title>
-    <link>http://eebond.github.io/posts/centos%E4%B8%8B%E4%BD%BF%E7%94%A8certbot%E7%94%B3%E8%AF%B7%E9%83%A8%E7%BD%B2let-s-encrpyt%E5%85%8D%E8%B4%B9ssl%E8%AF%81%E4%B9%A6ngingx%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+    <link>https://eebond.github.io/centos%E4%B8%8B%E4%BD%BF%E7%94%A8certbot%E7%94%B3%E8%AF%B7%E9%83%A8%E7%BD%B2let-s-encrpyt%E5%85%8D%E8%B4%B9ssl%E8%AF%81%E4%B9%A6ngingx%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
     <pubDate>Thu, 11 Nov 2021 17:29:03 &#43;0000</pubDate>
     <author>作者</author>
-    <guid>http://eebond.github.io/posts/centos%E4%B8%8B%E4%BD%BF%E7%94%A8certbot%E7%94%B3%E8%AF%B7%E9%83%A8%E7%BD%B2let-s-encrpyt%E5%85%8D%E8%B4%B9ssl%E8%AF%81%E4%B9%A6ngingx%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+    <guid>https://eebond.github.io/centos%E4%B8%8B%E4%BD%BF%E7%94%A8certbot%E7%94%B3%E8%AF%B7%E9%83%A8%E7%BD%B2let-s-encrpyt%E5%85%8D%E8%B4%B9ssl%E8%AF%81%E4%B9%A6ngingx%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
     <description><![CDATA[本文讲述任何在centos7下申请SSL免费证书，实现Nginx服务器Https访问]]></description>
 </item></channel>
 </rss>

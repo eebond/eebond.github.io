@@ -1,14 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>VMware - 分类 - EEBOND</title>
-        <link>http://eebond.github.io/categories/vmware/</link>
-        <description>VMware - 分类 - EEBOND</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 01 Dec 2021 19:59:02 &#43;0000</lastBuildDate><atom:link href="http://eebond.github.io/categories/vmware/" rel="self" type="application/rss+xml" /><item>
+        <title>VMware - 分类 - EEBONDの博客</title>
+        <link>https://eebond.github.io/categories/vmware/</link>
+        <description>VMware - 分类 - EEBONDの博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>eebond0327@gmail.com (eebond)</managingEditor>
+            <webMaster>eebond0327@gmail.com (eebond)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 01 Dec 2021 19:59:02 &#43;0000</lastBuildDate><atom:link href="https://eebond.github.io/categories/vmware/" rel="self" type="application/rss+xml" /><item>
     <title>VMware虚拟机中CentOS7系统网络配置</title>
-    <link>http://eebond.github.io/posts/vmware%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%ADcentos7%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</link>
+    <link>https://eebond.github.io/vmware%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%ADcentos7%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</link>
     <pubDate>Wed, 01 Dec 2021 19:59:02 &#43;0000</pubDate>
     <author>作者</author>
-    <guid>http://eebond.github.io/posts/vmware%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%ADcentos7%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</guid>
+    <guid>https://eebond.github.io/vmware%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%ADcentos7%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</guid>
     <description><![CDATA[安装CentOS7 mini版本，由于没有UI界面，无法联网，所以要手动配置]]></description>
 </item></channel>
 </rss>

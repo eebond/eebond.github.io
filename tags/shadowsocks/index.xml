@@ -1,14 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>shadowsocks - 标签 - EEBOND</title>
-        <link>http://eebond.github.io/tags/shadowsocks/</link>
-        <description>shadowsocks - 标签 - EEBOND</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 07 Apr 2022 09:05:53 &#43;0000</lastBuildDate><atom:link href="http://eebond.github.io/tags/shadowsocks/" rel="self" type="application/rss+xml" /><item>
+        <title>shadowsocks - 标签 - EEBONDの博客</title>
+        <link>https://eebond.github.io/tags/shadowsocks/</link>
+        <description>shadowsocks - 标签 - EEBONDの博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>eebond0327@gmail.com (eebond)</managingEditor>
+            <webMaster>eebond0327@gmail.com (eebond)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 07 Apr 2022 09:05:53 &#43;0000</lastBuildDate><atom:link href="https://eebond.github.io/tags/shadowsocks/" rel="self" type="application/rss+xml" /><item>
     <title>CentOS7 安装部署Shadowsocks</title>
-    <link>http://eebond.github.io/posts/centos7-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2shadowsocks/</link>
+    <link>https://eebond.github.io/centos7-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2shadowsocks/</link>
     <pubDate>Thu, 07 Apr 2022 09:05:53 &#43;0000</pubDate>
     <author>作者</author>
-    <guid>http://eebond.github.io/posts/centos7-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2shadowsocks/</guid>
+    <guid>https://eebond.github.io/centos7-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2shadowsocks/</guid>
     <description><![CDATA[nothting]]></description>
 </item></channel>
 </rss>

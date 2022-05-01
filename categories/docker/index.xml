@@ -1,14 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>docker - 分类 - EEBOND</title>
-        <link>http://eebond.github.io/categories/docker/</link>
-        <description>docker - 分类 - EEBOND</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 15 Nov 2021 09:21:33 &#43;0000</lastBuildDate><atom:link href="http://eebond.github.io/categories/docker/" rel="self" type="application/rss+xml" /><item>
+        <title>docker - 分类 - EEBONDの博客</title>
+        <link>https://eebond.github.io/categories/docker/</link>
+        <description>docker - 分类 - EEBONDの博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>eebond0327@gmail.com (eebond)</managingEditor>
+            <webMaster>eebond0327@gmail.com (eebond)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 15 Nov 2021 09:21:33 &#43;0000</lastBuildDate><atom:link href="https://eebond.github.io/categories/docker/" rel="self" type="application/rss+xml" /><item>
     <title>CentOS 7安装与卸载docker</title>
-    <link>http://eebond.github.io/posts/centos-7%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BDdocker/</link>
+    <link>https://eebond.github.io/centos-7%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BDdocker/</link>
     <pubDate>Mon, 15 Nov 2021 09:21:33 &#43;0000</pubDate>
     <author>作者</author>
-    <guid>http://eebond.github.io/posts/centos-7%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BDdocker/</guid>
+    <guid>https://eebond.github.io/centos-7%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BDdocker/</guid>
     <description><![CDATA[nothting]]></description>
 </item></channel>
 </rss>
