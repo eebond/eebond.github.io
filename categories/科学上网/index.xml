@@ -10,27 +10,924 @@
     <pubDate>Thu, 07 Apr 2022 18:05:43 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/centos7%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2trojan-go/</guid>
-    <description><![CDATA[nothting]]></description>
+    <description><![CDATA[<h2 id="前言">前言</h2>
+<blockquote>
+<p>Trojan-goTrojan-Go是使用Go语言实现的完整的Trojan代理，和Trojan协议以及原版的配置文件格式兼容。支持并且兼容Trojan-GFW版本的绝大多数功能，并扩展了更多的实用功能。</p>
+</blockquote>
+<blockquote>
+<p>Trojan-Go的的首要目标是保障传输安全性和隐蔽性。在此前提下，尽可能提升传输性能和易用性。</p>
+</blockquote>
+<blockquote>
+<p>Trojan-Go<a href="https://p4gefau1t.github.io/trojan-go/" target="_blank" rel="noopener noreffer">官方文档</a>,可以详细阅读，了解trojan的原理。</p>
+</blockquote>
+<blockquote>
+<p>Trojan-Go和V2ray + WS + TLS一样是目前比较稳定的科学上网方式，shadowsocks已经能被墙识别，搬瓦工秒被封端口。</p>
+</blockquote>
+<h2 id="安装trojan-go">安装Trojan-Go</h2>
+<h3 id="申请tls证书">申请TLS证书</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">certbot certonly --standalone -d trojan.eebond.xyz
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>如果当前有nginx正在运行，先关闭nginx。</p>
+</blockquote>
+<p>查看证书是否安装成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">certbot certificates
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>证书安装路径</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Certificate Path: /etc/letsencrypt/live/trojan.eebond.xyz/fullchain.pem
+</span></span><span class="line"><span class="cl">Private Key Path: /etc/letsencrypt/live/trojan.eebond.xyz/privkey.pem
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="安装配置nginx">安装配置Nginx</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install nginx -y
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>网站配置文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /etc/nginx/conf.d/trojan.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>文件内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">server {
+</span></span><span class="line"><span class="cl">        listen       1239;
+</span></span><span class="line"><span class="cl">        root         /srv/www/blog;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    server {
+</span></span><span class="line"><span class="cl">        listen       1001;
+</span></span><span class="line"><span class="cl">        root         /srv/www/blog;
+</span></span><span class="line"><span class="cl">    }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="安装配置trojan-go">安装配置trojan-go</h3>
+<h4 id="下载安装trojan-go">下载安装trojan-go</h4>
+<blockquote>
+<p>在 <a href="https://github.com/p4gefau1t/trojan-go/releases" target="_blank" rel="noopener noreffer">https://github.com/p4gefau1t/trojan-go/releases</a> 查看下载链接，下载解压至 /usr/local/trojan-go目录</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://github.com/p4gefau1t/trojan-go/releases/download/v0.10.6/trojan-go-linux-amd64.zip  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="配置trojan-go">配置trojan-go</h4>
+<p>将example目录下的 server.json 复制到/usr/local/trojan-go目录，修改为如下内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    &#34;run_type&#34;: &#34;server&#34;,
+</span></span><span class="line"><span class="cl">    &#34;local_addr&#34;: &#34;0.0.0.0&#34;,
+</span></span><span class="line"><span class="cl">    &#34;local_port&#34;: 447,
+</span></span><span class="line"><span class="cl">    &#34;remote_addr&#34;: &#34;127.0.0.1&#34;,
+</span></span><span class="line"><span class="cl">    &#34;remote_port&#34;: 1001,
+</span></span><span class="line"><span class="cl">    &#34;password&#34;: [
+</span></span><span class="line"><span class="cl">        &#34;5f45307f-a867-05de-3913-ff539f92325f&#34;
+</span></span><span class="line"><span class="cl">    ],
+</span></span><span class="line"><span class="cl">    &#34;ssl&#34;: {
+</span></span><span class="line"><span class="cl">        &#34;verify&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;verify_hostname&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;cert&#34;: &#34;/etc/letsencrypt/live/trojan.eebond.xyz/fullchain.pem&#34;,
+</span></span><span class="line"><span class="cl">        &#34;key&#34;: &#34;/etc/letsencrypt/live/trojan.eebond.xyz/privkey.pem&#34;,
+</span></span><span class="line"><span class="cl">        &#34;sni&#34;: &#34;trojan.eebond.xyz&#34;,
+</span></span><span class="line"><span class="cl">	&#34;fallback_addr&#34;: &#34;127.0.0.1&#34;,
+</span></span><span class="line"><span class="cl">	&#34;fallback_port&#34;: 1239
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    &#34;router&#34;: {
+</span></span><span class="line"><span class="cl">        &#34;enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;block&#34;: [
+</span></span><span class="line"><span class="cl">            &#34;geoip:private&#34;
+</span></span><span class="line"><span class="cl">        ],
+</span></span><span class="line"><span class="cl">        &#34;geoip&#34;: &#34;/usr/local/trojan-go/geoip.dat&#34;,
+</span></span><span class="line"><span class="cl">        &#34;geosite&#34;: &#34;/usr/local/trojan-go/geosite.dat&#34;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="创建systemctl启动文件">创建systemctl启动文件</h4>
+<p>1.复制启动文件至系统服务目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cp /usr/local/trojan-go/example/trojan-go.service /usr/lib/systemd/system/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2.修改启动文件，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">[Unit]
+</span></span><span class="line"><span class="cl">Description=Trojan-Go - An unidentifiable mechanism that helps you bypass GFW
+</span></span><span class="line"><span class="cl">Documentation=https://p4gefau1t.github.io/trojan-go/
+</span></span><span class="line"><span class="cl">After=network.target nss-lookup.target
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[Service]
+</span></span><span class="line"><span class="cl">User=root
+</span></span><span class="line"><span class="cl">CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+</span></span><span class="line"><span class="cl">AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+</span></span><span class="line"><span class="cl">NoNewPrivileges=true
+</span></span><span class="line"><span class="cl">ExecStart=/usr/local/trojan-go/trojan-go -config /usr/local/trojan-go/server.json
+</span></span><span class="line"><span class="cl">Restart=on-failure
+</span></span><span class="line"><span class="cl">RestartSec=10s
+</span></span><span class="line"><span class="cl">LimitNOFILE=infinity
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[Install]
+</span></span><span class="line"><span class="cl">WantedBy=multi-user.target
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意修改User和ExecStart，否则无法自启动</p>
+</blockquote>
+<p>3.启动服务&amp;设置开机启动</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl daemon-reload
+</span></span><span class="line"><span class="cl">systemctl start trojan-go
+</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> trojan-go
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>之后就可以在客户端快乐的使用了！</p>
+]]></description>
 </item><item>
     <title>CentOS7 安装部署Shadowsocks</title>
     <link>https://eebond.github.io/centos7-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2shadowsocks/</link>
     <pubDate>Thu, 07 Apr 2022 09:05:53 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/centos7-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2shadowsocks/</guid>
-    <description><![CDATA[nothting]]></description>
+    <description><![CDATA[<h2 id="前言">前言</h2>
+<blockquote>
+<p>之前安装的shadowsocks-libev有点不太好用了，端口直接被封，可能是加密协议的问题。
+现在，用网上通用的脚本方法安装shadowsocks。</p>
+</blockquote>
+<h2 id="安装">安装</h2>
+<p><a href="https://github.com/teddysun/shadowsocks_install" target="_blank" rel="noopener noreffer">秋水逸冰的一键安装脚本</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget –no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh <span class="o">&amp;&amp;</span> bash ./shadowsocks.sh  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>直接默认配置就行，后期手动更改配置。</p>
+<h2 id="修改配置文件">修改配置文件</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /etc/shadowsocks.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>只需要修改服务端口和密码就行了，其他的不懂就不要动。</p>
+<p>退出编辑页面，重启shadowsocks</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl restart shadowsocks
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="客户端下载使用">客户端下载使用</h2>
+<p><a href="https://github.com/shadowsocks/shadowsocks-windows/releases" target="_blank" rel="noopener noreffer">shadowsocks-windows客户端直链</a></p>
+]]></description>
 </item><item>
     <title>V2ray&#43;WS&#43;TLS手动配置教程</title>
     <link>https://eebond.github.io/v2ray-ws-tls%E6%89%8B%E5%8A%A8%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/</link>
     <pubDate>Fri, 19 Nov 2021 22:52:40 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/v2ray-ws-tls%E6%89%8B%E5%8A%A8%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/</guid>
-    <description><![CDATA[根据官方脚本和Nginx知识，在CentOS 7上手动配置V2ray+WS+TLS教程]]></description>
+    <description><![CDATA[<h3 id="准备工作">准备工作</h3>
+<p>如果是新的vps，需要安装必要的工具：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum update
+</span></span><span class="line"><span class="cl">yum install -y vim wget curl
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>需要将系统时间改为东八区，即上海时间：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="一v2ray官方一键安装脚本">一、V2ray官方一键安装脚本</h3>
+<h4 id="1获取v2ray官方脚本">1.获取V2ray官方脚本</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2执行v2ray官方脚本">2.执行V2ray官方脚本</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash install-release.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="3安装文件分析">3.安装文件分析</h4>
+<ul>
+<li>/usr/local/bin/v2ray：V2Ray 程序；</li>
+<li>/usr/local/bin/v2ctl：V2Ray 工具；</li>
+<li>/usr/local/etc/v2ray/config.json：配置文件；</li>
+<li>/usr/local/share/v2ray/geoip.dat：IP 数据文件</li>
+<li>/usr/local/share/v2ray/geosite.dat：域名数据文件</li>
+</ul>
+<h4 id="4安装最新的geoipdat-和-geositedat">4.安装最新的geoip.dat 和 geosite.dat</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-dat-release.sh <span class="o">&amp;&amp;</span> bash install-dat-release.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="5移除v2ray">5.移除V2ray</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash install-release.sh --remove
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="二v2ray配置文件">二、V2ray配置文件</h3>
+<h4 id="直接获取配置文件">直接获取配置文件</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /usr/local/etc/v2ray <span class="o">&amp;&amp;</span> wget -O config.json https://raw.githubusercontent.com/eebond/banwagong/main/V2rayN/config.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="手动编写配置文件并粘贴配置文件">手动编写配置文件并粘贴配置文件</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /usr/local/etc/v2ray/config.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="配置文件内容">配置文件内容</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  &#34;log&#34;: {
+</span></span><span class="line"><span class="cl">        &#34;access&#34;: &#34;/var/log/v2ray/access.log&#34;,
+</span></span><span class="line"><span class="cl">        &#34;error&#34;: &#34;/var/log/v2ray/error.log&#34;,
+</span></span><span class="line"><span class="cl">        &#34;loglevel&#34;: &#34;warning&#34;
+</span></span><span class="line"><span class="cl">  },
+</span></span><span class="line"><span class="cl">  &#34;inbounds&#34;: [
+</span></span><span class="line"><span class="cl">   {
+</span></span><span class="line"><span class="cl">    &#34;listen&#34;: &#34;127.0.0.1&#34;,
+</span></span><span class="line"><span class="cl">    &#34;port&#34;: 10086,
+</span></span><span class="line"><span class="cl">    &#34;protocol&#34;: &#34;vmess&#34;,
+</span></span><span class="line"><span class="cl">    &#34;settings&#34;: {
+</span></span><span class="line"><span class="cl">      &#34;clients&#34;: [
+</span></span><span class="line"><span class="cl">        {
+</span></span><span class="line"><span class="cl">          &#34;id&#34;: &#34;2e82cf13-4e82-4935-9ec7-23d0e0eb56b3&#34;,
+</span></span><span class="line"><span class="cl">          &#34;level&#34;: 1,
+</span></span><span class="line"><span class="cl">          &#34;alterId&#34;: 0 
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">      ]
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    &#34;streamSettings&#34;: {
+</span></span><span class="line"><span class="cl">        &#34;network&#34;: &#34;ws&#34;,
+</span></span><span class="line"><span class="cl">        &#34;security&#34;: &#34;none&#34;,
+</span></span><span class="line"><span class="cl">        &#34;wsSettings&#34;: {
+</span></span><span class="line"><span class="cl">          &#34;path&#34;: &#34;/vmess&#34;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">   },
+</span></span><span class="line"><span class="cl">   {
+</span></span><span class="line"><span class="cl">    &#34;listen&#34;: &#34;127.0.0.1&#34;,
+</span></span><span class="line"><span class="cl">    &#34;port&#34;: 12345,
+</span></span><span class="line"><span class="cl">    &#34;protocol&#34;: &#34;vless&#34;,
+</span></span><span class="line"><span class="cl">    &#34;settings&#34;: {
+</span></span><span class="line"><span class="cl">      &#34;decryption&#34;: &#34;none&#34;,
+</span></span><span class="line"><span class="cl">      &#34;clients&#34;: [
+</span></span><span class="line"><span class="cl">        {
+</span></span><span class="line"><span class="cl">          &#34;id&#34;: &#34;b123c75b-ebdf-006a-eeea-bcf6a8242e42&#34;,
+</span></span><span class="line"><span class="cl">          &#34;level&#34;: 0
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">      ]
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    &#34;streamSettings&#34;: {
+</span></span><span class="line"><span class="cl">      &#34;network&#34;:&#34;ws&#34;,
+</span></span><span class="line"><span class="cl">      &#34;security&#34;: &#34;none&#34;,
+</span></span><span class="line"><span class="cl">      &#34;wsSettings&#34;:{
+</span></span><span class="line"><span class="cl">        &#34;path&#34;:&#34;/vless&#34;,
+</span></span><span class="line"><span class="cl">        &#34;headers&#34;:{}
+</span></span><span class="line"><span class="cl">      }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">   },
+</span></span><span class="line"><span class="cl">   {
+</span></span><span class="line"><span class="cl">    &#34;port&#34;: 51888,
+</span></span><span class="line"><span class="cl">     &#34;protocol&#34;: &#34;shadowsocks&#34;,
+</span></span><span class="line"><span class="cl">     &#34;settings&#34;: {
+</span></span><span class="line"><span class="cl">        &#34;method&#34;: &#34;aes-256-gcm&#34;,
+</span></span><span class="line"><span class="cl">        &#34;password&#34;: &#34;www.bannedbook.org&#34;,
+</span></span><span class="line"><span class="cl">        &#34;network&#34;: &#34;tcp,udp&#34;,
+</span></span><span class="line"><span class="cl">        &#34;level&#34;: 0
+</span></span><span class="line"><span class="cl">      }
+</span></span><span class="line"><span class="cl">   }
+</span></span><span class="line"><span class="cl">  ],
+</span></span><span class="line"><span class="cl">  &#34;outbounds&#34;: [{
+</span></span><span class="line"><span class="cl">    &#34;protocol&#34;: &#34;freedom&#34;,
+</span></span><span class="line"><span class="cl">    &#34;settings&#34;: {}
+</span></span><span class="line"><span class="cl">  },{
+</span></span><span class="line"><span class="cl">    &#34;protocol&#34;: &#34;blackhole&#34;,
+</span></span><span class="line"><span class="cl">    &#34;settings&#34;: {},
+</span></span><span class="line"><span class="cl">    &#34;tag&#34;: &#34;blocked&#34;
+</span></span><span class="line"><span class="cl">  }],
+</span></span><span class="line"><span class="cl">  &#34;routing&#34;: {
+</span></span><span class="line"><span class="cl">    &#34;rules&#34;: [
+</span></span><span class="line"><span class="cl">      {
+</span></span><span class="line"><span class="cl">        &#34;type&#34;: &#34;field&#34;,
+</span></span><span class="line"><span class="cl">        &#34;ip&#34;: [&#34;geoip:private&#34;],
+</span></span><span class="line"><span class="cl">        &#34;outboundTag&#34;: &#34;blocked&#34;
+</span></span><span class="line"><span class="cl">      }
+</span></span><span class="line"><span class="cl">    ]
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="v2ctl生成uuid">V2ctl生成uuid</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">v2ctl uuid
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="三运行v2ray服务端">三、运行V2ray服务端</h3>
+<h4 id="启动v2ray服务">启动V2ray服务</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl start v2ray
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="设置开机自启动">设置开机自启动</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl <span class="nb">enable</span> v2ray
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="测试v2ray配置文件正确性">测试V2ray配置文件正确性</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">v2ray -test -config /usr/local/etc/v2ray/config.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="控制-v2ray-的运行的常用命令">控制 V2Ray 的运行的常用命令</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">service v2ray restart <span class="p">|</span> force-reload <span class="p">|</span>start<span class="p">|</span>stop<span class="p">|</span>status<span class="p">|</span>reload
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>TIPS<br>
+此时已经可以通过V2ray实现科学上网了。</p>
+</blockquote>
+<h3 id="四nginx反向代理tls">四、Nginx反向代理+TLS</h3>
+<h4 id="nginxtls配置教程">Nginx+TLS配置教程</h4>
+<p><a href="https://eebond.github.io/centos7/centos-xia-shi-yong-certbot-shen-qing-bu-shu-let-s-encrpyt-mian-fei-ssl-zheng-shu-ngingx-fu-wu-qi/" target="_blank" rel="noopener noreffer">https://eebond.github.io/centos7/centos-xia-shi-yong-certbot-shen-qing-bu-shu-let-s-encrpyt-mian-fei-ssl-zheng-shu-ngingx-fu-wu-qi/</a></p>
+<h4 id="nginx配置文件">Nginx配置文件</h4>
+<h5 id="快速获取">快速获取</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget -O /etc/nginx/conf.d/cloud.conf  https://raw.githubusercontent.com/eebond/banwagong/main/Nginx/conf.d/blog.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="手动输入">手动输入</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /etc/nginx/conf.d/blog.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="配置文件">配置文件</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">    server {
+</span></span><span class="line"><span class="cl">        listen       80;
+</span></span><span class="line"><span class="cl">        listen       [::]:80;
+</span></span><span class="line"><span class="cl">        server_name  blog.eebond.xyz;
+</span></span><span class="line"><span class="cl">        rewrite ^(.*)$ https://$host$1 permanent;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Settings for a TLS enabled server.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    server {
+</span></span><span class="line"><span class="cl">        listen       443 ssl http2;
+</span></span><span class="line"><span class="cl">        listen       [::]:443 ssl http2;
+</span></span><span class="line"><span class="cl">        server_name  blog.eebond.xyz;
+</span></span><span class="line"><span class="cl">        root         /srv/www/blog;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ssl_certificate &#34;/etc/letsencrypt/live/blog.eebond.xyz/fullchain.pem&#34;;
+</span></span><span class="line"><span class="cl">        ssl_certificate_key &#34;/etc/letsencrypt/live/blog.eebond.xyz/privkey.pem&#34;;
+</span></span><span class="line"><span class="cl">        ssl_session_cache shared:SSL:1m;
+</span></span><span class="line"><span class="cl">        ssl_session_timeout  10m;
+</span></span><span class="line"><span class="cl">        ssl_ciphers HIGH:!aNULL:!MD5;
+</span></span><span class="line"><span class="cl">        ssl_prefer_server_ciphers on;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        # Load configuration files for the default server block.
+</span></span><span class="line"><span class="cl">        include /etc/nginx/default.d/*.conf;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        error_page 404 /404.html;
+</span></span><span class="line"><span class="cl">            location = /40x.html {
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        error_page 500 502 503 504 /50x.html;
+</span></span><span class="line"><span class="cl">            location = /50x.html {
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        location /vmess {
+</span></span><span class="line"><span class="cl">            if ($http_upgrade != &#34;websocket&#34;) {
+</span></span><span class="line"><span class="cl">            return 404;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            proxy_redirect off;
+</span></span><span class="line"><span class="cl">            proxy_pass http://127.0.0.1:10086;
+</span></span><span class="line"><span class="cl">            proxy_http_version 1.1;
+</span></span><span class="line"><span class="cl">            proxy_set_header Upgrade $http_upgrade;
+</span></span><span class="line"><span class="cl">            proxy_set_header Connection &#34;upgrade&#34;;
+</span></span><span class="line"><span class="cl">            proxy_set_header Host $host;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            proxy_set_header X-Real-IP $remote_addr;
+</span></span><span class="line"><span class="cl">            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        location /vless {
+</span></span><span class="line"><span class="cl">            if ($http_upgrade != &#34;websocket&#34;) {
+</span></span><span class="line"><span class="cl">                return 404;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            proxy_redirect off;
+</span></span><span class="line"><span class="cl">            proxy_pass http://127.0.0.1:12345;
+</span></span><span class="line"><span class="cl">            proxy_http_version 1.1;
+</span></span><span class="line"><span class="cl">            proxy_set_header Upgrade $http_upgrade;
+</span></span><span class="line"><span class="cl">            proxy_set_header Connection &#34;upgrade&#34;;
+</span></span><span class="line"><span class="cl">            proxy_set_header Host $host;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            proxy_set_header X-Real-IP $remote_addr;
+</span></span><span class="line"><span class="cl">            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span></code></pre></td></tr></table>
+</div>
+</div>]]></description>
 </item><item>
     <title>CentOS 7 安装部署Shadowsocks-libev</title>
     <link>https://eebond.github.io/centos-7-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2shadowsocks-libev/</link>
     <pubDate>Fri, 19 Nov 2021 20:08:12 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/centos-7-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2shadowsocks-libev/</guid>
-    <description><![CDATA[手动部署Shadowsocks-libev]]></description>
+    <description><![CDATA[<p>参考文章：<a href="https://gfw.report/blog/ss_tutorial/zh/" target="_blank" rel="noopener noreffer">https://gfw.report/blog/ss_tutorial/zh/</a></p>
+<h3 id="一安装snap应用商店">一、安装snap应用商店</h3>
+<h4 id="1安装epel">1.安装EPEL</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install epel-release -y
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2安装snapd">2.安装snapd</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install snapd -y
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="3添加snap启动通信socket">3.添加snap启动通信socket</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl <span class="nb">enable</span> --now snapd.socket
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="4创建链接snap软件包一般安装在snap目录下">4.创建链接（snap软件包一般安装在/snap目录·下）</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ln -s /var/lib/snapd/snap /snap
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="5安装snap-core更新">5.安装snap core(更新)</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">snap snap install core
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="二安装shadowsocks-libev">二、安装Shadowsocks-libev</h3>
+<h4 id="1安装最新版的shadowsocks-libev">1.安装最新版的Shadowsocks-libev</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">snap install shadowsocks-libev --edge
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2编写配置文件">2.编写配置文件</h4>
+<h5 id="快速获取配置文件">快速获取配置文件</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /var/snap/shadowsocks-libev/common/etc/shadowsocks-libev/ <span class="o">&amp;&amp;</span>  wget -O config.json https://raw.githubusercontent.com/eebond/banwagong/main/shadowsocks-libev/config.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="配置文件位置">配置文件位置</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">/var/snap/shadowsocks-libev/common/etc/shadowsocks-libev/config.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="配置文件内容">配置文件内容</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    &#34;server&#34;:[&#34;::0&#34;,&#34;0.0.0.0&#34;],
+</span></span><span class="line"><span class="cl">    &#34;server_port&#34;:8389,
+</span></span><span class="line"><span class="cl">    &#34;encryption_method&#34;:&#34;chacha20-ietf-poly1305&#34;,
+</span></span><span class="line"><span class="cl">    &#34;password&#34;:&#34;ks5g+uP4eYBto8rxfy5gJg==&#34;,
+</span></span><span class="line"><span class="cl">    &#34;mode&#34;:&#34;tcp_and_udp&#34;,
+</span></span><span class="line"><span class="cl">    &#34;fast_open&#34;:false
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="生成强密码">生成强密码</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">openssl rand -base64 <span class="m">16</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="三运行shadowsocks-libev">三、运行Shadowsocks-libev</h3>
+<h4 id="启动shadowsocks-libev">启动Shadowsocks-libev</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl start snap.shadowsocks-libev.ss-server-daemon.service
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="设置开机自启动">设置开机自启动</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl <span class="nb">enable</span> snap.shadowsocks-libev.ss-server-daemon.service
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="四维护">四、维护</h3>
+<h4 id="检查运行状态和日志">检查运行状态和日志</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl status snap.shadowsocks-libev.ss-server-daemon.service
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="重新加载配置文件">重新加载配置文件</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl restart snap.shadowsocks-libev.ss-server-daemon.service
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="配置备用端口来缓解端口封锁">配置备用端口来缓解端口封锁</h4>
+<p>使用以下命令来将服务器从12000到12010端口接收到的TCP和UDP流量全部转发到8389端口：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">iptables -t nat -A PREROUTING -p tcp --dport 12000:12010 -j REDIRECT --to-port <span class="m">8389</span>
+</span></span><span class="line"><span class="cl">iptables -t nat -A PREROUTING -p udp --dport 12000:12010 -j REDIRECT --to-port <span class="m">8389</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输入一下命令，查看是否配置成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">iptables -t nat -L PREROUTING -nv --line-number
+</span></span></code></pre></td></tr></table>
+</div>
+</div>]]></description>
 </item></channel>
 </rss>

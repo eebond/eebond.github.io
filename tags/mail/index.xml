@@ -10,6 +10,52 @@
     <pubDate>Thu, 09 Dec 2021 16:07:41 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/linux%E4%B8%8B%E4%BD%BF%E7%94%A8mail%E5%B7%A5%E5%85%B7%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/</guid>
-    <description><![CDATA[nothting]]></description>
+    <description><![CDATA[<p>邮件常常是Linux下监控报警手段之一。Linux下的mail命令可以方便，快速的完成发送邮件。下面以CentOS为例</p>
+<h2 id="1安装mailx">1.安装mailx</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install mailx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2配置">2.配置</h2>
+<p>vi /etc/mail.rc   在文件尾加上如下配置  （注:因为163的设置相对简单些，以163邮箱为例，QQ邮箱等，其他邮箱因为安全等因素，需要设置的比较多，具体的可以搞下，本文不作重点。QQ邮箱也是可以的，需要开启smtp服务，并生成授权码）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">set from=zabbix@163.com
+</span></span><span class="line"><span class="cl">set smtp=smtp.163.com
+</span></span><span class="line"><span class="cl">set smtp-auth-user=zabbix@163.com
+</span></span><span class="line"><span class="cl">set smtp-auth-password=邮箱密码
+</span></span><span class="line"><span class="cl">set smtp-auth=login
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="3发送邮件测试">3.发送邮件测试</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Content&#34;</span> <span class="p">|</span> mail -s <span class="s2">&#34;Title&#34;</span> abc@163.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>带附件的邮件(需要注意的是目标邮箱一定要放在最后写)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Content&#34;</span> <span class="p">|</span> mail -s <span class="s2">&#34;Title&#34;</span> -a &lt;附件&gt; abc@163.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div>]]></description>
 </item></channel>
 </rss>

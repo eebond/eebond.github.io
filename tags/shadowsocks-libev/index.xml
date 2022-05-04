@@ -10,6 +10,173 @@
     <pubDate>Fri, 19 Nov 2021 20:08:12 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/centos-7-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2shadowsocks-libev/</guid>
-    <description><![CDATA[手动部署Shadowsocks-libev]]></description>
+    <description><![CDATA[<p>参考文章：<a href="https://gfw.report/blog/ss_tutorial/zh/" target="_blank" rel="noopener noreffer">https://gfw.report/blog/ss_tutorial/zh/</a></p>
+<h3 id="一安装snap应用商店">一、安装snap应用商店</h3>
+<h4 id="1安装epel">1.安装EPEL</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install epel-release -y
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2安装snapd">2.安装snapd</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install snapd -y
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="3添加snap启动通信socket">3.添加snap启动通信socket</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl <span class="nb">enable</span> --now snapd.socket
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="4创建链接snap软件包一般安装在snap目录下">4.创建链接（snap软件包一般安装在/snap目录·下）</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ln -s /var/lib/snapd/snap /snap
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="5安装snap-core更新">5.安装snap core(更新)</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">snap snap install core
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="二安装shadowsocks-libev">二、安装Shadowsocks-libev</h3>
+<h4 id="1安装最新版的shadowsocks-libev">1.安装最新版的Shadowsocks-libev</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">snap install shadowsocks-libev --edge
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2编写配置文件">2.编写配置文件</h4>
+<h5 id="快速获取配置文件">快速获取配置文件</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /var/snap/shadowsocks-libev/common/etc/shadowsocks-libev/ <span class="o">&amp;&amp;</span>  wget -O config.json https://raw.githubusercontent.com/eebond/banwagong/main/shadowsocks-libev/config.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="配置文件位置">配置文件位置</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">/var/snap/shadowsocks-libev/common/etc/shadowsocks-libev/config.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="配置文件内容">配置文件内容</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    &#34;server&#34;:[&#34;::0&#34;,&#34;0.0.0.0&#34;],
+</span></span><span class="line"><span class="cl">    &#34;server_port&#34;:8389,
+</span></span><span class="line"><span class="cl">    &#34;encryption_method&#34;:&#34;chacha20-ietf-poly1305&#34;,
+</span></span><span class="line"><span class="cl">    &#34;password&#34;:&#34;ks5g+uP4eYBto8rxfy5gJg==&#34;,
+</span></span><span class="line"><span class="cl">    &#34;mode&#34;:&#34;tcp_and_udp&#34;,
+</span></span><span class="line"><span class="cl">    &#34;fast_open&#34;:false
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="生成强密码">生成强密码</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">openssl rand -base64 <span class="m">16</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="三运行shadowsocks-libev">三、运行Shadowsocks-libev</h3>
+<h4 id="启动shadowsocks-libev">启动Shadowsocks-libev</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl start snap.shadowsocks-libev.ss-server-daemon.service
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="设置开机自启动">设置开机自启动</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl <span class="nb">enable</span> snap.shadowsocks-libev.ss-server-daemon.service
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="四维护">四、维护</h3>
+<h4 id="检查运行状态和日志">检查运行状态和日志</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl status snap.shadowsocks-libev.ss-server-daemon.service
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="重新加载配置文件">重新加载配置文件</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl restart snap.shadowsocks-libev.ss-server-daemon.service
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="配置备用端口来缓解端口封锁">配置备用端口来缓解端口封锁</h4>
+<p>使用以下命令来将服务器从12000到12010端口接收到的TCP和UDP流量全部转发到8389端口：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">iptables -t nat -A PREROUTING -p tcp --dport 12000:12010 -j REDIRECT --to-port <span class="m">8389</span>
+</span></span><span class="line"><span class="cl">iptables -t nat -A PREROUTING -p udp --dport 12000:12010 -j REDIRECT --to-port <span class="m">8389</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输入一下命令，查看是否配置成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">iptables -t nat -L PREROUTING -nv --line-number
+</span></span></code></pre></td></tr></table>
+</div>
+</div>]]></description>
 </item></channel>
 </rss>

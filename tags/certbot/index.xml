@@ -10,6 +10,234 @@
     <pubDate>Thu, 11 Nov 2021 17:29:03 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/centos%E4%B8%8B%E4%BD%BF%E7%94%A8certbot%E7%94%B3%E8%AF%B7%E9%83%A8%E7%BD%B2let-s-encrpyt%E5%85%8D%E8%B4%B9ssl%E8%AF%81%E4%B9%A6ngingx%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
-    <description><![CDATA[本文讲述任何在centos7下申请SSL免费证书，实现Nginx服务器Https访问]]></description>
+    <description><![CDATA[<ul>
+<li>网站使用 HTTPS 协议已是大势所趋，而要在 web 上使用 HTTPS 的话，我们首先需要获得一个 SSL 证书文件。本文介绍如何在 CentOS7 + Nginx 环境下，安装使用 Let&rsquo;s Encrypt 免费 SSL 证书。</li>
+</ul>
+<h3 id="1准备工作">1.准备工作</h3>
+<p>(1)首先安装Nginx服务器，并确保正常运行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install nginx -y
+</span></span><span class="line"><span class="cl">systemctl start nginx  //启动Nginx
+</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> nginx  //设置Nginx开机自启动
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>(2)服务器要开放80端口以及443端口</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">firewall-cmd --permanent --add-port<span class="o">=</span>80/tcp
+</span></span><span class="line"><span class="cl">firewall-cmd --permanent --add-port<span class="o">=</span>443/tcp
+</span></span><span class="line"><span class="cl">firewall-cmd --reload
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>（3）需要有自己的域名，并在域名服务器创建一台A记录，指向服务器的公网IP。比如我这里使用blog.eebond.xyz这个域名。等域名解析生效后，访问：<a href="http://blog.eebond.xyz" target="_blank" rel="noopener noreffer">http://blog.eebond.xyz</a> ,可以看到如下页面则说明域名解析成功、Nginx服务器正常运行：</p>
+<p></p>
+<h3 id="2安装certbot工具">2.安装certbot工具</h3>
+<p>我们采用certbot脚本方式申请let&rsquo;s Encrypt证书，依次执行如下命令安装该工具：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install -y epel-release
+</span></span><span class="line"><span class="cl">yum install -y certbot
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="3申请证书">3.申请证书</h3>
+<p>（1）接下来我们要使用certbot命令初次申请证书，命令格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">certbot certonly --webroot -w <span class="o">[</span>Web站点目录<span class="o">]</span> -d <span class="o">[</span>站点域名<span class="o">]</span> -m <span class="o">[</span>联系人email地址<span class="o">]</span> --agree-tos
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>还有不设web站点的申请方式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">certbot certonly --standalone -d <span class="o">[</span>站点域名<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>（2）这里我执行如下命令，读者根据实际情况修改：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">certbot certonly --webroot -w /srv/www/blog  -d eebond.xyz -m eebond0327@gmail.com --agree-tos
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>（3）申请成功后，证书会保存在 /etc/letsencrypt/live/demo.hangge.com/ 下面：
+</p>
+<p>（4）使用如下命令可以查看证书的有效期：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">openssl x509 -noout -dates -in /etc/letsencrypt/live/blog.eebond.xyz/cert.pem
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<h3 id="4证书更新">4.证书更新</h3>
+<p>（1）Let&rsquo;s Encrypt 证书的有效期是 90 天，需要长期使用的话，需要在失效前进行延长申请。我们可以执行如下命令去更新：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">//更新证书
+</span></span><span class="line"><span class="cl">certbot renew --dry-run
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">//如果不需要返回的信息，可以用静默方式
+</span></span><span class="line"><span class="cl">certbot renew --quiet
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>（2）我们也可以将更新证书的脚本写到定时任务来自动完成，免得我们手动操作。首先执行如下命令开始编辑定时任务：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">crontab -e
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>（3）此时会进入 vi 的编辑界面让你编辑工作（每项工作都是一行）。我们在末尾添加如下一行内容，表示每月 1 号 5 时会执行执行一次更新，并重启 nginx 服务器：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="m">00</span> <span class="m">05</span> <span class="m">01</span> * * /usr/bin/certbot renew --quiet <span class="o">&amp;&amp;</span> /bin/systemctl restart nginx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不设站点目录的生成证书方式，需要先关闭nginx服务器再更新证书</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="m">00</span> <span class="m">05</span> <span class="m">01</span> * * /usr/bin/certbot renew --dry-run --pre-hook <span class="s2">&#34;service nginx stop&#34;</span> --post-hook <span class="s2">&#34;service nginx start&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="5配置nginx">5.配置Nginx</h3>
+<p>（1）编写nginx配置文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /etc/nginx/conf.d/cloud.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>（2）修改默认的server_name、 ssl_certificate、 ssl_certificate_key等地方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">   server {
+</span></span><span class="line"><span class="cl">       listen       80;
+</span></span><span class="line"><span class="cl">       listen       [::]:80;
+</span></span><span class="line"><span class="cl">       server_name  blog.eebond.xyz;
+</span></span><span class="line"><span class="cl">       rewrite ^(.*)$ https://$host$1 permanent;
+</span></span><span class="line"><span class="cl">   }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Settings for a TLS enabled server.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   server {
+</span></span><span class="line"><span class="cl">       listen       443 ssl http2;
+</span></span><span class="line"><span class="cl">       listen       [::]:443 ssl http2;
+</span></span><span class="line"><span class="cl">       server_name  blog.eebond.xyz;
+</span></span><span class="line"><span class="cl">       root         /srv/www/blog;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       ssl_certificate &#34;/etc/letsencrypt/live/blog.eebond.xyz/fullchain.pem&#34;;
+</span></span><span class="line"><span class="cl">       ssl_certificate_key &#34;/etc/letsencrypt/live/blog.eebond.xyz/privkey.pem&#34;;
+</span></span><span class="line"><span class="cl">       ssl_session_cache shared:SSL:1m;
+</span></span><span class="line"><span class="cl">       ssl_session_timeout  10m;
+</span></span><span class="line"><span class="cl">       ssl_ciphers HIGH:!aNULL:!MD5;
+</span></span><span class="line"><span class="cl">       ssl_prefer_server_ciphers on;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       # Load configuration files for the default server block.
+</span></span><span class="line"><span class="cl">       include /etc/nginx/default.d/*.conf;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       error_page 404 /404.html;
+</span></span><span class="line"><span class="cl">           location = /40x.html {
+</span></span><span class="line"><span class="cl">       }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       error_page 500 502 503 504 /50x.html;
+</span></span><span class="line"><span class="cl">           location = /50x.html {
+</span></span><span class="line"><span class="cl">       }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       
+</span></span><span class="line"><span class="cl">   }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>（3）保存退出后，重新加载Nginx配置文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nginx -s reload
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>(4)再次使用浏览器访问<a href="http://blog.eebond.xyz" target="_blank" rel="noopener noreffer">http://blog.eebond.xyz</a> ，如果正常跳转到<a href="https://blog.eebond.xyz" target="_blank" rel="noopener noreffer">https://blog.eebond.xyz</a> ，并且地址栏有个小锁图标，则说明https配置成功了：</p>
+<p></p>
+<p>我这里是把我的博客部署到上面了，有时候输入blog.eebond.xyz没有小锁，可能是浏览器之前访问过，有缓存。</p>
+]]></description>
 </item></channel>
 </rss>

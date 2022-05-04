@@ -10,13 +10,305 @@
     <pubDate>Wed, 30 Mar 2022 19:14:28 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/hexo%E5%8D%9A%E5%AE%A2github-actions%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</guid>
-    <description><![CDATA[nothting]]></description>
+    <description><![CDATA[<h2 id="问题分析">问题分析</h2>
+<p>本地Hexo博客源码备份到GitHub的一个仓库中，博客展示有两个地方，一个是GitHub Pages，一个是自己VPS建的博客网站。每次先将本地源码备份推送到GitHub仓库，然后再deploy出网站内容发布到两个服务端。通过GitHub的Actions，可以让我只需要每次推送源码，GitHub帮我自动部署网站。<strong>甚至本地都不需要安装Hexo</strong>。</p>
+<h2 id="实现方案">实现方案</h2>
+<p>blog_backup仓库用于存放Hexo博客源码，eebond.github.io仓库存放博客网站文件，vps自建git私服存放博客网站文件。</p>
+<p>需要一对公私钥，私钥放在blog_backup仓库，公钥放在eebond.github.io仓库和vps私服仓库所在用户。</p>
+<h3 id="生成公钥私钥">生成公钥私钥</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh-keygen -f hexo-deploy-key -t rsa
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>命令执行后会生成两个文件hexo-deploy-key（私钥）和hexo-deploy-key.pub（公钥）。</p>
+<h3 id="添加公钥">添加公钥</h3>
+<h4 id="添加公钥到github-pages仓库中eebondgithubio">添加公钥到GitHub Pages仓库中（eebond.github.io)</h4>
+<p></p>
+<h4 id="添加公钥到私服仓库所在用户">添加公钥到私服仓库所在用户</h4>
+<p>我的私服是在git用户中创建的，所以添加到git用户下的.ssh/authorized_keys文件中。</p>
+<h3 id="添加私钥">添加私钥</h3>
+<p>将私钥添加到blog_backup仓库的Actions secrets：
+</p>
+<h3 id="配置workflow文件">配置workflow文件</h3>
+<p>在blog_backup仓库根目录下创建.github/workflows/autodeploy.yml文件，文件名随意设置。
+文件内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 当有改动推送到main分支时，启动Action</span>
+</span></span><span class="line"><span class="cl">name: 自动部署
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">on:
+</span></span><span class="line"><span class="cl">  push:
+</span></span><span class="line"><span class="cl">    branches:
+</span></span><span class="line"><span class="cl">      - master <span class="c1">#2020年10月后github新建仓库默认分支改为main，注意更改</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  release:
+</span></span><span class="line"><span class="cl">    types:
+</span></span><span class="line"><span class="cl">      - published
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">jobs:
+</span></span><span class="line"><span class="cl">  deploy:
+</span></span><span class="line"><span class="cl">    runs-on: ubuntu-latest
+</span></span><span class="line"><span class="cl">    steps:
+</span></span><span class="line"><span class="cl">      - name: 检查分支
+</span></span><span class="line"><span class="cl">        uses: actions/checkout@v2
+</span></span><span class="line"><span class="cl">        with:
+</span></span><span class="line"><span class="cl">          ref: master <span class="c1">#2020年10月后github新建仓库默认分支改为main，注意更改</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      - name: 安装 Node
+</span></span><span class="line"><span class="cl">        uses: actions/setup-node@v1
+</span></span><span class="line"><span class="cl">        with:
+</span></span><span class="line"><span class="cl">          node-version: <span class="s1">&#39;12.x&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      - name: 安装 Hexo
+</span></span><span class="line"><span class="cl">        run: <span class="p">|</span>
+</span></span><span class="line"><span class="cl">          <span class="nb">export</span> <span class="nv">TZ</span><span class="o">=</span><span class="s1">&#39;Asia/Shanghai&#39;</span>
+</span></span><span class="line"><span class="cl">          npm install hexo-cli -g
+</span></span><span class="line"><span class="cl">      - name: 缓存 Hexo
+</span></span><span class="line"><span class="cl">        uses: actions/cache@v1
+</span></span><span class="line"><span class="cl">        id: cache
+</span></span><span class="line"><span class="cl">        with:
+</span></span><span class="line"><span class="cl">          path: node_modules
+</span></span><span class="line"><span class="cl">          key: <span class="si">${</span><span class="p">{runner.OS</span><span class="si">}</span><span class="o">}</span>-<span class="si">${</span><span class="p">{hashFiles(</span><span class="s1">&#39;**/package-lock.json&#39;</span><span class="p">)</span><span class="si">}</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      - name: 安装依赖
+</span></span><span class="line"><span class="cl">        <span class="k">if</span>: steps.cache.outputs.cache-hit !<span class="o">=</span> <span class="s1">&#39;true&#39;</span>
+</span></span><span class="line"><span class="cl">        run: <span class="p">|</span>
+</span></span><span class="line"><span class="cl">          npm install --save
+</span></span><span class="line"><span class="cl">      - name: 生成静态文件
+</span></span><span class="line"><span class="cl">        run: <span class="p">|</span>
+</span></span><span class="line"><span class="cl">          hexo clean
+</span></span><span class="line"><span class="cl">          hexo generate
+</span></span><span class="line"><span class="cl">      - name: 服务器验证
+</span></span><span class="line"><span class="cl">        env:
+</span></span><span class="line"><span class="cl">          ACTION_DEPLOY_KEY: <span class="si">${</span><span class="p">{ secrets.HEXO_DEPLOY_KEY </span><span class="si">}</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">        run: <span class="p">|</span>
+</span></span><span class="line"><span class="cl">          sudo timedatectl set-timezone <span class="s2">&#34;Asia/Shanghai&#34;</span>
+</span></span><span class="line"><span class="cl">          mkdir -p ~/.ssh/
+</span></span><span class="line"><span class="cl">          <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$ACTION_DEPLOY_KEY</span><span class="s2">&#34;</span> &gt; ~/.ssh/id_rsa
+</span></span><span class="line"><span class="cl">          chmod <span class="m">600</span> ~/.ssh/id_rsa
+</span></span><span class="line"><span class="cl">          ssh-keyscan -p <span class="m">29488</span> 23.105.219.155 &gt;&gt; ~/.ssh/known_hosts  <span class="c1">#此处填写你的服务器IP</span>
+</span></span><span class="line"><span class="cl">          git config --global user.name <span class="s2">&#34;eebond&#34;</span>
+</span></span><span class="line"><span class="cl">          git config --global user.email <span class="s2">&#34;1422797591@qq.com&#34;</span> <span class="c1">#修改为你的GitHub用户名邮箱</span>
+</span></span><span class="line"><span class="cl">      - name: 部署
+</span></span><span class="line"><span class="cl">        run: <span class="p">|</span>
+</span></span><span class="line"><span class="cl">          hexo deploy
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>之后就可以本地推送后，GitHub自动部署网站了。</p>
+]]></description>
 </item><item>
     <title>Hexo博客备份和迁移</title>
     <link>https://eebond.github.io/hexo%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD%E5%92%8C%E8%BF%81%E7%A7%BB/</link>
     <pubDate>Wed, 17 Nov 2021 18:21:03 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/hexo%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD%E5%92%8C%E8%BF%81%E7%A7%BB/</guid>
-    <description><![CDATA[nothting]]></description>
+    <description><![CDATA[<h2 id="为什么需要备份和迁移">为什么需要备份和迁移？</h2>
+<p>一般情况下，我们博客的相关配置信息都是在本地操作的,  但是当我们更换了设备或者电脑出现故障了等，那么我们便无法再维护我们的博客了。因而为了保护我们的劳动成果以及将来能更方便的维护博客，我们需要对博客进行备份和迁移，也就是将博客的相关配置信息上传到github上进行托管。日后有必要的时候可以从github上克隆到本地进行博客的维护等操作。</p>
+<p>我在windows10上安装的Hexo博客，如果要换电脑或者换系统就要转移Hexo博客，之后我将Hexo博客转移到Ubuntu20.04上以便我在使用Ubuntu系统时也可以写博客。</p>
+<h2 id="备份">备份</h2>
+<h3 id="思路">思路</h3>
+<p>在搭建博客的时候，我们已经将博客部署到了github上去，其实部署上去只是生成的静态文件。因而还需要将hexo生成的网站源文件也push到github上。这个时候需要再github上创建分支，其中主分支master已经存放了生成的静态网页。</p>
+<p>以下操作在windows10上进行</p>
+<h3 id="处理过程">处理过程</h3>
+<h4 id="删除git">删除.git</h4>
+<p>将hexo的主题下的.git删除，比如删除themes/next/目录下的.git否则无法将主题文件夹push。</p>
+<h4 id="创建gitignore">创建.gitignore</h4>
+<p>在本地blog文件夹下创建文件.gitignore，正常情况这个文件是自动生成的，打开后写入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">.DS_Store
+</span></span><span class="line"><span class="cl">Thumbs.db
+</span></span><span class="line"><span class="cl">db.json
+</span></span><span class="line"><span class="cl">*.log
+</span></span><span class="line"><span class="cl">node_modules/
+</span></span><span class="line"><span class="cl">public/
+</span></span><span class="line"><span class="cl">.deploy*/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个文件的存在是指在push的时候忽略文件中的文件格式。</p>
+<h4 id="创建本地分支">创建本地分支</h4>
+<p>在本地blog文件夹中执行命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">#git初始化
+</span></span><span class="line"><span class="cl">git init
+</span></span><span class="line"><span class="cl">#创建hexo分支，用来存放源码
+</span></span><span class="line"><span class="cl">git checkout -b hexo
+</span></span><span class="line"><span class="cl">#git 文件添加
+</span></span><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">#git 提交
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;backup&#34;</span>
+</span></span><span class="line"><span class="cl">#添加远程仓库，github上的博客仓库
+</span></span><span class="line"><span class="cl">git remote add origin 博客仓库地址
+</span></span><span class="line"><span class="cl">#push到hexo分支
+</span></span><span class="line"><span class="cl">git push origin hexo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="迁移">迁移</h2>
+<p>以下操作在Ubuntu系统上进行</p>
+<h3 id="安装hexo">安装Hexo</h3>
+<h4 id="1安装git">1.安装git</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install git -y
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2安装nodejs">2.安装Node.js</h4>
+<p>安装Node.js的最佳方式是使用nvm.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl https://raw.github.com/creationix/nvm/master/install.sh <span class="p">|</span> bash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装完成后，重启终端并执行下列命令即可安装Node.js。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">source</span> ~./profile
+</span></span><span class="line"><span class="cl">nvm install stable
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装Hexo</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">npm install hexo-cli -g
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>至此，Hexo的安装完成了。</p>
+<h3 id="从github下载备份并安装">从GitHub下载备份并安装</h3>
+<h4 id="1配置远程仓库的访问权限">1.配置远程仓库的访问权限</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh-keygen -t rsa
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将生成的公钥添加到GitHub的SSH-Keyd的列表中。</p>
+<h4 id="2下载备份">2.下载备份</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir myblog
+</span></span><span class="line"><span class="cl">git clone -b hexo  &lt;远程仓库地址&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="3安装">3.安装</h4>
+<p>进入myblog目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">npm install
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>之后就可以正常使用了。</p>
+]]></description>
 </item></channel>
 </rss>

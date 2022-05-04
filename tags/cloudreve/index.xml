@@ -10,6 +10,33 @@
     <pubDate>Fri, 01 Apr 2022 15:37:56 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/cloudreve%E7%BD%91%E7%9B%98%E5%A4%87%E4%BB%BD%E4%B8%8E%E8%BF%81%E7%A7%BB/</guid>
-    <description><![CDATA[备份 Cloudreve网盘使用内置数据库，实际所有的数据都保存在uploads目录里，而我的uploads使用软链接指向我的阿里云盘中的up]]></description>
+    <description><![CDATA[<h2 id="备份">备份</h2>
+<p>Cloudreve网盘使用内置数据库，实际所有的数据都保存在uploads目录里，而我的uploads使用软链接指向我的阿里云盘中的uploads目录，所以我实际只需要备份如下文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">  cloudreve
+</span></span><span class="line"><span class="cl">  cloudreve.db
+</span></span><span class="line"><span class="cl">  conf.ini
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>实际只需要在Cloudreve目录创建git仓库，将上述文件推送到GitHub仓库即可，具体操作不详细叙述。</p>
+<h2 id="迁移">迁移</h2>
+<p>之前已经备份过了，所以当要在新服务器上重新搭建cloudreve，只需要pull上述仓库分支。</p>
+<p>我的具体操作如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git pull git@github.com:eebond/banwagong.git master
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>之后按照官方教程安装配置<a href="https://docs.cloudreve.org/getting-started/install" target="_blank" rel="noopener noreffer">https://docs.cloudreve.org/getting-started/install</a></p>
+]]></description>
 </item></channel>
 </rss>

@@ -10,6 +10,85 @@
     <pubDate>Wed, 01 Dec 2021 19:59:02 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/vmware%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%ADcentos7%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</guid>
-    <description><![CDATA[安装CentOS7 mini版本，由于没有UI界面，无法联网，所以要手动配置]]></description>
+    <description><![CDATA[<p><strong>在VMware虚拟机中安装CentOS 7的mini版本，没有UI界面，需要手动配置网络，才能联网。</strong></p>
+<h2 id="vmware虚拟网络编辑器设置">VMware虚拟网络编辑器设置</h2>
+<p>在&lt; 编辑 &gt;选项 中打开虚拟网络编辑器：
+</p>
+<p>虚拟网络编辑器如图所示：
+</p>
+<p>点击右下方的&lt; 更改设置 &gt;选项，然后如图设置
+
+</p>
+<h2 id="centos-中配置文件">CentOS 中配置文件</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ip addr
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看网卡名称为ens33：
+</p>
+<p>更改配置文件/etc/sysconfig/network-scripts/ifcfg-ens33</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">TYPE=Ethernet
+</span></span><span class="line"><span class="cl">PROXY_METHOD=none
+</span></span><span class="line"><span class="cl">BROWSER_ONLY=no
+</span></span><span class="line"><span class="cl">BOOTPROTO=static   #改为static，表示静态IP，IP不会变
+</span></span><span class="line"><span class="cl">DEFROUTE=yes
+</span></span><span class="line"><span class="cl">IPV4_FAILURE_FATAL=no
+</span></span><span class="line"><span class="cl">IPV6INIT=yes
+</span></span><span class="line"><span class="cl">IPV6_AUTOCONF=yes
+</span></span><span class="line"><span class="cl">IPV6_DEFROUTE=yes
+</span></span><span class="line"><span class="cl">IPV6_FAILURE_FATAL=no
+</span></span><span class="line"><span class="cl">IPV6_ADDR_GEN_MODE=stable-privacy
+</span></span><span class="line"><span class="cl">NAME=ens33
+</span></span><span class="line"><span class="cl">UUID=9a344100-a68f-48bd-8c76-104ca488d1e9
+</span></span><span class="line"><span class="cl">DEVICE=ens33
+</span></span><span class="line"><span class="cl">ONBOOT=yes        #开机自动读取该配置文件
+</span></span><span class="line"><span class="cl">IPADDR=192.168.70.110  ##自己设置的静态IP
+</span></span><span class="line"><span class="cl">NETMASK=255.255.255.0  ##子网掩码
+</span></span><span class="line"><span class="cl">GATEWAY=192.168.70.2   ##网关
+</span></span><span class="line"><span class="cl">DNS1=8.8.8.8           ## DNS
+</span></span><span class="line"><span class="cl">DNS2=8.8.4.4
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">systemctl restart network
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>让网络配置生效</p>
+<h2 id="对于本地宿主机的配置">对于本地宿主机的配置</h2>
+<p></p>
+<p>配置结束虚拟机就可以上网了</p>
+]]></description>
 </item></channel>
 </rss>

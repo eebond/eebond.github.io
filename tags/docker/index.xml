@@ -10,6 +10,169 @@
     <pubDate>Mon, 15 Nov 2021 09:21:33 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/centos-7%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BDdocker/</guid>
-    <description><![CDATA[nothting]]></description>
+    <description><![CDATA[<h3 id="一-安装docker环境">一、 安装Docker环境</h3>
+<hr>
+<h4 id="1使用官方安装脚本自动安装">1.使用官方安装脚本自动安装</h4>
+<p>安装命令如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -fsSL https://get.docker.com <span class="p">|</span> bash -s docker --mirror Aliyun
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也可以使用国内daocloud一键安装命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -sSL https://get.daocloud.io/docker <span class="p">|</span> sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2使用docker仓库进行安装">2.使用Docker仓库进行安装</h4>
+<ul>
+<li>下载关于Docker的依赖环境</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum -y install yum-utils device-mapper-persistent-data lvm2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>设置下载Docker的镜像源</p>
+<ul>
+<li>使用官方源（国内较慢）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum-config-manager  --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>国内的源地址</p>
+<ul>
+<li>阿里云</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum-config-manager  --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>清华大学源</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum-config-manager --add-repo https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/centos/docker-ce.repo
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>安装Docker</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum makacache fast
+</span></span><span class="line"><span class="cl">yum -y install docker-ce
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="二清理卸载docker环境">二、清理卸载Docker环境</h3>
+<hr>
+<p>1.杀死所有运行容器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker <span class="nb">kill</span> <span class="k">$(</span>docker ps -a -q<span class="k">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2.删除所有容器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker rm <span class="k">$(</span>docker ps -a -q<span class="k">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>3.删除所有镜像</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker rmi <span class="k">$(</span>docker images -q<span class="k">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>4.停止docker服务</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl stop docker
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>5.删除存储目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm -rf /etc/docker
+</span></span><span class="line"><span class="cl">rm -rf /run/docker
+</span></span><span class="line"><span class="cl">rm -rf /var/lib/docker
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>6.卸载docker</p>
+<ul>
+<li>查看已安装的docker包</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum list installed <span class="p">|</span> grep docker
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>卸载相关包</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum remove docker*
+</span></span></code></pre></td></tr></table>
+</div>
+</div>]]></description>
 </item></channel>
 </rss>

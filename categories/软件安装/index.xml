@@ -10,20 +10,106 @@
     <pubDate>Thu, 31 Mar 2022 20:13:31 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/vscode-picgo%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</guid>
-    <description><![CDATA[nothting]]></description>
+    <description><![CDATA[<h2 id="前言">前言</h2>
+<p>由于我喜欢在VSCode上写博客，也一直使用PicGo客户端来上传图片到图床，但是由于经常在Ubuntu与windows系统中切换，而PicGo对于Liunx的支持不太好（无法实现开机自启动功能），所以想着使用PicGo的vscode插件，那么以后只需要一个VSCode，就可以不需要PicGo客户端了。而且VSCode还可以在不同设备间进行同步。</p>
+<h2 id="实现">实现</h2>
+<h3 id="安装picgo插件">安装PicGo插件</h3>
+<p></p>
+<h3 id="配置picgo插件">配置PicGo插件</h3>
+<p></p>
+<p></p>
+<p></p>
+<h3 id="使用的快捷键">使用的快捷键</h3>
+<p></p>
+<p>至此，就可以在VSCode中快乐的使用图床了。</p>
+<blockquote>
+<p>tips:
+不过VSCode的插件PicGo来上传图片确实稍微比客户端慢一点。</p>
+</blockquote>
+]]></description>
 </item><item>
     <title>Ubuntu中安装PicGo并配置GitHub图床</title>
     <link>https://eebond.github.io/ubuntu%E4%B8%AD%E5%AE%89%E8%A3%85picgo%E5%B9%B6%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A/</link>
     <pubDate>Thu, 31 Mar 2022 13:53:13 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/ubuntu%E4%B8%AD%E5%AE%89%E8%A3%85picgo%E5%B9%B6%E9%85%8D%E7%BD%AEgithub%E5%9B%BE%E5%BA%8A/</guid>
-    <description><![CDATA[nothting]]></description>
+    <description><![CDATA[<p>PicGo在windows中安装较为简单，本文详细说明PicGo在Ubuntu中的安装配置过程，Windows端可以参考。</p>
+<h3 id="下载picgo软件包">下载PicGo软件包</h3>
+<p>项目地址：<a href="https://github.com/Molunerfinn/PicGo/releases" target="_blank" rel="noopener noreffer">PicGo</a></p>
+<p>Ubuntu端需要下载后缀为.AppImage的软件包。</p>
+<p>本文所下软件包为<a href="https://github.com/Molunerfinn/PicGo/releases/download/v2.3.0/PicGo-2.3.0.AppImage" target="_blank" rel="noopener noreffer">PicGo-2.3.0.AppImage</a></p>
+<h3 id="安装运行软件包">安装运行软件包</h3>
+<p>给PicGo-2.3.0.AppImage权限：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod <span class="m">777</span> PicGo-2.3.0.AppImage
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>右键单击，选择run，运行PicGo。</p>
+<h3 id="配置picgo和github图床">配置PicGo和GitHub图床</h3>
+<p>事先准备在GitHub新建一个仓库，用来存放图片，并且添加Token。</p>
+<p></p>
+<p>其中自定义域名为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">https://raw.githubusercontent.com/eebond/images/main
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>还可以对图片链接进行CDN加速，需要改变自定义域名为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">https://cdn.jsdelivr.net/gh/用户名/图床仓库名
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>指定存储路径是在仓库中创建的一个文件夹。</p>
+<p>快捷键设置：
+</p>
+<h3 id="安装必要支撑软件">安装必要支撑软件</h3>
+<p>之前的操作后，PicGo无法正常使用快捷键，缺失支撑软件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install xclip
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>至此，我们可以正常使用图床了。</p>
+]]></description>
 </item><item>
     <title>VSCode在Ubuntu下无法使用中文输入</title>
     <link>https://eebond.github.io/vscode%E5%9C%A8ubuntu%E4%B8%8B%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5/</link>
     <pubDate>Sun, 27 Mar 2022 19:01:10 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/vscode%E5%9C%A8ubuntu%E4%B8%8B%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5/</guid>
-    <description><![CDATA[nothting]]></description>
+    <description><![CDATA[<h3 id="问题">问题</h3>
+<p>今天遇到无法在Ubuntu20.04环境中下载了VSCode，却无法在VSCode中切换中文输入法，只能输入英文。</p>
+<h3 id="问题原因">问题原因</h3>
+<p>VSCode是使用Ubuntu自带的商店下载的，所以无法使用，具体原因不知。</p>
+<h3 id="问题解决">问题解决</h3>
+<p>1.先卸载已安装的VSCode</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">snap remove code
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2.从VSCode官网下载对应版本的安装包重新安装</p>
+<blockquote>
+<p>下载地址链接：<a href="https://code.visualstudio.com/Download" target="_blank" rel="noopener noreffer">https://code.visualstudio.com/Download</a></p>
+</blockquote>
+]]></description>
 </item></channel>
 </rss>

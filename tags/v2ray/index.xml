@@ -10,6 +10,465 @@
     <pubDate>Fri, 19 Nov 2021 22:52:40 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/v2ray-ws-tls%E6%89%8B%E5%8A%A8%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/</guid>
-    <description><![CDATA[根据官方脚本和Nginx知识，在CentOS 7上手动配置V2ray+WS+TLS教程]]></description>
+    <description><![CDATA[<h3 id="准备工作">准备工作</h3>
+<p>如果是新的vps，需要安装必要的工具：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum update
+</span></span><span class="line"><span class="cl">yum install -y vim wget curl
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>需要将系统时间改为东八区，即上海时间：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="一v2ray官方一键安装脚本">一、V2ray官方一键安装脚本</h3>
+<h4 id="1获取v2ray官方脚本">1.获取V2ray官方脚本</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2执行v2ray官方脚本">2.执行V2ray官方脚本</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash install-release.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="3安装文件分析">3.安装文件分析</h4>
+<ul>
+<li>/usr/local/bin/v2ray：V2Ray 程序；</li>
+<li>/usr/local/bin/v2ctl：V2Ray 工具；</li>
+<li>/usr/local/etc/v2ray/config.json：配置文件；</li>
+<li>/usr/local/share/v2ray/geoip.dat：IP 数据文件</li>
+<li>/usr/local/share/v2ray/geosite.dat：域名数据文件</li>
+</ul>
+<h4 id="4安装最新的geoipdat-和-geositedat">4.安装最新的geoip.dat 和 geosite.dat</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-dat-release.sh <span class="o">&amp;&amp;</span> bash install-dat-release.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="5移除v2ray">5.移除V2ray</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash install-release.sh --remove
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="二v2ray配置文件">二、V2ray配置文件</h3>
+<h4 id="直接获取配置文件">直接获取配置文件</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /usr/local/etc/v2ray <span class="o">&amp;&amp;</span> wget -O config.json https://raw.githubusercontent.com/eebond/banwagong/main/V2rayN/config.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="手动编写配置文件并粘贴配置文件">手动编写配置文件并粘贴配置文件</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /usr/local/etc/v2ray/config.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="配置文件内容">配置文件内容</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  &#34;log&#34;: {
+</span></span><span class="line"><span class="cl">        &#34;access&#34;: &#34;/var/log/v2ray/access.log&#34;,
+</span></span><span class="line"><span class="cl">        &#34;error&#34;: &#34;/var/log/v2ray/error.log&#34;,
+</span></span><span class="line"><span class="cl">        &#34;loglevel&#34;: &#34;warning&#34;
+</span></span><span class="line"><span class="cl">  },
+</span></span><span class="line"><span class="cl">  &#34;inbounds&#34;: [
+</span></span><span class="line"><span class="cl">   {
+</span></span><span class="line"><span class="cl">    &#34;listen&#34;: &#34;127.0.0.1&#34;,
+</span></span><span class="line"><span class="cl">    &#34;port&#34;: 10086,
+</span></span><span class="line"><span class="cl">    &#34;protocol&#34;: &#34;vmess&#34;,
+</span></span><span class="line"><span class="cl">    &#34;settings&#34;: {
+</span></span><span class="line"><span class="cl">      &#34;clients&#34;: [
+</span></span><span class="line"><span class="cl">        {
+</span></span><span class="line"><span class="cl">          &#34;id&#34;: &#34;2e82cf13-4e82-4935-9ec7-23d0e0eb56b3&#34;,
+</span></span><span class="line"><span class="cl">          &#34;level&#34;: 1,
+</span></span><span class="line"><span class="cl">          &#34;alterId&#34;: 0 
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">      ]
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    &#34;streamSettings&#34;: {
+</span></span><span class="line"><span class="cl">        &#34;network&#34;: &#34;ws&#34;,
+</span></span><span class="line"><span class="cl">        &#34;security&#34;: &#34;none&#34;,
+</span></span><span class="line"><span class="cl">        &#34;wsSettings&#34;: {
+</span></span><span class="line"><span class="cl">          &#34;path&#34;: &#34;/vmess&#34;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">   },
+</span></span><span class="line"><span class="cl">   {
+</span></span><span class="line"><span class="cl">    &#34;listen&#34;: &#34;127.0.0.1&#34;,
+</span></span><span class="line"><span class="cl">    &#34;port&#34;: 12345,
+</span></span><span class="line"><span class="cl">    &#34;protocol&#34;: &#34;vless&#34;,
+</span></span><span class="line"><span class="cl">    &#34;settings&#34;: {
+</span></span><span class="line"><span class="cl">      &#34;decryption&#34;: &#34;none&#34;,
+</span></span><span class="line"><span class="cl">      &#34;clients&#34;: [
+</span></span><span class="line"><span class="cl">        {
+</span></span><span class="line"><span class="cl">          &#34;id&#34;: &#34;b123c75b-ebdf-006a-eeea-bcf6a8242e42&#34;,
+</span></span><span class="line"><span class="cl">          &#34;level&#34;: 0
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">      ]
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    &#34;streamSettings&#34;: {
+</span></span><span class="line"><span class="cl">      &#34;network&#34;:&#34;ws&#34;,
+</span></span><span class="line"><span class="cl">      &#34;security&#34;: &#34;none&#34;,
+</span></span><span class="line"><span class="cl">      &#34;wsSettings&#34;:{
+</span></span><span class="line"><span class="cl">        &#34;path&#34;:&#34;/vless&#34;,
+</span></span><span class="line"><span class="cl">        &#34;headers&#34;:{}
+</span></span><span class="line"><span class="cl">      }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">   },
+</span></span><span class="line"><span class="cl">   {
+</span></span><span class="line"><span class="cl">    &#34;port&#34;: 51888,
+</span></span><span class="line"><span class="cl">     &#34;protocol&#34;: &#34;shadowsocks&#34;,
+</span></span><span class="line"><span class="cl">     &#34;settings&#34;: {
+</span></span><span class="line"><span class="cl">        &#34;method&#34;: &#34;aes-256-gcm&#34;,
+</span></span><span class="line"><span class="cl">        &#34;password&#34;: &#34;www.bannedbook.org&#34;,
+</span></span><span class="line"><span class="cl">        &#34;network&#34;: &#34;tcp,udp&#34;,
+</span></span><span class="line"><span class="cl">        &#34;level&#34;: 0
+</span></span><span class="line"><span class="cl">      }
+</span></span><span class="line"><span class="cl">   }
+</span></span><span class="line"><span class="cl">  ],
+</span></span><span class="line"><span class="cl">  &#34;outbounds&#34;: [{
+</span></span><span class="line"><span class="cl">    &#34;protocol&#34;: &#34;freedom&#34;,
+</span></span><span class="line"><span class="cl">    &#34;settings&#34;: {}
+</span></span><span class="line"><span class="cl">  },{
+</span></span><span class="line"><span class="cl">    &#34;protocol&#34;: &#34;blackhole&#34;,
+</span></span><span class="line"><span class="cl">    &#34;settings&#34;: {},
+</span></span><span class="line"><span class="cl">    &#34;tag&#34;: &#34;blocked&#34;
+</span></span><span class="line"><span class="cl">  }],
+</span></span><span class="line"><span class="cl">  &#34;routing&#34;: {
+</span></span><span class="line"><span class="cl">    &#34;rules&#34;: [
+</span></span><span class="line"><span class="cl">      {
+</span></span><span class="line"><span class="cl">        &#34;type&#34;: &#34;field&#34;,
+</span></span><span class="line"><span class="cl">        &#34;ip&#34;: [&#34;geoip:private&#34;],
+</span></span><span class="line"><span class="cl">        &#34;outboundTag&#34;: &#34;blocked&#34;
+</span></span><span class="line"><span class="cl">      }
+</span></span><span class="line"><span class="cl">    ]
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="v2ctl生成uuid">V2ctl生成uuid</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">v2ctl uuid
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="三运行v2ray服务端">三、运行V2ray服务端</h3>
+<h4 id="启动v2ray服务">启动V2ray服务</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl start v2ray
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="设置开机自启动">设置开机自启动</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl <span class="nb">enable</span> v2ray
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="测试v2ray配置文件正确性">测试V2ray配置文件正确性</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">v2ray -test -config /usr/local/etc/v2ray/config.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="控制-v2ray-的运行的常用命令">控制 V2Ray 的运行的常用命令</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">service v2ray restart <span class="p">|</span> force-reload <span class="p">|</span>start<span class="p">|</span>stop<span class="p">|</span>status<span class="p">|</span>reload
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>TIPS<br>
+此时已经可以通过V2ray实现科学上网了。</p>
+</blockquote>
+<h3 id="四nginx反向代理tls">四、Nginx反向代理+TLS</h3>
+<h4 id="nginxtls配置教程">Nginx+TLS配置教程</h4>
+<p><a href="https://eebond.github.io/centos7/centos-xia-shi-yong-certbot-shen-qing-bu-shu-let-s-encrpyt-mian-fei-ssl-zheng-shu-ngingx-fu-wu-qi/" target="_blank" rel="noopener noreffer">https://eebond.github.io/centos7/centos-xia-shi-yong-certbot-shen-qing-bu-shu-let-s-encrpyt-mian-fei-ssl-zheng-shu-ngingx-fu-wu-qi/</a></p>
+<h4 id="nginx配置文件">Nginx配置文件</h4>
+<h5 id="快速获取">快速获取</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget -O /etc/nginx/conf.d/cloud.conf  https://raw.githubusercontent.com/eebond/banwagong/main/Nginx/conf.d/blog.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="手动输入">手动输入</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /etc/nginx/conf.d/blog.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="配置文件">配置文件</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">    server {
+</span></span><span class="line"><span class="cl">        listen       80;
+</span></span><span class="line"><span class="cl">        listen       [::]:80;
+</span></span><span class="line"><span class="cl">        server_name  blog.eebond.xyz;
+</span></span><span class="line"><span class="cl">        rewrite ^(.*)$ https://$host$1 permanent;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Settings for a TLS enabled server.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    server {
+</span></span><span class="line"><span class="cl">        listen       443 ssl http2;
+</span></span><span class="line"><span class="cl">        listen       [::]:443 ssl http2;
+</span></span><span class="line"><span class="cl">        server_name  blog.eebond.xyz;
+</span></span><span class="line"><span class="cl">        root         /srv/www/blog;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ssl_certificate &#34;/etc/letsencrypt/live/blog.eebond.xyz/fullchain.pem&#34;;
+</span></span><span class="line"><span class="cl">        ssl_certificate_key &#34;/etc/letsencrypt/live/blog.eebond.xyz/privkey.pem&#34;;
+</span></span><span class="line"><span class="cl">        ssl_session_cache shared:SSL:1m;
+</span></span><span class="line"><span class="cl">        ssl_session_timeout  10m;
+</span></span><span class="line"><span class="cl">        ssl_ciphers HIGH:!aNULL:!MD5;
+</span></span><span class="line"><span class="cl">        ssl_prefer_server_ciphers on;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        # Load configuration files for the default server block.
+</span></span><span class="line"><span class="cl">        include /etc/nginx/default.d/*.conf;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        error_page 404 /404.html;
+</span></span><span class="line"><span class="cl">            location = /40x.html {
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        error_page 500 502 503 504 /50x.html;
+</span></span><span class="line"><span class="cl">            location = /50x.html {
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        location /vmess {
+</span></span><span class="line"><span class="cl">            if ($http_upgrade != &#34;websocket&#34;) {
+</span></span><span class="line"><span class="cl">            return 404;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            proxy_redirect off;
+</span></span><span class="line"><span class="cl">            proxy_pass http://127.0.0.1:10086;
+</span></span><span class="line"><span class="cl">            proxy_http_version 1.1;
+</span></span><span class="line"><span class="cl">            proxy_set_header Upgrade $http_upgrade;
+</span></span><span class="line"><span class="cl">            proxy_set_header Connection &#34;upgrade&#34;;
+</span></span><span class="line"><span class="cl">            proxy_set_header Host $host;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            proxy_set_header X-Real-IP $remote_addr;
+</span></span><span class="line"><span class="cl">            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        location /vless {
+</span></span><span class="line"><span class="cl">            if ($http_upgrade != &#34;websocket&#34;) {
+</span></span><span class="line"><span class="cl">                return 404;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            proxy_redirect off;
+</span></span><span class="line"><span class="cl">            proxy_pass http://127.0.0.1:12345;
+</span></span><span class="line"><span class="cl">            proxy_http_version 1.1;
+</span></span><span class="line"><span class="cl">            proxy_set_header Upgrade $http_upgrade;
+</span></span><span class="line"><span class="cl">            proxy_set_header Connection &#34;upgrade&#34;;
+</span></span><span class="line"><span class="cl">            proxy_set_header Host $host;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            proxy_set_header X-Real-IP $remote_addr;
+</span></span><span class="line"><span class="cl">            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span></code></pre></td></tr></table>
+</div>
+</div>]]></description>
 </item></channel>
 </rss>

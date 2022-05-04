@@ -10,41 +10,2626 @@
     <pubDate>Sun, 17 Apr 2022 20:01:48 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/linux%E4%B8%AD%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEjdk8/</guid>
-    <description><![CDATA[nothting]]></description>
+    <description><![CDATA[<h2 id="前言">前言</h2>
+<blockquote>
+<p>学习JAVA需要安装配置jdk环境，太多数时候会在Linux环境中配置jdk，本篇以Centos7为例配置jdk8，以便日后参考，快速配置环境。</p>
+</blockquote>
+<hr>
+<h2 id="安装配置">安装配置</h2>
+<h3 id="下载jdk8">下载jdk8</h3>
+<p>1.通过<a href="https://www.oracle.com/java/technologies/downloads/#java8" target="_blank" rel="noopener noreffer">oracle官网下载</a></p>
+<p></p>
+<p>但是官网下载，需要Oracle账号。网上找到得账号：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">1287019365@qq.com
+</span></span><span class="line"><span class="cl">Oracle@1234
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2.通过wget下载我的私有云盘里的jdk8备份</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget jdk-8u321-linux-x64.tar.gz https://cloud.eebond.xyz/api/v3/file/get/194/jdk-8u321-linux-x64.tar.gz?sign<span class="o">=</span>bvDVYkfqvYU4jv86no9qpC6Sw7n2opQLA6CtcU_W-EI%3D%3A0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="配置">配置</h3>
+<p>1、 解压jdk-8u321-linux-x64.tar.gz到指定目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir /usr/java <span class="o">&amp;&amp;</span> tar -zxvf jdk-8u321-linux-x64.tar.gz -C /usr/java/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2、 配置环境变量</p>
+<p>打开配置文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /etc/profile
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>编写配置文件内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">export JAVA_HOME=/usr/java/jdk1.8.0_321
+</span></span><span class="line"><span class="cl">export PATH=$JAVA_HOME/bin:$PATH
+</span></span><span class="line"><span class="cl">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使更新后的配置文件生效</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">source</span> /etc/profile
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="验证使用jdk">验证使用jdk</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">java -version 
+</span></span><span class="line"><span class="cl">javac
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+]]></description>
 </item><item>
     <title>vps上挂载阿里云盘并用aria2实现离线下载</title>
     <link>https://eebond.github.io/vps%E4%B8%8A%E6%8C%82%E8%BD%BD%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98%E5%B9%B6%E7%94%A8aria2%E5%AE%9E%E7%8E%B0%E7%A6%BB%E7%BA%BF%E4%B8%8B%E8%BD%BD/</link>
     <pubDate>Wed, 30 Mar 2022 16:06:46 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/vps%E4%B8%8A%E6%8C%82%E8%BD%BD%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98%E5%B9%B6%E7%94%A8aria2%E5%AE%9E%E7%8E%B0%E7%A6%BB%E7%BA%BF%E4%B8%8B%E8%BD%BD/</guid>
-    <description><![CDATA[nothting]]></description>
+    <description><![CDATA[<h2 id="vps挂载阿里云盘并用aria2实现离线下载">vps挂载阿里云盘并用aria2实现离线下载</h2>
+<p>之前用cloudreve搭建了一个私人网盘，性能可以，但是vps的空间太小，无法存储很多文件。该网盘还有离线下载功能，需要用aria2来实现。所以我想把私人网盘的存储放在阿里云盘里，并且通过aria2实现两个网盘的离线下载。</p>
+<h3 id="首先获得阿里云盘-refreshtoken">首先获得阿里云盘 refreshToken</h3>
+<p>登录阿里云网页版，点击F12</p>
+<p></p>
+<h3 id="让阿里云盘实现webdav功能">让阿里云盘实现WebDAV功能</h3>
+<p>使用开源项目<a href="https://github.com/messense/aliyundrive-WebDAV" target="_blank" rel="noopener noreffer">aliyundrive-WebDAV</a>来实现功能。</p>
+<p>以CentOS7为例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install python3-pip -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">pip3 install aliyundrive-WebDAV
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>升级项目：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pip install --upgrade aliyundrive-WebDAV
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>后台启动命令实现WebDAV功能</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nohup aliyundrive-webdav -I -U 用户名 -W 密码 -r 你的token <span class="p">&amp;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="挂载使用阿里云盘">挂载使用阿里云盘</h3>
+<p>Rclone 是一个用于在多平台进行文件同步的命令行工具，支持多家网盘及文件传输协议。这里主要介绍 Linux 端挂载 WebDAV 的使用方式：</p>
+<p>使用官方脚本安装最新 rclone：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl https://rclone.org/install.sh <span class="p">|</span> sudo bash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来使用 rclone 挂载 WebDAV，输入后回车，一步一步跟着 rclone 的提示来即可，下方#号后面的内容为步骤翻译注释，不要全部复制粘贴进去了，仔细看提示根据自己的实际情况来修改，输入命令 rclone config 开始配置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@eebond ~<span class="o">]</span><span class="c1"># rclone config</span>
+</span></span><span class="line"><span class="cl">2022/03/30 16:46:46 NOTICE: Config file <span class="s2">&#34;/root/.config/rclone/rclone.conf&#34;</span> not found - using defaults
+</span></span><span class="line"><span class="cl">No remotes found, make a new one?
+</span></span><span class="line"><span class="cl">n<span class="o">)</span> New remote
+</span></span><span class="line"><span class="cl">s<span class="o">)</span> Set configuration password
+</span></span><span class="line"><span class="cl">q<span class="o">)</span> Quit config
+</span></span><span class="line"><span class="cl">n/s/q&gt; n
+</span></span><span class="line"><span class="cl">name&gt; aliyun
+</span></span><span class="line"><span class="cl">Option Storage.
+</span></span><span class="line"><span class="cl">Type of storage to configure.
+</span></span><span class="line"><span class="cl">Choose a number from below, or <span class="nb">type</span> in your own value.
+</span></span><span class="line"><span class="cl"> <span class="m">1</span> / 1Fichier
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>fichier<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">2</span> / Akamai NetStorage
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>netstorage<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">3</span> / Alias <span class="k">for</span> an existing remote
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span><span class="nb">alias</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">4</span> / Amazon Drive
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>amazon cloud drive<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">5</span> / Amazon S3 Compliant Storage Providers including AWS, Alibaba, Ceph, Digital Ocean, Dreamhost, IBM COS, Lyve Cloud, Minio, RackCorp, SeaweedFS, and Tencent COS
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>s3<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">6</span> / Backblaze B2
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>b2<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">7</span> / Better checksums <span class="k">for</span> other remotes
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>hasher<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">8</span> / Box
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>box<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">9</span> / Cache a remote
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>cache<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">10</span> / Citrix Sharefile
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>sharefile<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">11</span> / Compress a remote
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>compress<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">12</span> / Dropbox
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>dropbox<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">13</span> / Encrypt/Decrypt a remote
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>crypt<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">14</span> / Enterprise File Fabric
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>filefabric<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">15</span> / FTP Connection
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>ftp<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">16</span> / Google Cloud Storage <span class="o">(</span>this is not Google Drive<span class="o">)</span>
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>google cloud storage<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">17</span> / Google Drive
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>drive<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">18</span> / Google Photos
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>google photos<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">19</span> / Hadoop distributed file system
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>hdfs<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">20</span> / Hubic
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>hubic<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">21</span> / In memory object storage system.
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>memory<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">22</span> / Jottacloud
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>jottacloud<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">23</span> / Koofr, Digi Storage and other Koofr-compatible storage providers
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>koofr<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">24</span> / Local Disk
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span><span class="nb">local</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">25</span> / Mail.ru Cloud
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>mailru<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">26</span> / Mega
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>mega<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">27</span> / Microsoft Azure Blob Storage
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>azureblob<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">28</span> / Microsoft OneDrive
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>onedrive<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">29</span> / OpenDrive
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>opendrive<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">30</span> / OpenStack Swift <span class="o">(</span>Rackspace Cloud Files, Memset Memstore, OVH<span class="o">)</span>
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>swift<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">31</span> / Pcloud
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>pcloud<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">32</span> / Put.io
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>putio<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">33</span> / QingCloud Object Storage
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>qingstor<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">34</span> / SSH/SFTP Connection
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>sftp<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">35</span> / Sia Decentralized Cloud
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>sia<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">36</span> / Storj Decentralized Cloud Storage
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>storj<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">37</span> / Sugarsync
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>sugarsync<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">38</span> / Transparently chunk/split large files
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>chunker<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">39</span> / Union merges the contents of several upstream fs
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>union<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">40</span> / Uptobox
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>uptobox<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">41</span> / Webdav
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>webdav<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">42</span> / Yandex Disk
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>yandex<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">43</span> / Zoho
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>zoho<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">44</span> / http Connection
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>http<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">45</span> / premiumize.me
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>premiumizeme<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">46</span> / seafile
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>seafile<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Storage&gt; <span class="m">41</span>
+</span></span><span class="line"><span class="cl">Option url.
+</span></span><span class="line"><span class="cl">URL of http host to connect to.
+</span></span><span class="line"><span class="cl">E.g. https://example.com.
+</span></span><span class="line"><span class="cl">Enter a value.
+</span></span><span class="line"><span class="cl">url&gt; http://127.0.0.1:8080
+</span></span><span class="line"><span class="cl">Option vendor.
+</span></span><span class="line"><span class="cl">Name of the Webdav site/service/software you are using.
+</span></span><span class="line"><span class="cl">Choose a number from below, or <span class="nb">type</span> in your own value.
+</span></span><span class="line"><span class="cl">Press Enter to leave empty.
+</span></span><span class="line"><span class="cl"> <span class="m">1</span> / Nextcloud
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>nextcloud<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">2</span> / Owncloud
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>owncloud<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">3</span> / Sharepoint Online, authenticated by Microsoft account
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>sharepoint<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">4</span> / Sharepoint with NTLM authentication, usually self-hosted or on-premises
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>sharepoint-ntlm<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">5</span> / Other site/service or software
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>other<span class="o">)</span>
+</span></span><span class="line"><span class="cl">vendor&gt; <span class="m">5</span>
+</span></span><span class="line"><span class="cl">Option user.
+</span></span><span class="line"><span class="cl">User name.
+</span></span><span class="line"><span class="cl">In <span class="k">case</span> NTLM authentication is used, the username should be in the format <span class="s1">&#39;Domain\User&#39;</span>.
+</span></span><span class="line"><span class="cl">Enter a value. Press Enter to leave empty.
+</span></span><span class="line"><span class="cl">user&gt; eebond
+</span></span><span class="line"><span class="cl">Option pass.
+</span></span><span class="line"><span class="cl">Password.
+</span></span><span class="line"><span class="cl">Choose an alternative below. Press Enter <span class="k">for</span> the default <span class="o">(</span>n<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">y<span class="o">)</span> Yes, <span class="nb">type</span> in my own password
+</span></span><span class="line"><span class="cl">g<span class="o">)</span> Generate random password
+</span></span><span class="line"><span class="cl">n<span class="o">)</span> No, leave this optional password blank <span class="o">(</span>default<span class="o">)</span>
+</span></span><span class="line"><span class="cl">y/g/n&gt; y
+</span></span><span class="line"><span class="cl">Enter the password:
+</span></span><span class="line"><span class="cl">password:
+</span></span><span class="line"><span class="cl">Confirm the password:
+</span></span><span class="line"><span class="cl">password:
+</span></span><span class="line"><span class="cl">Option bearer_token.
+</span></span><span class="line"><span class="cl">Bearer token instead of user/pass <span class="o">(</span>e.g. a Macaroon<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">Enter a value. Press Enter to leave empty.
+</span></span><span class="line"><span class="cl">bearer_token&gt; 
+</span></span><span class="line"><span class="cl">Edit advanced config?
+</span></span><span class="line"><span class="cl">y<span class="o">)</span> Yes
+</span></span><span class="line"><span class="cl">n<span class="o">)</span> No <span class="o">(</span>default<span class="o">)</span>
+</span></span><span class="line"><span class="cl">y/n&gt; 
+</span></span><span class="line"><span class="cl">--------------------
+</span></span><span class="line"><span class="cl"><span class="o">[</span>aliyun<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">type</span> <span class="o">=</span> webdav
+</span></span><span class="line"><span class="cl"><span class="nv">url</span> <span class="o">=</span> http://127.0.0.1:8080
+</span></span><span class="line"><span class="cl"><span class="nv">vendor</span> <span class="o">=</span> other
+</span></span><span class="line"><span class="cl"><span class="nv">user</span> <span class="o">=</span> eebond
+</span></span><span class="line"><span class="cl"><span class="nv">pass</span> <span class="o">=</span> *** ENCRYPTED ***
+</span></span><span class="line"><span class="cl">--------------------
+</span></span><span class="line"><span class="cl">y<span class="o">)</span> Yes this is OK <span class="o">(</span>default<span class="o">)</span>
+</span></span><span class="line"><span class="cl">e<span class="o">)</span> Edit this remote
+</span></span><span class="line"><span class="cl">d<span class="o">)</span> Delete this remote
+</span></span><span class="line"><span class="cl">y/e/d&gt; 
+</span></span><span class="line"><span class="cl">Current remotes:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Name                 <span class="nv">Type</span>
+</span></span><span class="line"><span class="cl"><span class="o">====</span>                 <span class="o">====</span>
+</span></span><span class="line"><span class="cl">aliyun               webdav
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">e<span class="o">)</span> Edit existing remote
+</span></span><span class="line"><span class="cl">n<span class="o">)</span> New remote
+</span></span><span class="line"><span class="cl">d<span class="o">)</span> Delete remote
+</span></span><span class="line"><span class="cl">r<span class="o">)</span> Rename remote
+</span></span><span class="line"><span class="cl">c<span class="o">)</span> Copy remote
+</span></span><span class="line"><span class="cl">s<span class="o">)</span> Set configuration password
+</span></span><span class="line"><span class="cl">q<span class="o">)</span> Quit config
+</span></span><span class="line"><span class="cl">e/n/d/r/c/s/q&gt; q
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>创建挂载目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir aliyun
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装fuse</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install fuse
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>后台挂载</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nohup rclone mount aliyun:/ /root/aliyun --cache-dir /tmp --allow-other --vfs-cache-mode writes --allow-non-empty <span class="p">&amp;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="安装aria2">安装Aria2</h3>
+<p>下载脚本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget -N git.io/aria2.sh <span class="o">&amp;&amp;</span> chmod +x aria2.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行脚本安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./aria2.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装成功后修改配置文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /root/.aria2c/aria2.conf
+</span></span><span class="line"><span class="cl"><span class="c1"># 下载完成后执行的命令</span>
+</span></span><span class="line"><span class="cl">on-download-complete<span class="o">=</span>/root/.aria2c/upload.sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">vim /root/.aria2c/script.conf
+</span></span><span class="line"><span class="cl"><span class="c1"># 网盘名称(RCLONE 配置时填写的 name)</span>
+</span></span><span class="line"><span class="cl">drive-name<span class="o">=</span>aliyun
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>之后在<a href="https://chrome.google.com/webstore/detail/aria2-for-chrome/mpkodccbngfoacfalldjimigbofkhgjn?hl=zh-CN" target="_blank" rel="noopener noreffer">aria2-for-chrome</a>上使用。</p>
+<h3 id="私人云盘将文件存储放在阿里云盘中">私人云盘将文件存储放在阿里云盘中</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ln -s /root/aliyun/uploads/ uploads
+</span></span></code></pre></td></tr></table>
+</div>
+</div>]]></description>
 </item><item>
     <title>wget命令使用教程</title>
     <link>https://eebond.github.io/wget%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</link>
     <pubDate>Mon, 28 Mar 2022 16:39:30 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/wget%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</guid>
-    <description><![CDATA[nothting]]></description>
+    <description><![CDATA[<h2 id="wget命令详解">wget命令详解</h2>
+<ul>
+<li>
+<p>导读： wget是Linux中的一个下载文件的工具，wget是在Linux下开发的开放源代码的软件，作者是Hrvoje Niksic，后来被移植到包括Windows在内的各个平台上。</p>
+</li>
+<li>
+<p>它用在命令行下。对于Linux用户是必不可少的工具，尤其对于网络管理员，经常要下载一些软件或从远程服务器恢复备份到本地服务器。如果我们使用虚拟主机，处理这样的事务我们只能先从远程服务器下载到我们电脑磁盘，然后再用ftp工具上传到服务器。这样既浪费时间又浪费精力，那不没办法的事。而到了Linux VPS，它则可以直接下载到服务器而不用经过上传这一步。wget工具体积小但功能完善，它支持断点下载功能，同时支持FTP和HTTP下载方式，支持代理服务器和设置起来方便简单。下面我们以实例的形式说明怎么使用wget。</p>
+</li>
+</ul>
+<h3 id="1安装wget">1.安装wget</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install -y wget
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看帮助手册</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@network test<span class="o">]</span><span class="c1"># wget --help</span>
+</span></span><span class="line"><span class="cl">GNU Wget 1.14，非交互式的网络文件下载工具。
+</span></span><span class="line"><span class="cl">用法： wget <span class="o">[</span>选项<span class="o">]</span>... <span class="o">[</span>URL<span class="o">]</span>...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">长选项所必须的参数在使用短选项时也是必须的。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 1.启动：</span>
+</span></span><span class="line"><span class="cl">  -V,  --version           显示 Wget 的版本信息并退出。
+</span></span><span class="line"><span class="cl">  -h,  --help              打印此帮助。
+</span></span><span class="line"><span class="cl">  -b,  --background        启动后转入后台。
+</span></span><span class="line"><span class="cl">  -e,  --execute<span class="o">=</span>COMMAND   运行一个“.wgetrc”风格的命令。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 2.日志和输入文件：</span>
+</span></span><span class="line"><span class="cl">  -o,  --output-file<span class="o">=</span>FILE    将日志信息写入 FILE。
+</span></span><span class="line"><span class="cl">  -a,  --append-output<span class="o">=</span>FILE  将信息添加至 FILE。
+</span></span><span class="line"><span class="cl">  -d,  --debug               打印大量调试信息。
+</span></span><span class="line"><span class="cl">  -q,  --quiet               安静模式 <span class="o">(</span>无信息输出<span class="o">)</span>。
+</span></span><span class="line"><span class="cl">  -v,  --verbose             详尽的输出 <span class="o">(</span>此为默认值<span class="o">)</span>。
+</span></span><span class="line"><span class="cl">  -nv, --no-verbose          关闭详尽输出，但不进入安静模式。
+</span></span><span class="line"><span class="cl">       --report-speed<span class="o">=</span>TYPE   Output bandwidth as TYPE.  TYPE can be bits.
+</span></span><span class="line"><span class="cl">  -i,  --input-file<span class="o">=</span>FILE     下载本地或外部 FILE 中的 URLs。
+</span></span><span class="line"><span class="cl">  -F,  --force-html          把输入文件当成 HTML 文件。
+</span></span><span class="line"><span class="cl">  -B,  --base<span class="o">=</span>URL            解析与 URL 相关的
+</span></span><span class="line"><span class="cl">                             HTML 输入文件 <span class="o">(</span>由 -i -F 选项指定<span class="o">)</span>。
+</span></span><span class="line"><span class="cl">       --config<span class="o">=</span>FILE         Specify config file to use.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 3.下载：</span>
+</span></span><span class="line"><span class="cl">  -t,  --tries<span class="o">=</span>NUMBER            设置重试次数为 NUMBER <span class="o">(</span><span class="m">0</span> 代表无限制<span class="o">)</span>。
+</span></span><span class="line"><span class="cl">       --retry-connrefused       即使拒绝连接也是重试。
+</span></span><span class="line"><span class="cl">  -O,  --output-document<span class="o">=</span>FILE    将文档写入 FILE。
+</span></span><span class="line"><span class="cl">  -nc, --no-clobber              skip downloads that would download to
+</span></span><span class="line"><span class="cl">                                 existing files <span class="o">(</span>overwriting them<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">  -c,  --continue                断点续传下载文件。
+</span></span><span class="line"><span class="cl">       --progress<span class="o">=</span>TYPE           选择进度条类型。
+</span></span><span class="line"><span class="cl">  -N,  --timestamping            只获取比本地文件新的文件。
+</span></span><span class="line"><span class="cl">  --no-use-server-timestamps     不用服务器上的时间戳来设置本地文件。
+</span></span><span class="line"><span class="cl">  -S,  --server-response         打印服务器响应。
+</span></span><span class="line"><span class="cl">       --spider                  不下载任何文件。
+</span></span><span class="line"><span class="cl">  -T,  --timeout<span class="o">=</span>SECONDS         将所有超时设为 SECONDS 秒。
+</span></span><span class="line"><span class="cl">       --dns-timeout<span class="o">=</span>SECS        设置 DNS 查寻超时为 SECS 秒。
+</span></span><span class="line"><span class="cl">       --connect-timeout<span class="o">=</span>SECS    设置连接超时为 SECS 秒。
+</span></span><span class="line"><span class="cl">       --read-timeout<span class="o">=</span>SECS       设置读取超时为 SECS 秒。
+</span></span><span class="line"><span class="cl">  -w,  --wait<span class="o">=</span>SECONDS            等待间隔为 SECONDS 秒。
+</span></span><span class="line"><span class="cl">       --waitretry<span class="o">=</span>SECONDS       在获取文件的重试期间等待 1..SECONDS 秒。
+</span></span><span class="line"><span class="cl">       --random-wait             获取多个文件时，每次随机等待间隔
+</span></span><span class="line"><span class="cl">                                 0.5*WAIT...1.5*WAIT 秒。
+</span></span><span class="line"><span class="cl">       --no-proxy                禁止使用代理。
+</span></span><span class="line"><span class="cl">  -Q,  --quota<span class="o">=</span>NUMBER            设置获取配额为 NUMBER 字节。
+</span></span><span class="line"><span class="cl">       --bind-address<span class="o">=</span>ADDRESS    绑定至本地主机上的 ADDRESS <span class="o">(</span>主机名或是 IP<span class="o">)</span>。
+</span></span><span class="line"><span class="cl">       --limit-rate<span class="o">=</span>RATE         限制下载速率为 RATE。
+</span></span><span class="line"><span class="cl">       --no-dns-cache            关闭 DNS 查寻缓存。
+</span></span><span class="line"><span class="cl">       --restrict-file-names<span class="o">=</span>OS  限定文件名中的字符为 OS 允许的字符。
+</span></span><span class="line"><span class="cl">       --ignore-case             匹配文件/目录时忽略大小写。
+</span></span><span class="line"><span class="cl">  -4,  --inet4-only              仅连接至 IPv4 地址。
+</span></span><span class="line"><span class="cl">  -6,  --inet6-only              仅连接至 IPv6 地址。
+</span></span><span class="line"><span class="cl">       --prefer-family<span class="o">=</span>FAMILY    首先连接至指定协议的地址
+</span></span><span class="line"><span class="cl">                                 FAMILY 为 IPv6，IPv4 或是 none。
+</span></span><span class="line"><span class="cl">       --user<span class="o">=</span>USER               将 ftp 和 http 的用户名均设置为 USER。
+</span></span><span class="line"><span class="cl">       --password<span class="o">=</span>PASS           将 ftp 和 http 的密码均设置为 PASS。
+</span></span><span class="line"><span class="cl">       --ask-password            提示输入密码。
+</span></span><span class="line"><span class="cl">       --no-iri                  关闭 IRI 支持。
+</span></span><span class="line"><span class="cl">       --local-encoding<span class="o">=</span>ENC      IRI <span class="o">(</span>国际化资源标识符<span class="o">)</span> 使用 ENC 作为本地编码。
+</span></span><span class="line"><span class="cl">       --remote-encoding<span class="o">=</span>ENC     使用 ENC 作为默认远程编码。
+</span></span><span class="line"><span class="cl">       --unlink                  remove file before clobber.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 4.目录：</span>
+</span></span><span class="line"><span class="cl">  -nd, --no-directories           不创建目录。
+</span></span><span class="line"><span class="cl">  -x,  --force-directories        强制创建目录。
+</span></span><span class="line"><span class="cl">  -nH, --no-host-directories      不要创建主目录。
+</span></span><span class="line"><span class="cl">       --protocol-directories     在目录中使用协议名称。
+</span></span><span class="line"><span class="cl">  -P,  --directory-prefix<span class="o">=</span>PREFIX  以 PREFIX/... 保存文件
+</span></span><span class="line"><span class="cl">       --cut-dirs<span class="o">=</span>NUMBER          忽略远程目录中 NUMBER 个目录层。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 5.HTTP 选项：</span>
+</span></span><span class="line"><span class="cl">       --http-user<span class="o">=</span>USER        设置 http 用户名为 USER。
+</span></span><span class="line"><span class="cl">       --http-password<span class="o">=</span>PASS    设置 http 密码为 PASS。
+</span></span><span class="line"><span class="cl">       --no-cache              不在服务器上缓存数据。
+</span></span><span class="line"><span class="cl">       --default-page<span class="o">=</span>NAME     改变默认页
+</span></span><span class="line"><span class="cl">                               <span class="o">(</span>默认页通常是“index.html”<span class="o">)</span>。
+</span></span><span class="line"><span class="cl">  -E,  --adjust-extension      以合适的扩展名保存 HTML/CSS 文档。
+</span></span><span class="line"><span class="cl">       --ignore-length         忽略头部的‘Content-Length’区域。
+</span></span><span class="line"><span class="cl">       --header<span class="o">=</span>STRING         在头部插入 STRING。
+</span></span><span class="line"><span class="cl">       --max-redirect          每页所允许的最大重定向。
+</span></span><span class="line"><span class="cl">       --proxy-user<span class="o">=</span>USER       使用 USER 作为代理用户名。
+</span></span><span class="line"><span class="cl">       --proxy-password<span class="o">=</span>PASS   使用 PASS 作为代理密码。
+</span></span><span class="line"><span class="cl">       --referer<span class="o">=</span>URL           在 HTTP 请求头包含‘Referer: URL’。
+</span></span><span class="line"><span class="cl">       --save-headers          将 HTTP 头保存至文件。
+</span></span><span class="line"><span class="cl">  -U,  --user-agent<span class="o">=</span>AGENT      标识为 AGENT 而不是 Wget/VERSION。
+</span></span><span class="line"><span class="cl">       --no-http-keep-alive    禁用 HTTP keep-alive <span class="o">(</span>永久连接<span class="o">)</span>。
+</span></span><span class="line"><span class="cl">       --no-cookies            不使用 cookies。
+</span></span><span class="line"><span class="cl">       --load-cookies<span class="o">=</span>FILE     会话开始前从 FILE 中载入 cookies。
+</span></span><span class="line"><span class="cl">       --save-cookies<span class="o">=</span>FILE     会话结束后保存 cookies 至 FILE。
+</span></span><span class="line"><span class="cl">       --keep-session-cookies  载入并保存会话 <span class="o">(</span>非永久<span class="o">)</span> cookies。
+</span></span><span class="line"><span class="cl">       --post-data<span class="o">=</span>STRING      使用 POST 方式；把 STRING 作为数据发送。
+</span></span><span class="line"><span class="cl">       --post-file<span class="o">=</span>FILE        使用 POST 方式；发送 FILE 内容。
+</span></span><span class="line"><span class="cl">       --content-disposition   当选中本地文件名时
+</span></span><span class="line"><span class="cl">                               允许 Content-Disposition 头部 <span class="o">(</span>尚在实验<span class="o">)</span>。
+</span></span><span class="line"><span class="cl">       --content-on-error      output the received content on server errors.
+</span></span><span class="line"><span class="cl">       --auth-no-challenge     发送不含服务器询问的首次等待
+</span></span><span class="line"><span class="cl">                               的基本 HTTP 验证信息。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 6.HTTPS (SSL/TLS) 选项：</span>
+</span></span><span class="line"><span class="cl">       --secure-protocol<span class="o">=</span>PR     choose secure protocol, one of auto, SSLv2,
+</span></span><span class="line"><span class="cl">                                SSLv3, TLSv1, TLSv1_1 and TLSv1_2.
+</span></span><span class="line"><span class="cl">       --no-check-certificate   不要验证服务器的证书。
+</span></span><span class="line"><span class="cl">       --certificate<span class="o">=</span>FILE       客户端证书文件。
+</span></span><span class="line"><span class="cl">       --certificate-type<span class="o">=</span>TYPE  客户端证书类型，PEM 或 DER。
+</span></span><span class="line"><span class="cl">       --private-key<span class="o">=</span>FILE       私钥文件。
+</span></span><span class="line"><span class="cl">       --private-key-type<span class="o">=</span>TYPE  私钥文件类型，PEM 或 DER。
+</span></span><span class="line"><span class="cl">       --ca-certificate<span class="o">=</span>FILE    带有一组 CA 认证的文件。
+</span></span><span class="line"><span class="cl">       --ca-directory<span class="o">=</span>DIR       保存 CA 认证的哈希列表的目录。
+</span></span><span class="line"><span class="cl">       --random-file<span class="o">=</span>FILE       带有生成 SSL PRNG 的随机数据的文件。
+</span></span><span class="line"><span class="cl">       --egd-file<span class="o">=</span>FILE          用于命名带有随机数据的 EGD 套接字的文件。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 7.FTP 选项：</span>
+</span></span><span class="line"><span class="cl">       --ftp-user<span class="o">=</span>USER         设置 ftp 用户名为 USER。
+</span></span><span class="line"><span class="cl">       --ftp-password<span class="o">=</span>PASS     设置 ftp 密码为 PASS。
+</span></span><span class="line"><span class="cl">       --no-remove-listing     不要删除‘.listing’文件。
+</span></span><span class="line"><span class="cl">       --no-glob               不在 FTP 文件名中使用通配符展开。
+</span></span><span class="line"><span class="cl">       --no-passive-ftp        禁用“passive”传输模式。
+</span></span><span class="line"><span class="cl">       --preserve-permissions  保留远程文件的权限。
+</span></span><span class="line"><span class="cl">       --retr-symlinks         递归目录时，获取链接的文件 <span class="o">(</span>而非目录<span class="o">)</span>。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 8.WARC options:</span>
+</span></span><span class="line"><span class="cl">       --warc-file<span class="o">=</span>FILENAME      save request/response data to a .warc.gz file.
+</span></span><span class="line"><span class="cl">       --warc-header<span class="o">=</span>STRING      insert STRING into the warcinfo record.
+</span></span><span class="line"><span class="cl">       --warc-max-size<span class="o">=</span>NUMBER    <span class="nb">set</span> maximum size of WARC files to NUMBER.
+</span></span><span class="line"><span class="cl">       --warc-cdx                write CDX index files.
+</span></span><span class="line"><span class="cl">       --warc-dedup<span class="o">=</span>FILENAME     <span class="k">do</span> not store records listed in this CDX file.
+</span></span><span class="line"><span class="cl">       --no-warc-compression     <span class="k">do</span> not compress WARC files with GZIP.
+</span></span><span class="line"><span class="cl">       --no-warc-digests         <span class="k">do</span> not calculate SHA1 digests.
+</span></span><span class="line"><span class="cl">       --no-warc-keep-log        <span class="k">do</span> not store the log file in a WARC record.
+</span></span><span class="line"><span class="cl">       --warc-tempdir<span class="o">=</span>DIRECTORY  location <span class="k">for</span> temporary files created by the
+</span></span><span class="line"><span class="cl">                                 WARC writer.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 9.递归下载：</span>
+</span></span><span class="line"><span class="cl">  -r,  --recursive          指定递归下载。
+</span></span><span class="line"><span class="cl">  -l,  --level<span class="o">=</span>NUMBER       最大递归深度 <span class="o">(</span>inf 或 <span class="m">0</span> 代表无限制，即全部下载<span class="o">)</span>。
+</span></span><span class="line"><span class="cl">       --delete-after       下载完成后删除本地文件。
+</span></span><span class="line"><span class="cl">  -k,  --convert-links      让下载得到的 HTML 或 CSS 中的链接指向本地文件。
+</span></span><span class="line"><span class="cl">  --backups<span class="o">=</span>N   before writing file X, rotate up to N backup files.
+</span></span><span class="line"><span class="cl">  -K,  --backup-converted   在转换文件 X 前先将它备份为 X.orig。
+</span></span><span class="line"><span class="cl">  -m,  --mirror             -N -r -l inf --no-remove-listing 的缩写形式。
+</span></span><span class="line"><span class="cl">  -p,  --page-requisites    下载所有用于显示 HTML 页面的图片之类的元素。
+</span></span><span class="line"><span class="cl">       --strict-comments    用严格方式 <span class="o">(</span>SGML<span class="o">)</span> 处理 HTML 注释。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 10.递归接受/拒绝：</span>
+</span></span><span class="line"><span class="cl">  -A,  --accept<span class="o">=</span>LIST               逗号分隔的可接受的扩展名列表。
+</span></span><span class="line"><span class="cl">  -R,  --reject<span class="o">=</span>LIST               逗号分隔的要拒绝的扩展名列表。
+</span></span><span class="line"><span class="cl">       --accept-regex<span class="o">=</span>REGEX        regex matching accepted URLs.
+</span></span><span class="line"><span class="cl">       --reject-regex<span class="o">=</span>REGEX        regex matching rejected URLs.
+</span></span><span class="line"><span class="cl">       --regex-type<span class="o">=</span>TYPE           regex <span class="nb">type</span> <span class="o">(</span>posix<span class="p">|</span>pcre<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">  -D,  --domains<span class="o">=</span>LIST              逗号分隔的可接受的域列表。
+</span></span><span class="line"><span class="cl">       --exclude-domains<span class="o">=</span>LIST      逗号分隔的要拒绝的域列表。
+</span></span><span class="line"><span class="cl">       --follow-ftp                跟踪 HTML 文档中的 FTP 链接。
+</span></span><span class="line"><span class="cl">       --follow-tags<span class="o">=</span>LIST          逗号分隔的跟踪的 HTML 标识列表。
+</span></span><span class="line"><span class="cl">       --ignore-tags<span class="o">=</span>LIST          逗号分隔的忽略的 HTML 标识列表。
+</span></span><span class="line"><span class="cl">  -H,  --span-hosts                递归时转向外部主机。
+</span></span><span class="line"><span class="cl">  -L,  --relative                  只跟踪有关系的链接。
+</span></span><span class="line"><span class="cl">  -I,  --include-directories<span class="o">=</span>LIST  允许目录的列表。
+</span></span><span class="line"><span class="cl">  --trust-server-names             use the name specified by the redirection
+</span></span><span class="line"><span class="cl">                                   url last component.
+</span></span><span class="line"><span class="cl">  -X,  --exclude-directories<span class="o">=</span>LIST  排除目录的列表。
+</span></span><span class="line"><span class="cl">  -np, --no-parent                 不追溯至父目录。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="2使用wget下载文件">2.使用wget下载文件</h3>
+<h4 id="1下载单个文件">1)下载单个文件</h4>
+<p>以下的例子是从网络下载一个文件并保存在当前目录</p>
+<p>在下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget http://cn.wordpress.org/wordpress-4.9.4-zh_CN.tar.gz
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2以不同的文件名保存--o">2）以不同的文件名保存 -O</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@network test<span class="o">]</span><span class="c1"># wget https://cn.wordpress.org/wordpress-4.9.4-zh_CN.tar.gz</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@network test<span class="o">]</span><span class="c1"># ls</span>
+</span></span><span class="line"><span class="cl">wordpress-4.9.4-zh_CN.tar.gz
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>我们可以使用参数-O来指定一个文件名：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget -O wordpress.tar.gz  http://cn.wordpress.org/wordpress-4.9.4-zh_CN.tar.gz
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="3断点续传--c">3）断点续传 -c</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 使用wget -c重新启动下载中断的文件:</span>
+</span></span><span class="line"><span class="cl">对于我们下载大文件时突然由于网络等原因中断非常有帮助，我们可以继续接着下载而不是重新下载一个文件
+</span></span><span class="line"><span class="cl">wget -c https://cn.wordpress.org/wordpress-4.9.4-zh_CN.tar.gz
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="4后台下载--b">4）后台下载 -b</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 对于下载非常大的文件的时候，我们可以使用参数-b进行后台下载</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@network test<span class="o">]</span><span class="c1"># wget -b https://cn.wordpress.org/wordpress-4.9.4-zh_CN.tar.gz</span>
+</span></span><span class="line"><span class="cl">继续在后台运行，pid 为 1463。
+</span></span><span class="line"><span class="cl">将把输出写入至 “wget-log”。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 可以使用以下命令来察看下载进度:</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@network test<span class="o">]</span><span class="c1"># tail -f wget-log</span>
+</span></span><span class="line"><span class="cl">  8550K .......... .......... .......... .......... .......... 96%  814K 0s
+</span></span><span class="line"><span class="cl">  8600K .......... .......... .......... .......... .......... 97% 9.53M 0s
+</span></span><span class="line"><span class="cl">  8650K .......... .......... .......... .......... .......... 98% 86.8M 0s
+</span></span><span class="line"><span class="cl">  8700K .......... .......... .......... .......... .......... 98%  145M 0s
+</span></span><span class="line"><span class="cl">  8750K .......... .......... .......... .......... .......... 99% 67.4M 0s
+</span></span><span class="line"><span class="cl">  8800K .......... .......... .......... .......... .......... 99%  107M 0s
+</span></span><span class="line"><span class="cl">  8850K .......... .........                                  100% 1.95M<span class="o">=</span>16s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2018-11-10 15:39:07 <span class="o">(</span><span class="m">564</span> KB/s<span class="o">)</span> - 已保存 “wordpress-4.9.4-zh_CN.tar.gz.2” <span class="o">[</span>9082696/9082696<span class="o">])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="5伪装代理名称下载">5）伪装代理名称下载</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">有些网站能通过根据判断代理名称不是浏览器而拒绝你的下载请求。
+</span></span><span class="line"><span class="cl">不过你可以通过–user-agent参数伪装。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="6测试下载链接">6）测试下载链接</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 进行定时下载，应该在预定时间测试下载链接是否有效。我们可以增加–spider参数进行测试检查:</span>
+</span></span><span class="line"><span class="cl">wget --spider URL 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">1.如果下载链接正确，将会显示 
+</span></span><span class="line"><span class="cl">wget –spider URL 
+</span></span><span class="line"><span class="cl">Spider mode enabled. Check <span class="k">if</span> remote file exists. 
+</span></span><span class="line"><span class="cl">HTTP request sent, awaiting response… <span class="m">200</span> OK 
+</span></span><span class="line"><span class="cl">Length: unspecified <span class="o">[</span>text/html<span class="o">]</span> 
+</span></span><span class="line"><span class="cl">Remote file exists and could contain further links, 
+</span></span><span class="line"><span class="cl">but recursion is disabled — not retrieving. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2.这保证了下载能在预定的时间进行，但当你给错了一个链接，将会显示如下错误 
+</span></span><span class="line"><span class="cl">wget –spider url 
+</span></span><span class="line"><span class="cl">Spider mode enabled. Check <span class="k">if</span> remote file exists. 
+</span></span><span class="line"><span class="cl">HTTP request sent, awaiting response… <span class="m">404</span> Not Found 
+</span></span><span class="line"><span class="cl">Remote file does not exist — broken link!!! 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>你可以在以下几种情况下使用spider参数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">1. 定时下载之前进行检查
+</span></span><span class="line"><span class="cl">2. 间隔检测网站是否可用
+</span></span><span class="line"><span class="cl">3. 检查网站页面的死链接
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="7增加重试次数">7）增加重试次数</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">如果网络有问题或下载一个大文件也有可能失败。wget默认重试20次连接下载文件。如果需要，你可以使用–tries增加重试次数。
+</span></span><span class="line"><span class="cl">wget –tries<span class="o">=</span><span class="m">40</span> URL
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="8下载多个文件--i">8）下载多个文件 -i</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">1.首先，保存一份下载链接文件 
+</span></span><span class="line"><span class="cl">cat &gt; filelist.txt 
+</span></span><span class="line"><span class="cl">url1 
+</span></span><span class="line"><span class="cl">url2 
+</span></span><span class="line"><span class="cl">url3 
+</span></span><span class="line"><span class="cl">url4 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2.接着使用这个文件和参数-i下载 
+</span></span><span class="line"><span class="cl">wget -i filelist.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="9镜像网站-mirror">9）镜像网站 –mirror</h4>
+<h4 id="10过滤指定格式下载-reject">10）过滤指定格式下载 –reject</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">下载一个网站，但你不希望下载图片:
+</span></span><span class="line"><span class="cl">wget –reject<span class="o">=</span>gif url 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="11把下载信息存入日志文件--o">11）把下载信息存入日志文件 -o</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">你不希望下载信息直接显示在终端而是在一个日志文件，可以使用以下命令：
+</span></span><span class="line"><span class="cl">wget -o download.log URL
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">使用wget -O下载并以不同的文件名保存<span class="o">(</span>-O：下载文件到对应目录，并且修改文件名称<span class="o">)</span>
+</span></span><span class="line"><span class="cl">wget -O wordpress.zip http:<span class="sb">``</span>//www<span class="sb">``</span>.minjieren.com<span class="sb">``</span>/download<span class="sb">``</span>.aspx?<span class="sb">``</span>id<span class="sb">``</span><span class="o">=</span><span class="m">1080</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="12其他参数">12）其他参数</h4>
+<ul>
+<li>限制总下载文件大小 -Q</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">当你想要下载的文件超过5M而退出下载，你可以使用以下命令：
+</span></span><span class="line"><span class="cl">wget -Q5m -i filelist.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">注意：这个参数对单个文件下载不起作用，只能递归下载时才有效。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>下载指定格式文件 -r -A</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">可以在以下情况使用该功能:
+</span></span><span class="line"><span class="cl">1.下载一个网站的所有图片
+</span></span><span class="line"><span class="cl">2.下载一个网站的所有视频
+</span></span><span class="line"><span class="cl">3.下载一个网站的所有PDF文件
+</span></span><span class="line"><span class="cl">wget -r -A.pdf url
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>使用wget FTP下载</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">使用wget来完成ftp链接的下载。 使用wget匿名ftp下载
+</span></span><span class="line"><span class="cl">wget ftp-url
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">使用wget用户名和密码认证的ftp下载
+</span></span><span class="line"><span class="cl">wget --ftp-user<span class="o">=</span>USERNAME --ftp-password<span class="o">=</span>PASSWORD url
+</span></span></code></pre></td></tr></table>
+</div>
+</div>]]></description>
 </item><item>
     <title>curl命令使用教程</title>
     <link>https://eebond.github.io/curl%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</link>
     <pubDate>Mon, 28 Mar 2022 16:20:27 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/curl%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</guid>
-    <description><![CDATA[nothting]]></description>
+    <description><![CDATA[<h2 id="curl-命令行工具及参数">curl 命令行工具及参数</h2>
+<ul>
+<li>curl是一个开源的用于数据传输的命令行工具与库，它使用URL语法格式，支持众多传输协议，包括：HTTP、HTTPS、FTP、FTPS、GOPHER、TFTP、SCP、SFTP、SMB、TELNET、DICT、LDAP、LDAPS、FILE、IMAP、SMTP、POP3、RTSP和RTMP。curl库提供了很多强大的功能，你可以利用它来进行HTTP/HTTPS请求、上传/下载文件等，且支持Cookie、认证、代理、限速等。</li>
+</ul>
+<h3 id="1curl的基本使用">1.curl的基本使用</h3>
+<ul>
+<li>
+<p>1.使用curl访问一个网址（最基本用法）
+在命令行中输入“curl 网址”即可在命令显示界面显示该网址的内容。这种使用方式通常用来检测一个网址是否能够正常访问，因为Linux服务器最小化安装里没有浏览器，因此这种方式就是实现一种浏览器访问的功能。</p>
+</li>
+<li>
+<p>2.使用curl下载文件
+在命令行中输入“curl -O 一个word网络地址 ”这句命令的意思是将该word下载到本地。在命令行中输入“curl -o 2.jpg 一个1.jpg网络地址”这句话是将1.jpg下载保存到本地，并可以重命名为2.jpg。</p>
+</li>
+<li>
+<p>.利用curl上传文件
+在命令行中输入“curl -T 1.JPG -u 用户名:密码 <code>ftp://FTP地址/img/</code> ” 这句命令的意思是将1.jpg上传到一个ftp的目录下，当然了使用该句命令需要知道ftp的基本信息如端口用户名密码等。</p>
+</li>
+</ul>
+<h3 id="2curl命令的进阶">2.curl命令的进阶</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">目录：
+</span></span><span class="line"><span class="cl">1. curl的使用
+</span></span><span class="line"><span class="cl">1.1 URL访问
+</span></span><span class="line"><span class="cl">1.2 表单提交
+</span></span><span class="line"><span class="cl">1.3 其它HTTP请求方法
+</span></span><span class="line"><span class="cl">1.4 文件上传
+</span></span><span class="line"><span class="cl">1.5 HTTPS支持
+</span></span><span class="line"><span class="cl">1.6 添加请求头
+</span></span><span class="line"><span class="cl">1.7 Cookie支持
+</span></span><span class="line"><span class="cl">2. curl语法及选项
+</span></span><span class="line"><span class="cl">----------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">1. curl的使用
+</span></span><span class="line"><span class="cl">1.1 URL访问
+</span></span><span class="line"><span class="cl">访问一个网页时，可以使用curl命令后加上要访问的网址：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl itbilu.com 
+</span></span><span class="line"><span class="cl">&lt;html&gt;
+</span></span><span class="line"><span class="cl">&lt;head&gt;&lt;title&gt;301 Moved Permanently&lt;/title&gt;&lt;/head&gt;
+</span></span><span class="line"><span class="cl">&lt;body <span class="nv">bgcolor</span><span class="o">=</span><span class="s2">&#34;white&#34;</span>&gt;
+</span></span><span class="line"><span class="cl">&lt;center&gt;&lt;h1&gt;301 Moved Permanently&lt;/h1&gt;&lt;/center&gt;
+</span></span><span class="line"><span class="cl">&lt;hr&gt;&lt;center&gt;nginx/1.6.2&lt;/center&gt;
+</span></span><span class="line"><span class="cl">&lt;/body&gt;
+</span></span><span class="line"><span class="cl">&lt;/html&gt;
+</span></span><span class="line"><span class="cl">如上所示，我们就看到所访问网址的页面源码。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">重定向跟踪
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">在上面示例中，页面使用了301重定向，这时我们可以添加-L参数来跟踪URL重定向： curl -L itbilu.com
+</span></span><span class="line"><span class="cl">页面保存
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">如果需要将页面源码保存到本地，可以使用-o参数：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -o <span class="o">[</span>文件名<span class="o">]</span> itbilu.com
+</span></span><span class="line"><span class="cl">查看头信息
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">如果需要查看访问页面的可以添加-i或--include参数： curl -i itbilu.com
+</span></span><span class="line"><span class="cl">添加-i参数后，页面响应头会和页面源码（响应体）一块返回。如果只想查看响应头，可以使用-I或--head参数：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -I itbilu.com
+</span></span><span class="line"><span class="cl">HTTP/1.1 <span class="m">301</span> Moved Permanently
+</span></span><span class="line"><span class="cl">Server: nginx/1.6.2
+</span></span><span class="line"><span class="cl">Date: Sun, <span class="m">25</span> Jun <span class="m">2017</span> 02:03:45 GMT
+</span></span><span class="line"><span class="cl">Content-Type: text/html
+</span></span><span class="line"><span class="cl">Content-Length: <span class="m">184</span>
+</span></span><span class="line"><span class="cl">Connection: keep-alive
+</span></span><span class="line"><span class="cl">Location: https://itbilu.com/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">1.2 表单提交
+</span></span><span class="line"><span class="cl">通过Form表单，可以将Web页面的表单数据提交到服务端。提交表单时，可以使用GET或POST提交方法。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl同样支持表单数据提交，也可以使用GET或POST提交方法。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">GET数据提交
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">当全用GET表单数据提交时，提交数据会被附加到请求URL的后面。类型如下： curl <span class="s1">&#39;//itbilu.com/?keyword=linux&amp;page=3&#39;</span>
+</span></span><span class="line"><span class="cl">使用curl进行GET数据提交时，也可以直接把提交数据添加到URL后面：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl https://itbilu.com/?keyword<span class="o">=</span>linux<span class="p">&amp;</span><span class="nv">page</span><span class="o">=</span><span class="m">3</span>
+</span></span><span class="line"><span class="cl">POST数据提交
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl使用POST提交表单数据时，除了-X参数指定请求方法外，还要使用--data参数添加提交数据：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -X POST --data <span class="s1">&#39;keyword=linux&#39;</span> itbilu.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">1.3 其它HTTP请求方法
+</span></span><span class="line"><span class="cl">目前为止，我们使用GET和POST两种HTTP请求。curl支持所有HTTP请求方法，只要通过-X参数指定即可。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">如，使用DELETE请求： curl -X DELETE itbilu.com/examlple.html
+</span></span><span class="line"><span class="cl">使用PUT请求，并指定请求数据：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -X PUT --data <span class="s1">&#39;keyword=linux&#39;</span> itbilu.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">1.4 文件上传
+</span></span><span class="line"><span class="cl">curl支持文件上传，上传文件时使用-T或--upload-file参数： curl -T ./index.html www.uploadhttp.com/receive.cgi
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">1.5 HTTPS支持
+</span></span><span class="line"><span class="cl">对于使用了SSL/TLS加密的HTTPS协议，可以使用curl直接访问：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl https://itbilu.com
+</span></span><span class="line"><span class="cl">如果使用的本地ssl证书认证的HTTPS，可以通过-E或--cert参数指定本地证书： curl -E mycert.pem https:/itbilu.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">1.6 添加请求头
+</span></span><span class="line"><span class="cl">有时在进行HTTP请求时，需要自定义请求头。在curl中，可以通过-H或--header参数来指定请求头。多次使用-H或--header参数可指定多个请求头。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">如，指定Content-Type及Authorization请求头：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -H <span class="s1">&#39;Content-Type:application/json&#39;</span> -H <span class="s1">&#39;Authorization: bearer eyJhbGciOiJIUzI1NiJ9&#39;</span> itbilu.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">1.7 Cookie支持
+</span></span><span class="line"><span class="cl">Cookie是一种常用的保持服务端会话信息的方法，crul也支持使用Cookie。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">可以通过--cookie参数指定发送请求时的Cookie值，也可以通过-b <span class="o">[</span>文件名<span class="o">]</span>来指定一个存储了Cookie值的本地文件： curl -b stored_cookies_in_file itbilu.com
+</span></span><span class="line"><span class="cl">Cookie值可能会被服务器所返回的值所修改，并应用于下次HTTP请求。这时，可以能过-c参数指定存储服务器返回Cookie值的存储文件：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ curl -b cookies.txt -c newcookies.txt itbilu.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">除以上用法外，curl还可以设置用户代理（客户端）信息、使用代理服务器、指定认证用户名／密码等。详见：curl语法及选项
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl --silent -H <span class="s2">&#34;Host: www.test.com&#34;</span> <span class="s2">&#34;192.168.0.1/xxx/xxx/t.php&#34;</span>
+</span></span><span class="line"><span class="cl">curl <span class="s2">&#34;http://www.test.com/LiveUserCount.ac &#34;</span> -x 127.0.0.1:1080
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="3curl语法及选项">3.curl语法及选项</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># curl语法结构如下：</span>
+</span></span><span class="line"><span class="cl"><span class="o">===================</span>
+</span></span><span class="line"><span class="cl">curl <span class="o">[</span>options...<span class="o">]</span> &lt;url&gt;
+</span></span><span class="line"><span class="cl">参数选项
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl（7.29.0）所支持的选项（options）参数如下：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">在以下选项中，<span class="o">(</span>H<span class="o">)</span> 表示仅适用 HTTP/HTTPS ，<span class="o">(</span>F<span class="o">)</span> 表示仅适用于 FTP
+</span></span><span class="line"><span class="cl">    --anyauth       选择 <span class="s2">&#34;any&#34;</span> 认证方法 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-a, --append        添加要上传的文件 <span class="o">(</span>F/SFTP<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --basic         使用HTTP基础认证（Basic Authentication）<span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --cacert FILE   CA 证书，用于每次请求认证 <span class="o">(</span>SSL<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --capath DIR    CA 证书目录 <span class="o">(</span>SSL<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-E, --cert CERT<span class="o">[</span>:PASSWD<span class="o">]</span> 客户端证书文件及密码 <span class="o">(</span>SSL<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --cert-type TYPE 证书文件类型 <span class="o">(</span>DER/PEM/ENG<span class="o">)</span> <span class="o">(</span>SSL<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --ciphers LIST  SSL 秘钥 <span class="o">(</span>SSL<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --compressed    请求压缩 <span class="o">(</span>使用 deflate 或 gzip<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-K, --config FILE   指定配置文件
+</span></span><span class="line"><span class="cl">    --connect-timeout SECONDS  连接超时设置
+</span></span><span class="line"><span class="cl">-C, --continue-at OFFSET  断点续转
+</span></span><span class="line"><span class="cl">-b, --cookie STRING/FILE  Cookies字符串或读取Cookies的文件位置 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-c, --cookie-jar FILE  操作结束后，要写入 Cookies 的文件位置 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --create-dirs   创建必要的本地目录层次结构
+</span></span><span class="line"><span class="cl">    --crlf          在上传时将 LF 转写为 CRLF
+</span></span><span class="line"><span class="cl">    --crlfile FILE  从指定的文件获得PEM格式CRL列表
+</span></span><span class="line"><span class="cl">-d, --data DATA     HTTP POST 数据 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --data-ascii DATA  ASCII 编码 HTTP POST 数据 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --data-binary DATA  binary 编码 HTTP POST 数据 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --data-urlencode DATA  url 编码 HTTP POST 数据 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --delegation STRING GSS-API 委托权限
+</span></span><span class="line"><span class="cl">    --digest        使用数字身份验证 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --disable-eprt  禁止使用 EPRT 或 LPRT <span class="o">(</span>F<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --disable-epsv  禁止使用 EPSV <span class="o">(</span>F<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-D, --dump-header FILE  将头信息写入指定的文件
+</span></span><span class="line"><span class="cl">    --egd-file FILE  为随机数据设置EGD socket路径<span class="o">(</span>SSL<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --engine ENGINGE  加密引擎 <span class="o">(</span>SSL<span class="o">)</span>. <span class="s2">&#34;--engine list&#34;</span> 指定列表
+</span></span><span class="line"><span class="cl">-f, --fail          连接失败时不显示HTTP错误信息 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-F, --form CONTENT  模拟 HTTP 表单数据提交（multipart POST） <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --form-string STRING  模拟 HTTP 表单数据提交 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --ftp-account DATA  帐户数据提交 <span class="o">(</span>F<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --ftp-alternative-to-user COMMAND  指定替换 <span class="s2">&#34;USER [name]&#34;</span> 的字符串 <span class="o">(</span>F<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --ftp-create-dirs  如果不存在则创建远程目录 <span class="o">(</span>F<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --ftp-method <span class="o">[</span>MULTICWD/NOCWD/SINGLECWD<span class="o">]</span> 控制 CWD <span class="o">(</span>F<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --ftp-pasv      使用 PASV/EPSV 替换 PORT <span class="o">(</span>F<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-P, --ftp-port ADR  使用指定 PORT 及地址替换 PASV <span class="o">(</span>F<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --ftp-skip-pasv-ip 跳过 PASV 的IP地址 <span class="o">(</span>F<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --ftp-pret      在 PASV 之前发送 PRET <span class="o">(</span>drftpd<span class="o">)</span> <span class="o">(</span>F<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --ftp-ssl-ccc   在认证之后发送 CCC <span class="o">(</span>F<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --ftp-ssl-ccc-mode ACTIVE/PASSIVE  设置 CCC 模式 <span class="o">(</span>F<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --ftp-ssl-control ftp 登录时需要 SSL/TLS <span class="o">(</span>F<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-G, --get           使用 HTTP GET 方法发送 -d 数据  <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-g, --globoff       禁用的 URL 队列 及范围使用 <span class="o">{}</span> 和 <span class="o">[]</span>
+</span></span><span class="line"><span class="cl">-H, --header LINE   要发送到服务端的自定义请求头 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-I, --head          仅显示响应文档头
+</span></span><span class="line"><span class="cl">-h, --help          显示帮助
+</span></span><span class="line"><span class="cl">-0, --http1.0       使用 HTTP 1.0 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --ignore-content-length  忽略 HTTP Content-Length 头
+</span></span><span class="line"><span class="cl">-i, --include       在输出中包含协议头 <span class="o">(</span>H/F<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-k, --insecure      允许连接到 SSL 站点，而不使用证书 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --interface INTERFACE  指定网络接口／地址
+</span></span><span class="line"><span class="cl">-4, --ipv4          将域名解析为 IPv4 地址
+</span></span><span class="line"><span class="cl">-6, --ipv6          将域名解析为 IPv6 地址
+</span></span><span class="line"><span class="cl">-j, --junk-session-cookies 读取文件中但忽略会话cookie <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --keepalive-time SECONDS  keepalive 包间隔
+</span></span><span class="line"><span class="cl">    --key KEY       私钥文件名 <span class="o">(</span>SSL/SSH<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --key-type TYPE 私钥文件类型 <span class="o">(</span>DER/PEM/ENG<span class="o">)</span> <span class="o">(</span>SSL<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --krb LEVEL     启用指定安全级别的 Kerberos <span class="o">(</span>F<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --libcurl FILE  命令的libcurl等价代码
+</span></span><span class="line"><span class="cl">    --limit-rate RATE  限制传输速度
+</span></span><span class="line"><span class="cl">-l, --list-only    只列出FTP目录的名称 <span class="o">(</span>F<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --local-port RANGE  强制使用的本地端口号
+</span></span><span class="line"><span class="cl">-L, --location      跟踪重定向 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --location-trusted 类似 --location 并发送验证信息到其它主机 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-M, --manual        显示全手动
+</span></span><span class="line"><span class="cl">    --mail-from FROM  从这个地址发送邮件
+</span></span><span class="line"><span class="cl">    --mail-rcpt TO  发送邮件到这个接收人<span class="o">(</span>s<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --mail-auth AUTH  原始电子邮件的起始地址
+</span></span><span class="line"><span class="cl">    --max-filesize BYTES  下载的最大文件大小 <span class="o">(</span>H/F<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --max-redirs NUM  最大重定向数 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-m, --max-time SECONDS  允许的最多传输时间
+</span></span><span class="line"><span class="cl">    --metalink      处理指定的URL上的XML文件
+</span></span><span class="line"><span class="cl">    --negotiate     使用 HTTP Negotiate 认证 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-n, --netrc         必须从 .netrc 文件读取用户名和密码
+</span></span><span class="line"><span class="cl">    --netrc-optional 使用 .netrc 或 URL<span class="p">;</span> 将重写 -n 参数
+</span></span><span class="line"><span class="cl">    --netrc-file FILE  设置要使用的 netrc 文件名
+</span></span><span class="line"><span class="cl">-N, --no-buffer     禁用输出流的缓存
+</span></span><span class="line"><span class="cl">    --no-keepalive  禁用 connection 的 keepalive
+</span></span><span class="line"><span class="cl">    --no-sessionid  禁止重复使用 SSL session-ID <span class="o">(</span>SSL<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --noproxy       不使用代理的主机列表
+</span></span><span class="line"><span class="cl">    --ntlm          使用 HTTP NTLM 认证 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-o, --output FILE   将输出写入文件，而非 stdout
+</span></span><span class="line"><span class="cl">    --pass PASS     传递给私钥的短语 <span class="o">(</span>SSL/SSH<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --post301       在 <span class="m">301</span> 重定向后不要切换为 GET 请求 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --post302       在 <span class="m">302</span> 重定向后不要切换为 GET 请求 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --post303       在 <span class="m">303</span> 重定向后不要切换为 GET 请求 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-#, --progress-bar  以进度条显示传输进度
+</span></span><span class="line"><span class="cl">    --proto PROTOCOLS  启用/禁用 指定的协议
+</span></span><span class="line"><span class="cl">    --proto-redir PROTOCOLS  在重定向上 启用/禁用 指定的协议
+</span></span><span class="line"><span class="cl">-x, --proxy <span class="o">[</span>PROTOCOL://<span class="o">]</span>HOST<span class="o">[</span>:PORT<span class="o">]</span> 在指定的端口上使用代理
+</span></span><span class="line"><span class="cl">    --proxy-anyauth 在代理上使用 <span class="s2">&#34;any&#34;</span> 认证方法 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --proxy-basic   在代理上使用 Basic 认证  <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --proxy-digest  在代理上使用 Digest 认证 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --proxy-negotiate 在代理上使用 Negotiate 认证 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --proxy-ntlm    在代理上使用 NTLM 认证 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-U, --proxy-user USER<span class="o">[</span>:PASSWORD<span class="o">]</span>  代理用户名及密码
+</span></span><span class="line"><span class="cl">     --proxy1.0 HOST<span class="o">[</span>:PORT<span class="o">]</span>  在指定的端口上使用 HTTP/1.0 代理
+</span></span><span class="line"><span class="cl">-p, --proxytunnel   使用HTTP代理 <span class="o">(</span>用于 CONNECT<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --pubkey KEY    公钥文件名 <span class="o">(</span>SSH<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-Q, --quote CMD     在传输开始前向服务器发送命令 <span class="o">(</span>F/SFTP<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --random-file FILE  读取随机数据的文件 <span class="o">(</span>SSL<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-r, --range RANGE   仅检索范围内的字节
+</span></span><span class="line"><span class="cl">    --raw           使用原始HTTP传输，而不使用编码 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-e, --referer       Referer URL <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-J, --remote-header-name 从远程文件读取头信息 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-O, --remote-name   将输出写入远程文件
+</span></span><span class="line"><span class="cl">    --remote-name-all 使用所有URL的远程文件名
+</span></span><span class="line"><span class="cl">-R, --remote-time   将远程文件的时间设置在本地输出上
+</span></span><span class="line"><span class="cl">-X, --request COMMAND  使用指定的请求命令
+</span></span><span class="line"><span class="cl">    --resolve HOST:PORT:ADDRESS  将 HOST:PORT 强制解析到 ADDRESS
+</span></span><span class="line"><span class="cl">    --retry NUM   出现问题时的重试次数
+</span></span><span class="line"><span class="cl">    --retry-delay SECONDS 重试时的延时时长
+</span></span><span class="line"><span class="cl">    --retry-max-time SECONDS  仅在指定时间段内重试
+</span></span><span class="line"><span class="cl">-S, --show-error    显示错误. 在选项 -s 中，当 curl 出现错误时将显示
+</span></span><span class="line"><span class="cl">-s, --silent        Silent模式。不输出任务内容
+</span></span><span class="line"><span class="cl">    --socks4 HOST<span class="o">[</span>:PORT<span class="o">]</span>  在指定的 host + port 上使用 SOCKS4 代理
+</span></span><span class="line"><span class="cl">    --socks4a HOST<span class="o">[</span>:PORT<span class="o">]</span>  在指定的 host + port 上使用 SOCKSa 代理
+</span></span><span class="line"><span class="cl">    --socks5 HOST<span class="o">[</span>:PORT<span class="o">]</span>  在指定的 host + port 上使用 SOCKS5 代理
+</span></span><span class="line"><span class="cl">    --socks5-hostname HOST<span class="o">[</span>:PORT<span class="o">]</span> SOCKS5 代理，指定用户名、密码
+</span></span><span class="line"><span class="cl">    --socks5-gssapi-service NAME  为gssapi使用SOCKS5代理服务名称 
+</span></span><span class="line"><span class="cl">    --socks5-gssapi-nec  与NEC Socks5服务器兼容
+</span></span><span class="line"><span class="cl">-Y, --speed-limit RATE  在指定限速时间之后停止传输
+</span></span><span class="line"><span class="cl">-y, --speed-time SECONDS  指定时间之后触发限速. 默认 <span class="m">30</span>
+</span></span><span class="line"><span class="cl">    --ssl           尝试 SSL/TLS <span class="o">(</span>FTP, IMAP, POP3, SMTP<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --ssl-reqd      需要 SSL/TLS <span class="o">(</span>FTP, IMAP, POP3, SMTP<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-2, --sslv2         使用 SSLv2 <span class="o">(</span>SSL<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-3, --sslv3         使用 SSLv3 <span class="o">(</span>SSL<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --ssl-allow-beast 允许的安全漏洞，提高互操作性<span class="o">(</span>SSL<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --stderr FILE   重定向 stderr 的文件位置. - means stdout
+</span></span><span class="line"><span class="cl">    --tcp-nodelay   使用 TCP_NODELAY 选项
+</span></span><span class="line"><span class="cl">-t, --telnet-option <span class="nv">OPT</span><span class="o">=</span>VAL  设置 telnet 选项
+</span></span><span class="line"><span class="cl">     --tftp-blksize VALUE  设备 TFTP BLKSIZE 选项 <span class="o">(</span>必须 &gt;512<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-z, --time-cond TIME  基于时间条件的传输
+</span></span><span class="line"><span class="cl">-1, --tlsv1         <span class="nv">使用</span> <span class="o">=</span>&gt; TLSv1 <span class="o">(</span>SSL<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --tlsv1.0       使用 TLSv1.0 <span class="o">(</span>SSL<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --tlsv1.1       使用 TLSv1.1 <span class="o">(</span>SSL<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --tlsv1.2       使用 TLSv1.2 <span class="o">(</span>SSL<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --trace FILE    将 debug 信息写入指定的文件
+</span></span><span class="line"><span class="cl">    --trace-ascii FILE  类似 --trace 但使用16进度输出
+</span></span><span class="line"><span class="cl">    --trace-time    向 trace/verbose 输出添加时间戳
+</span></span><span class="line"><span class="cl">    --tr-encoding   请求压缩传输编码 <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-T, --upload-file FILE  将文件传输（上传）到指定位置
+</span></span><span class="line"><span class="cl">    --url URL       指定所使用的 URL
+</span></span><span class="line"><span class="cl">-B, --use-ascii     使用 ASCII/text 传输
+</span></span><span class="line"><span class="cl">-u, --user USER<span class="o">[</span>:PASSWORD<span class="o">]</span>  指定服务器认证用户名、密码
+</span></span><span class="line"><span class="cl">    --tlsuser USER  TLS 用户名
+</span></span><span class="line"><span class="cl">    --tlspassword STRING TLS 密码
+</span></span><span class="line"><span class="cl">    --tlsauthtype STRING  TLS 认证类型 <span class="o">(</span>默认 SRP<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    --unix-socket FILE    通过这个 UNIX socket 域连接
+</span></span><span class="line"><span class="cl">-A, --user-agent STRING  要发送到服务器的 User-Agent <span class="o">(</span>H<span class="o">)</span>
+</span></span><span class="line"><span class="cl">-v, --verbose       显示详细操作信息
+</span></span><span class="line"><span class="cl">-V, --version       显示版本号并退出
+</span></span><span class="line"><span class="cl">-w, --write-out FORMAT  完成后输出什么
+</span></span><span class="line"><span class="cl">    --xattr        将元数据存储在扩展文件属性中
+</span></span><span class="line"><span class="cl">-q                 .curlrc 如果作为第一个参数无效
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="4-curl命令的使用范例">4. curl命令的使用范例</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span><span class="lnt">236
+</span><span class="lnt">237
+</span><span class="lnt">238
+</span><span class="lnt">239
+</span><span class="lnt">240
+</span><span class="lnt">241
+</span><span class="lnt">242
+</span><span class="lnt">243
+</span><span class="lnt">244
+</span><span class="lnt">245
+</span><span class="lnt">246
+</span><span class="lnt">247
+</span><span class="lnt">248
+</span><span class="lnt">249
+</span><span class="lnt">250
+</span><span class="lnt">251
+</span><span class="lnt">252
+</span><span class="lnt">253
+</span><span class="lnt">254
+</span><span class="lnt">255
+</span><span class="lnt">256
+</span><span class="lnt">257
+</span><span class="lnt">258
+</span><span class="lnt">259
+</span><span class="lnt">260
+</span><span class="lnt">261
+</span><span class="lnt">262
+</span><span class="lnt">263
+</span><span class="lnt">264
+</span><span class="lnt">265
+</span><span class="lnt">266
+</span><span class="lnt">267
+</span><span class="lnt">268
+</span><span class="lnt">269
+</span><span class="lnt">270
+</span><span class="lnt">271
+</span><span class="lnt">272
+</span><span class="lnt">273
+</span><span class="lnt">274
+</span><span class="lnt">275
+</span><span class="lnt">276
+</span><span class="lnt">277
+</span><span class="lnt">278
+</span><span class="lnt">279
+</span><span class="lnt">280
+</span><span class="lnt">281
+</span><span class="lnt">282
+</span><span class="lnt">283
+</span><span class="lnt">284
+</span><span class="lnt">285
+</span><span class="lnt">286
+</span><span class="lnt">287
+</span><span class="lnt">288
+</span><span class="lnt">289
+</span><span class="lnt">290
+</span><span class="lnt">291
+</span><span class="lnt">292
+</span><span class="lnt">293
+</span><span class="lnt">294
+</span><span class="lnt">295
+</span><span class="lnt">296
+</span><span class="lnt">297
+</span><span class="lnt">298
+</span><span class="lnt">299
+</span><span class="lnt">300
+</span><span class="lnt">301
+</span><span class="lnt">302
+</span><span class="lnt">303
+</span><span class="lnt">304
+</span><span class="lnt">305
+</span><span class="lnt">306
+</span><span class="lnt">307
+</span><span class="lnt">308
+</span><span class="lnt">309
+</span><span class="lnt">310
+</span><span class="lnt">311
+</span><span class="lnt">312
+</span><span class="lnt">313
+</span><span class="lnt">314
+</span><span class="lnt">315
+</span><span class="lnt">316
+</span><span class="lnt">317
+</span><span class="lnt">318
+</span><span class="lnt">319
+</span><span class="lnt">320
+</span><span class="lnt">321
+</span><span class="lnt">322
+</span><span class="lnt">323
+</span><span class="lnt">324
+</span><span class="lnt">325
+</span><span class="lnt">326
+</span><span class="lnt">327
+</span><span class="lnt">328
+</span><span class="lnt">329
+</span><span class="lnt">330
+</span><span class="lnt">331
+</span><span class="lnt">332
+</span><span class="lnt">333
+</span><span class="lnt">334
+</span><span class="lnt">335
+</span><span class="lnt">336
+</span><span class="lnt">337
+</span><span class="lnt">338
+</span><span class="lnt">339
+</span><span class="lnt">340
+</span><span class="lnt">341
+</span><span class="lnt">342
+</span><span class="lnt">343
+</span><span class="lnt">344
+</span><span class="lnt">345
+</span><span class="lnt">346
+</span><span class="lnt">347
+</span><span class="lnt">348
+</span><span class="lnt">349
+</span><span class="lnt">350
+</span><span class="lnt">351
+</span><span class="lnt">352
+</span><span class="lnt">353
+</span><span class="lnt">354
+</span><span class="lnt">355
+</span><span class="lnt">356
+</span><span class="lnt">357
+</span><span class="lnt">358
+</span><span class="lnt">359
+</span><span class="lnt">360
+</span><span class="lnt">361
+</span><span class="lnt">362
+</span><span class="lnt">363
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl是一种命令行工具，作用是发出网络请求，然后得到和提取数据，显示在<span class="s2">&#34;标准输出&#34;</span>（stdout）上面。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">它支持多种协议，下面举例讲解如何将它用于网站开发。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">一、查看网页源码
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">直接在curl命令后加上网址，就可以看到网页源码。我们以网址www.sina.com为例（选择该网址，主要因为它的网页代码较短）：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　curl www.sina.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　&lt;!DOCTYPE HTML PUBLIC <span class="s2">&#34;-//IETF//DTD HTML 2.0//EN&#34;</span>&gt;
+</span></span><span class="line"><span class="cl">　　&lt;html&gt;&lt;head&gt;
+</span></span><span class="line"><span class="cl">　　&lt;title&gt;301 Moved Permanently&lt;/title&gt;
+</span></span><span class="line"><span class="cl">　　&lt;/head&gt;&lt;body&gt;
+</span></span><span class="line"><span class="cl">　　&lt;h1&gt;Moved Permanently&lt;/h1&gt;
+</span></span><span class="line"><span class="cl">　　&lt;p&gt;The document has moved &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&#34;http://www.sina.com.cn/&#34;</span>&gt;here&lt;/a&gt;.&lt;/p&gt;
+</span></span><span class="line"><span class="cl">　　&lt;/body&gt;&lt;/html&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">如果要把这个网页保存下来，可以使用<span class="sb">`</span>-o<span class="sb">`</span>参数，这就相当于使用wget命令了。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　 curl -o <span class="o">[</span>文件名<span class="o">]</span> www.sina.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">二、自动跳转
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">有的网址是自动跳转的。使用<span class="sb">`</span>-L<span class="sb">`</span>参数，curl就会跳转到新的网址。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　curl -L www.sina.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">键入上面的命令，结果就自动跳转为www.sina.com.cn。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">三、显示头信息
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="sb">`</span>-i<span class="sb">`</span>参数可以显示http response的头信息，连同网页代码一起。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　 curl -i www.sina.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　HTTP/1.0 <span class="m">301</span> Moved Permanently
+</span></span><span class="line"><span class="cl">　　Date: Sat, <span class="m">03</span> Sep <span class="m">2011</span> 23:44:10 GMT
+</span></span><span class="line"><span class="cl">　　Server: Apache/2.0.54 <span class="o">(</span>Unix<span class="o">)</span>
+</span></span><span class="line"><span class="cl">　　Location: http://www.sina.com.cn/
+</span></span><span class="line"><span class="cl">　　Cache-Control: max-age<span class="o">=</span><span class="m">3600</span>
+</span></span><span class="line"><span class="cl">　　Expires: Sun, <span class="m">04</span> Sep <span class="m">2011</span> 00:44:10 GMT
+</span></span><span class="line"><span class="cl">　　Vary: Accept-Encoding
+</span></span><span class="line"><span class="cl">　　Content-Length: <span class="m">231</span>
+</span></span><span class="line"><span class="cl">　　Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><span class="o">=</span>iso-8859-1
+</span></span><span class="line"><span class="cl">　　Age: <span class="m">3239</span>
+</span></span><span class="line"><span class="cl">　　X-Cache: HIT from sh201-9.sina.com.cn
+</span></span><span class="line"><span class="cl">　　Connection: close
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　&lt;!DOCTYPE HTML PUBLIC <span class="s2">&#34;-//IETF//DTD HTML 2.0//EN&#34;</span>&gt;
+</span></span><span class="line"><span class="cl">　　&lt;html&gt;&lt;head&gt;
+</span></span><span class="line"><span class="cl">　　&lt;title&gt;301 Moved Permanently&lt;/title&gt;
+</span></span><span class="line"><span class="cl">　　&lt;/head&gt;&lt;body&gt;
+</span></span><span class="line"><span class="cl">　　&lt;h1&gt;Moved Permanently&lt;/h1&gt;
+</span></span><span class="line"><span class="cl">　　&lt;p&gt;The document has moved &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&#34;http://www.sina.com.cn/&#34;</span>&gt;here&lt;/a&gt;.&lt;/p&gt;
+</span></span><span class="line"><span class="cl">　　&lt;/body&gt;&lt;/html&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="sb">`</span>-I<span class="sb">`</span>参数则是只显示http response的头信息。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">四、显示通信过程
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="sb">`</span>-v<span class="sb">`</span>参数可以显示一次http通信的整个过程，包括端口连接和http request头信息。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　curl -v www.sina.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　* About to connect<span class="o">()</span> to www.sina.com port <span class="m">80</span> <span class="o">(</span><span class="c1">#0)</span>
+</span></span><span class="line"><span class="cl">　　* Trying 61.172.201.195... connected
+</span></span><span class="line"><span class="cl">　　* Connected to www.sina.com <span class="o">(</span>61.172.201.195<span class="o">)</span> port <span class="m">80</span> <span class="o">(</span><span class="c1">#0)</span>
+</span></span><span class="line"><span class="cl">　　&gt; GET / HTTP/1.1
+</span></span><span class="line"><span class="cl">　　&gt; User-Agent: curl/7.21.3 <span class="o">(</span>i686-pc-linux-gnu<span class="o">)</span> libcurl/7.21.3 OpenSSL/0.9.8o zlib/1.2.3.4 libidn/1.18
+</span></span><span class="line"><span class="cl">　　&gt; Host: www.sina.com
+</span></span><span class="line"><span class="cl">　　&gt; Accept: */*
+</span></span><span class="line"><span class="cl">　　&gt;
+</span></span><span class="line"><span class="cl">　　* HTTP 1.0, assume close after body
+</span></span><span class="line"><span class="cl">　　&lt; HTTP/1.0 <span class="m">301</span> Moved Permanently
+</span></span><span class="line"><span class="cl">　　&lt; Date: Sun, <span class="m">04</span> Sep <span class="m">2011</span> 00:42:39 GMT
+</span></span><span class="line"><span class="cl">　　&lt; Server: Apache/2.0.54 <span class="o">(</span>Unix<span class="o">)</span>
+</span></span><span class="line"><span class="cl">　　&lt; Location: http://www.sina.com.cn/
+</span></span><span class="line"><span class="cl">　　&lt; Cache-Control: max-age<span class="o">=</span><span class="m">3600</span>
+</span></span><span class="line"><span class="cl">　　&lt; Expires: Sun, <span class="m">04</span> Sep <span class="m">2011</span> 01:42:39 GMT
+</span></span><span class="line"><span class="cl">　　&lt; Vary: Accept-Encoding
+</span></span><span class="line"><span class="cl">　　&lt; Content-Length: <span class="m">231</span>
+</span></span><span class="line"><span class="cl">　　&lt; Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><span class="o">=</span>iso-8859-1
+</span></span><span class="line"><span class="cl">　　&lt; X-Cache: MISS from sh201-19.sina.com.cn
+</span></span><span class="line"><span class="cl">　　&lt; Connection: close
+</span></span><span class="line"><span class="cl">　　&lt;
+</span></span><span class="line"><span class="cl">　　&lt;!DOCTYPE HTML PUBLIC <span class="s2">&#34;-//IETF//DTD HTML 2.0//EN&#34;</span>&gt;
+</span></span><span class="line"><span class="cl">　　&lt;html&gt;&lt;head&gt;
+</span></span><span class="line"><span class="cl">　　&lt;title&gt;301 Moved Permanently&lt;/title&gt;
+</span></span><span class="line"><span class="cl">　　&lt;/head&gt;&lt;body&gt;
+</span></span><span class="line"><span class="cl">　　&lt;h1&gt;Moved Permanently&lt;/h1&gt;
+</span></span><span class="line"><span class="cl">　　&lt;p&gt;The document has moved &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&#34;http://www.sina.com.cn/&#34;</span>&gt;here&lt;/a&gt;.&lt;/p&gt;
+</span></span><span class="line"><span class="cl">　　&lt;/body&gt;&lt;/html&gt;
+</span></span><span class="line"><span class="cl">　　* Closing connection <span class="c1">#0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">如果你觉得上面的信息还不够，那么下面的命令可以查看更详细的通信过程。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　 curl --trace output.txt www.sina.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">或者
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　curl --trace-ascii output.txt www.sina.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">运行后，请打开output.txt文件查看。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">五、发送表单信息
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">发送表单信息有GET和POST两种方法。GET方法相对简单，只要把数据附在网址后面就行。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　 curl example.com/form.cgi?data<span class="o">=</span>xxx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">POST方法必须把数据和网址分开，curl就要用到--data参数。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　curl -X POST --data <span class="s2">&#34;data=xxx&#34;</span> example.com/form.cgi
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">如果你的数据没有经过表单编码，还可以让curl为你编码，参数是<span class="sb">`</span>--data-urlencode<span class="sb">`</span>。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　 curl -X POST--data-urlencode <span class="s2">&#34;date=April 1&#34;</span> example.com/form.cgi
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">六、HTTP动词
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl默认的HTTP动词是GET，使用<span class="sb">`</span>-X<span class="sb">`</span>参数可以支持其他动词。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　curl -X POST www.example.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　 curl -X DELETE www.example.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">七、文件上传
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">假定文件上传的表单是下面这样：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　&lt;form <span class="nv">method</span><span class="o">=</span><span class="s2">&#34;POST&#34;</span> <span class="nv">enctype</span><span class="o">=</span><span class="s1">&#39;multipart/form-data&#39;</span> <span class="nv">action</span><span class="o">=</span><span class="s2">&#34;upload.cgi&#34;</span>&gt;
+</span></span><span class="line"><span class="cl">　　　　&lt;input <span class="nv">type</span><span class="o">=</span>file <span class="nv">name</span><span class="o">=</span>upload&gt;
+</span></span><span class="line"><span class="cl">　　　　&lt;input <span class="nv">type</span><span class="o">=</span>submit <span class="nv">name</span><span class="o">=</span>press <span class="nv">value</span><span class="o">=</span><span class="s2">&#34;OK&#34;</span>&gt;
+</span></span><span class="line"><span class="cl">　　&lt;/form&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">你可以用curl这样上传文件：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　curl --form <span class="nv">upload</span><span class="o">=</span>@localfilename --form <span class="nv">press</span><span class="o">=</span>OK <span class="o">[</span>URL<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">八、Referer字段
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">有时你需要在http request头信息中，提供一个referer字段，表示你是从哪里跳转过来的。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　 curl --referer http://www.example.com http://www.example.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">九、User Agent字段
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">这个字段是用来表示客户端的设备信息。服务器有时会根据这个字段，针对不同设备，返回不同格式的网页，比如手机版和桌面版。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">iPhone4的User Agent是
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　Mozilla/5.0 <span class="o">(</span>iPhone<span class="p">;</span> U<span class="p">;</span> CPU iPhone OS 4_0 like Mac OS X<span class="p">;</span> en-us<span class="o">)</span> AppleWebKit/532.9 <span class="o">(</span>KHTML, like Gecko<span class="o">)</span> Version/4.0.5 Mobile/8A293 Safari/6531.22.7
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl可以这样模拟：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　curl --user-agent <span class="s2">&#34;[User Agent]&#34;</span> <span class="o">[</span>URL<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">十、cookie
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">使用<span class="sb">`</span>--cookie<span class="sb">`</span>参数，可以让curl发送cookie。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　 curl --cookie <span class="s2">&#34;name=xxx&#34;</span> www.example.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">至于具体的cookie的值，可以从http response头信息的<span class="sb">`</span>Set-Cookie<span class="sb">`</span>字段中得到。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="sb">`</span>-c cookie-file<span class="sb">`</span>可以保存服务器返回的cookie到文件，<span class="sb">`</span>-b cookie-file<span class="sb">`</span>可以使用这个文件作为cookie信息，进行后续的请求。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　curl -c cookies http://example.com
+</span></span><span class="line"><span class="cl">　　 curl -b cookies http://example.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">十一、增加头信息
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">有时需要在http request之中，自行增加一个头信息。<span class="sb">`</span>--header<span class="sb">`</span>参数就可以起到这个作用。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　curl --header <span class="s2">&#34;Content-Type:application/json&#34;</span> http://example.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">十二、HTTP认证
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">有些网域需要HTTP认证，这时curl需要用到<span class="sb">`</span>--user<span class="sb">`</span>参数。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">　　 curl --user name:password example.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">不带有任何参数时，curl 就是发出 GET 请求。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl https://www.example.com
+</span></span><span class="line"><span class="cl">上面命令向www.example.com发出 GET 请求，服务器返回的内容会在命令行输出。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-A
+</span></span><span class="line"><span class="cl">-A参数指定客户端的用户代理标头，即User-Agent。curl 的默认用户代理字符串是curl/<span class="o">[</span>version<span class="o">]</span>。 curl -A <span class="s1">&#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36&#39;</span> https://google.com
+</span></span><span class="line"><span class="cl">上面命令将User-Agent改成 Chrome 浏览器。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -A <span class="s1">&#39;&#39;</span> https://google.com
+</span></span><span class="line"><span class="cl">上面命令会移除User-Agent标头。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">也可以通过-H参数直接指定标头，更改User-Agent。 curl -H <span class="s1">&#39;User-Agent: php/1.0&#39;</span> https://google.com
+</span></span><span class="line"><span class="cl">-b
+</span></span><span class="line"><span class="cl">-b参数用来向服务器发送 Cookie。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -b <span class="s1">&#39;foo=bar&#39;</span> https://google.com
+</span></span><span class="line"><span class="cl">上面命令会生成一个标头Cookie: <span class="nv">foo</span><span class="o">=</span>bar，向服务器发送一个名为foo、值为bar的 Cookie。 curl -b <span class="s1">&#39;foo1=bar;foo2=bar2&#39;</span> https://google.com
+</span></span><span class="line"><span class="cl">上面命令发送两个 Cookie。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -b cookies.txt https://www.google.com
+</span></span><span class="line"><span class="cl">上面命令读取本地文件cookies.txt，里面是服务器设置的 Cookie（参见-c参数），将其发送到服务器。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-c
+</span></span><span class="line"><span class="cl">-c参数将服务器设置的 Cookie 写入一个文件。 curl -c cookies.txt https://www.google.com
+</span></span><span class="line"><span class="cl">上面命令将服务器的 HTTP 回应所设置 Cookie 写入文本文件cookies.txt。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-d
+</span></span><span class="line"><span class="cl">-d参数用于发送 POST 请求的数据体。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -d<span class="s1">&#39;login=emma＆password=123&#39;</span>-X POST https://google.com/login
+</span></span><span class="line"><span class="cl"><span class="c1"># 或者 curl -d &#39;login=emma&#39; -d &#39;password=123&#39; -X POST  https://google.com/login</span>
+</span></span><span class="line"><span class="cl">使用-d参数以后，HTTP 请求会自动加上标头Content-Type : application/x-www-form-urlencoded。并且会自动将请求转为 POST 方法，因此可以省略-X POST。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-d参数可以读取本地文本文件的数据，向服务器发送。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -d <span class="s1">&#39;@data.txt&#39;</span> https://google.com/login
+</span></span><span class="line"><span class="cl">上面命令读取data.txt文件的内容，作为数据体向服务器发送。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">--data-urlencode
+</span></span><span class="line"><span class="cl">--data-urlencode参数等同于-d，发送 POST 请求的数据体，区别在于会自动将发送的数据进行 URL 编码。 curl --data-urlencode <span class="s1">&#39;comment=hello world&#39;</span> https://google.com/login
+</span></span><span class="line"><span class="cl">上面代码中，发送的数据hello world之间有一个空格，需要进行 URL 编码。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-e
+</span></span><span class="line"><span class="cl">-e参数用来设置 HTTP 的标头Referer，表示请求的来源。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -e <span class="s1">&#39;https://google.com?q=example&#39;</span> https://www.example.com
+</span></span><span class="line"><span class="cl">上面命令将Referer标头设为https://google.com?q<span class="o">=</span>example。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-H参数可以通过直接添加标头Referer，达到同样效果。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -H <span class="s1">&#39;Referer: https://google.com?q=example&#39;</span> https://www.example.com
+</span></span><span class="line"><span class="cl">-F
+</span></span><span class="line"><span class="cl">-F参数用来向服务器上传二进制文件。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -F <span class="s1">&#39;file=@photo.png&#39;</span> https://google.com/profile
+</span></span><span class="line"><span class="cl">上面命令会给 HTTP 请求加上标头Content-Type: multipart/form-data，然后将文件photo.png作为file字段上传。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-F参数可以指定 MIME 类型。 curl -F <span class="s1">&#39;file=@photo.png;type=image/png&#39;</span> https://google.com/profile
+</span></span><span class="line"><span class="cl">上面命令指定 MIME 类型为image/png，否则 curl 会把 MIME 类型设为application/octet-stream。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-F参数也可以指定文件名。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -F <span class="s1">&#39;file=@photo.png;filename=me.png&#39;</span> https://google.com/profile
+</span></span><span class="line"><span class="cl">上面命令中，原始文件名为photo.png，但是服务器接收到的文件名为me.png。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-G
+</span></span><span class="line"><span class="cl">-G参数用来构造 URL 的查询字符串。 curl -G -d <span class="s1">&#39;q=kitties&#39;</span> -d <span class="s1">&#39;count=20&#39;</span> https://google.com/search
+</span></span><span class="line"><span class="cl">上面命令会发出一个 GET 请求，实际请求的 URL 为https://google.com/search?q<span class="o">=</span>kitties<span class="p">&amp;</span><span class="nv">count</span><span class="o">=</span>20。如果省略--G，会发出一个 POST 请求。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">如果数据需要 URL 编码，可以结合--data--urlencode参数。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -G --data-urlencode <span class="s1">&#39;comment=hello world&#39;</span> https://www.example.com
+</span></span><span class="line"><span class="cl">-H
+</span></span><span class="line"><span class="cl">-H参数添加 HTTP 请求的标头。 curl -H <span class="s1">&#39;Accept-Language: en-US&#39;</span> https://google.com
+</span></span><span class="line"><span class="cl">上面命令添加 HTTP 标头Accept-Language: en-US。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -H <span class="s1">&#39;Accept-Language: en-US&#39;</span> -H <span class="s1">&#39;Secret-Message: xyzzy&#39;</span> https://google.com
+</span></span><span class="line"><span class="cl">上面命令添加两个 HTTP 标头。 curl -d <span class="s1">&#39;{&#34;login&#34;: &#34;emma&#34;, &#34;pass&#34;: &#34;123&#34;}&#39;</span> -H <span class="s1">&#39;Content-Type: application/json&#39;</span> https://google.com/login
+</span></span><span class="line"><span class="cl">上面命令添加 HTTP 请求的标头是Content-Type: application/json，然后用-d参数发送 JSON 数据。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-i
+</span></span><span class="line"><span class="cl">-i参数打印出服务器回应的 HTTP 标头。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -i https://www.example.com
+</span></span><span class="line"><span class="cl">上面命令收到服务器回应后，先输出服务器回应的标头，然后空一行，再输出网页的源码。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-I
+</span></span><span class="line"><span class="cl">-I参数向服务器发出 HEAD 请求，然会将服务器返回的 HTTP 标头打印出来。 curl -I https://www.example.com
+</span></span><span class="line"><span class="cl">上面命令输出服务器对 HEAD 请求的回应。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">--head参数等同于-I。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl --head https://www.example.com
+</span></span><span class="line"><span class="cl">-k
+</span></span><span class="line"><span class="cl">-k参数指定跳过 SSL 检测。 curl -k https://www.example.com
+</span></span><span class="line"><span class="cl">上面命令不会检查服务器的 SSL 证书是否正确。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-L
+</span></span><span class="line"><span class="cl">-L参数会让 HTTP 请求跟随服务器的重定向。curl 默认不跟随重定向。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -L -d <span class="s1">&#39;tweet=hi&#39;</span> https://api.twitter.com/tweet
+</span></span><span class="line"><span class="cl">--limit-rate
+</span></span><span class="line"><span class="cl">--limit-rate用来限制 HTTP 请求和回应的带宽，模拟慢网速的环境。 curl --limit-rate 200k https://google.com
+</span></span><span class="line"><span class="cl">上面命令将带宽限制在每秒 200K 字节。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-o
+</span></span><span class="line"><span class="cl">-o参数将服务器的回应保存成文件，等同于wget命令。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -o example.html https://www.example.com
+</span></span><span class="line"><span class="cl">上面命令将www.example.com保存成example.html。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-O
+</span></span><span class="line"><span class="cl">-O参数将服务器回应保存成文件，并将 URL 的最后部分当作文件名。 curl -O https://www.example.com/foo/bar.html
+</span></span><span class="line"><span class="cl">上面命令将服务器回应保存成文件，文件名为bar.html。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-s
+</span></span><span class="line"><span class="cl">-s参数将不输出错误和进度信息。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -s https://www.example.com
+</span></span><span class="line"><span class="cl">上面命令一旦发生错误，不会显示错误信息。不发生错误的话，会正常显示运行结果。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">如果想让 curl 不产生任何输出，可以使用下面的命令。 curl -s -o /dev/null https://google.com
+</span></span><span class="line"><span class="cl">-S
+</span></span><span class="line"><span class="cl">-S参数指定只输出错误信息，通常与-s一起使用。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -s -o /dev/null https://google.com
+</span></span><span class="line"><span class="cl">上面命令没有任何输出，除非发生错误。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-u
+</span></span><span class="line"><span class="cl">-u参数用来设置服务器认证的用户名和密码。 curl -u <span class="s1">&#39;bob:12345&#39;</span> https://google.com/login
+</span></span><span class="line"><span class="cl">上面命令设置用户名为bob，密码为12345，然后将其转为 HTTP 标头Authorization: Basic Ym9iOjEyMzQ1。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl 能够识别 URL 里面的用户名和密码。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl https://bob:12345@google.com/login
+</span></span><span class="line"><span class="cl">上面命令能够识别 URL 里面的用户名和密码，将其转为上个例子里面的 HTTP 标头。 curl -u <span class="s1">&#39;bob&#39;</span> https://google.com/login
+</span></span><span class="line"><span class="cl">上面命令只设置了用户名，执行后，curl 会提示用户输入密码。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-v
+</span></span><span class="line"><span class="cl">-v参数输出通信的整个过程，用于调试。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -v https://www.example.com
+</span></span><span class="line"><span class="cl">--trace参数也可以用于调试，还会输出原始的二进制数据。 curl --trace - https://www.example.com
+</span></span><span class="line"><span class="cl">-x
+</span></span><span class="line"><span class="cl">-x参数指定 HTTP 请求的代理。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -x socks5://james:cats@myproxy.com:8080 https://www.example.com
+</span></span><span class="line"><span class="cl">上面命令指定 HTTP 请求通过myproxy.com:8080的 socks5 代理发出。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">如果没有指定代理协议，默认为 HTTP。 curl -x james:cats@myproxy.com:8080 https://www.example.com
+</span></span><span class="line"><span class="cl">上面命令中，请求的代理使用 HTTP 协议。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-X
+</span></span><span class="line"><span class="cl">-X参数指定 HTTP 请求的方法。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ curl -X POST https://www.example.com
+</span></span><span class="line"><span class="cl">上面命令对https://www.example.com发出 POST 请求。
+</span></span></code></pre></td></tr></table>
+</div>
+</div>]]></description>
 </item><item>
     <title>Linux下使用mail工具发送邮件</title>
     <link>https://eebond.github.io/linux%E4%B8%8B%E4%BD%BF%E7%94%A8mail%E5%B7%A5%E5%85%B7%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/</link>
     <pubDate>Thu, 09 Dec 2021 16:07:41 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/linux%E4%B8%8B%E4%BD%BF%E7%94%A8mail%E5%B7%A5%E5%85%B7%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/</guid>
-    <description><![CDATA[nothting]]></description>
+    <description><![CDATA[<p>邮件常常是Linux下监控报警手段之一。Linux下的mail命令可以方便，快速的完成发送邮件。下面以CentOS为例</p>
+<h2 id="1安装mailx">1.安装mailx</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install mailx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2配置">2.配置</h2>
+<p>vi /etc/mail.rc   在文件尾加上如下配置  （注:因为163的设置相对简单些，以163邮箱为例，QQ邮箱等，其他邮箱因为安全等因素，需要设置的比较多，具体的可以搞下，本文不作重点。QQ邮箱也是可以的，需要开启smtp服务，并生成授权码）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">set from=zabbix@163.com
+</span></span><span class="line"><span class="cl">set smtp=smtp.163.com
+</span></span><span class="line"><span class="cl">set smtp-auth-user=zabbix@163.com
+</span></span><span class="line"><span class="cl">set smtp-auth-password=邮箱密码
+</span></span><span class="line"><span class="cl">set smtp-auth=login
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="3发送邮件测试">3.发送邮件测试</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Content&#34;</span> <span class="p">|</span> mail -s <span class="s2">&#34;Title&#34;</span> abc@163.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>带附件的邮件(需要注意的是目标邮箱一定要放在最后写)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Content&#34;</span> <span class="p">|</span> mail -s <span class="s2">&#34;Title&#34;</span> -a &lt;附件&gt; abc@163.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div>]]></description>
 </item><item>
     <title>lrzsz工具 Linux和Windows之间互传文件</title>
     <link>https://eebond.github.io/lrzsz%E5%B7%A5%E5%85%B7-linux%E5%92%8Cwindows%E4%B9%8B%E9%97%B4%E4%BA%92%E4%BC%A0%E6%96%87%E4%BB%B6/</link>
     <pubDate>Tue, 16 Nov 2021 23:04:38 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/lrzsz%E5%B7%A5%E5%85%B7-linux%E5%92%8Cwindows%E4%B9%8B%E9%97%B4%E4%BA%92%E4%BC%A0%E6%96%87%E4%BB%B6/</guid>
-    <description><![CDATA[该工具需要在支持文件传输的终端工具中使用，如xshell可以，而putty不能]]></description>
+    <description><![CDATA[<p>该工具需要在支持文件传输的终端工具中使用，如xshell可以，而putty不能。</p>
+<h3 id="安装lrzsz工具">安装lrzsz工具</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install -y lrzsz
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="linux端接收来自windows端的文件">Linux端接收来自Windows端的文件</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rz
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输入命令后会弹出文件选择框
+</p>
+<h3 id="linux端发送文件到windows端">Linux端发送文件到windows端</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sz <span class="o">[</span>文件路径<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输入命令后会弹出文件保存位置选择框
+</p>
+]]></description>
 </item></channel>
 </rss>

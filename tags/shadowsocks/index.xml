@@ -10,6 +10,43 @@
     <pubDate>Thu, 07 Apr 2022 09:05:53 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://eebond.github.io/centos7-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2shadowsocks/</guid>
-    <description><![CDATA[nothting]]></description>
+    <description><![CDATA[<h2 id="前言">前言</h2>
+<blockquote>
+<p>之前安装的shadowsocks-libev有点不太好用了，端口直接被封，可能是加密协议的问题。
+现在，用网上通用的脚本方法安装shadowsocks。</p>
+</blockquote>
+<h2 id="安装">安装</h2>
+<p><a href="https://github.com/teddysun/shadowsocks_install" target="_blank" rel="noopener noreffer">秋水逸冰的一键安装脚本</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget –no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh <span class="o">&amp;&amp;</span> bash ./shadowsocks.sh  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>直接默认配置就行，后期手动更改配置。</p>
+<h2 id="修改配置文件">修改配置文件</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /etc/shadowsocks.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>只需要修改服务端口和密码就行了，其他的不懂就不要动。</p>
+<p>退出编辑页面，重启shadowsocks</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl restart shadowsocks
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="客户端下载使用">客户端下载使用</h2>
+<p><a href="https://github.com/shadowsocks/shadowsocks-windows/releases" target="_blank" rel="noopener noreffer">shadowsocks-windows客户端直链</a></p>
+]]></description>
 </item></channel>
 </rss>
