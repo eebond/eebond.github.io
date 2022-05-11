@@ -13,7 +13,11 @@
     <description><![CDATA[<p>安装系统时，如果 /boot 分区给的空间太少，在更新时可能就会显示 /boot 空间不足的 error，因为 Linux 更新时会保留近几次更新的 kernel，因此出现错误时，我们可以把一些比较旧的 kernel 删掉，帮 /boot 释放空间。</p>
 <p>以下方法适用于 CentOS 7 与 CentOS 8</p>
 <p>开机时可以看到目前系统里有 4 个版本的 kernel（rescue 不算）</p>
-<p></p>
+<p>
+<figure><a class="lightgallery" href="/images/Markdown/20211125223359.png" title=" " data-thumbnail="/images/Markdown/20211125223359.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <p>编辑 /etc/yum.conf，并将下面的参数更改为 2 或 3</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -45,7 +49,11 @@
 </div><p>完成后，系统就只会留下近两个版本的 kernel，/boot 的空间也就释放出来啦！
 （个人建议 /boot 空间最好大于 500MB，就不太会碰到这个问题了）</p>
 <p>重开机看一下
-</p>
+
+<figure><a class="lightgallery" href="/images/Markdown/20211125223805.png" title=" " data-thumbnail="/images/Markdown/20211125223805.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <p>剩下两个 kernel 了</p>
 ]]></description>
 </item></channel>

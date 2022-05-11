@@ -9,7 +9,7 @@
 
 登录阿里云网页版，点击F12
 
-![Alt Text]({{< param cdnPrefix >}}/images/Markdown/20220330162759.png)
+![ ](/images/Markdown/20220330162759.png)
 
 ### 让阿里云盘实现WebDAV功能
 

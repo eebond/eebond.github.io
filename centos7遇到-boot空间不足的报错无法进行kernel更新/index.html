@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://eebond.github.io/centos7%E9%81%87%E5%88%B0-boot%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E7%9A%84%E6%8A%A5%E9%94%99%E6%97%A0%E6%B3%95%E8%BF%9B%E8%A1%8Ckernel%E6%9B%B4%E6%96%B0/" /><meta property="og:image" content="https://eebond.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-11-25T22:29:57+00:00" />
-<meta property="article:modified_time" content="2022-05-01T16:33:13+08:00" />
+<meta property="article:modified_time" content="2022-05-11T17:23:47+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://eebond.github.io/logo.png"/>
@@ -29,8 +29,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/eebond.github.io\/centos7%E9%81%87%E5%88%B0-boot%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E7%9A%84%E6%8A%A5%E9%94%99%E6%97%A0%E6%B3%95%E8%BF%9B%E8%A1%8Ckernel%E6%9B%B4%E6%96%B0\/"
-        },"image": ["https:\/\/eebond.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "centos7问题（报错）","wordcount":  309 ,
-        "url": "https:\/\/eebond.github.io\/centos7%E9%81%87%E5%88%B0-boot%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E7%9A%84%E6%8A%A5%E9%94%99%E6%97%A0%E6%B3%95%E8%BF%9B%E8%A1%8Ckernel%E6%9B%B4%E6%96%B0\/","datePublished": "2021-11-25T22:29:57+00:00","dateModified": "2022-05-01T16:33:13+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        },"image": ["https:\/\/eebond.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "centos7问题（报错）","wordcount":  311 ,
+        "url": "https:\/\/eebond.github.io\/centos7%E9%81%87%E5%88%B0-boot%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E7%9A%84%E6%8A%A5%E9%94%99%E6%97%A0%E6%B3%95%E8%BF%9B%E8%A1%8Ckernel%E6%9B%B4%E6%96%B0\/","datePublished": "2021-11-25T22:29:57+00:00","dateModified": "2022-05-11T17:23:47+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "EEBOND","logo": "https:\/\/eebond.github.io\/images\/avatar.png"},"author": {
                 "@type": "Person",
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">centos7遇到/boot空间不足的报错，无法进行kernel更新</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>eebond</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/centos7/"><i class="far fa-folder fa-fw"></i>Centos7</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-11-25">2021-11-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 309 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-11-25">2021-11-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 311 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;<span id="/centos7%E9%81%87%E5%88%B0-boot%E7%A9%BA%E9%97%B4%E4%B8%8D%E8%B6%B3%E7%9A%84%E6%8A%A5%E9%94%99%E6%97%A0%E6%B3%95%E8%BF%9B%E8%A1%8Ckernel%E6%9B%B4%E6%96%B0/" class="leancloud_visitors" data-flag-title="centos7遇到/boot空间不足的报错，无法进行kernel更新">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
@@ -119,14 +119,17 @@
             </div><div class="content" id="content"><p>安装系统时，如果 /boot 分区给的空间太少，在更新时可能就会显示 /boot 空间不足的 error，因为 Linux 更新时会保留近几次更新的 kernel，因此出现错误时，我们可以把一些比较旧的 kernel 删掉，帮 /boot 释放空间。</p>
 <p>以下方法适用于 CentOS 7 与 CentOS 8</p>
 <p>开机时可以看到目前系统里有 4 个版本的 kernel（rescue 不算）</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125223359.png"
-        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125223359.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125223359.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125223359.png 2x"
-        data-sizes="auto"
-        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125223359.png"
-        title="Alt Text" /></p>
+<p>
+<figure><a class="lightgallery" href="/images/Markdown/20211125223359.png" title=" " data-thumbnail="/images/Markdown/20211125223359.png" data-sub-html="<h2> </h2><p> </p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Markdown/20211125223359.png"
+            data-srcset="/images/Markdown/20211125223359.png, /images/Markdown/20211125223359.png 1.5x, /images/Markdown/20211125223359.png 2x"
+            data-sizes="auto"
+            alt="/images/Markdown/20211125223359.png" />
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <p>编辑 /etc/yum.conf，并将下面的参数更改为 2 或 3</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -158,21 +161,24 @@
 </div><p>完成后，系统就只会留下近两个版本的 kernel，/boot 的空间也就释放出来啦！
 （个人建议 /boot 空间最好大于 500MB，就不太会碰到这个问题了）</p>
 <p>重开机看一下
-<img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125223805.png"
-        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125223805.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125223805.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125223805.png 2x"
-        data-sizes="auto"
-        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125223805.png"
-        title="Alt Text" /></p>
+
+<figure><a class="lightgallery" href="/images/Markdown/20211125223805.png" title=" " data-thumbnail="/images/Markdown/20211125223805.png" data-sub-html="<h2> </h2><p> </p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Markdown/20211125223805.png"
+            data-srcset="/images/Markdown/20211125223805.png, /images/Markdown/20211125223805.png 1.5x, /images/Markdown/20211125223805.png 2x"
+            data-sizes="auto"
+            alt="/images/Markdown/20211125223805.png" />
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <p>剩下两个 kernel 了</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2022-05-01&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/246034e4739de1364628daa10696e52cba4f7df5" target="_blank" title="commit by eebond(1422797591@qq.com) 246034e4739de1364628daa10696e52cba4f7df5: 第一次提交">
-                                    <i class="fas fa-hashtag fa-fw"></i>246034e</a></span>
+                <span>更新于 2022-05-11&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/69d96fa61afa207d07e125be00e3378340155576" target="_blank" title="commit by eebond(1422797591@qq.com) 69d96fa61afa207d07e125be00e3378340155576: update">
+                                    <i class="fas fa-hashtag fa-fw"></i>69d96fa</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>

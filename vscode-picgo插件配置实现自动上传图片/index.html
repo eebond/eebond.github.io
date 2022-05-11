@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://eebond.github.io/vscode-picgo%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/" /><meta property="og:image" content="https://eebond.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-31T20:13:31+00:00" />
-<meta property="article:modified_time" content="2022-05-01T16:33:13+08:00" />
+<meta property="article:modified_time" content="2022-05-11T17:23:47+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://eebond.github.io/logo.png"/>
@@ -29,8 +29,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/eebond.github.io\/vscode-picgo%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87\/"
-        },"image": ["https:\/\/eebond.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "PicGo, VSCode","wordcount":  259 ,
-        "url": "https:\/\/eebond.github.io\/vscode-picgo%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87\/","datePublished": "2022-03-31T20:13:31+00:00","dateModified": "2022-05-01T16:33:13+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        },"image": ["https:\/\/eebond.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "PicGo, VSCode","wordcount":  264 ,
+        "url": "https:\/\/eebond.github.io\/vscode-picgo%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87\/","datePublished": "2022-03-31T20:13:31+00:00","dateModified": "2022-05-11T17:23:47+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "EEBOND","logo": "https:\/\/eebond.github.io\/images\/avatar.png"},"author": {
                 "@type": "Person",
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">vscode&#43;PicGo插件配置实现自动上传图片</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>eebond</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/"><i class="far fa-folder fa-fw"></i>软件安装</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-31">2022-03-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 259 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-31">2022-03-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 264 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;<span id="/vscode-picgo%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/" class="leancloud_visitors" data-flag-title="vscode&#43;PicGo插件配置实现自动上传图片">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
@@ -131,48 +131,63 @@
 <p>由于我喜欢在VSCode上写博客，也一直使用PicGo客户端来上传图片到图床，但是由于经常在Ubuntu与windows系统中切换，而PicGo对于Liunx的支持不太好（无法实现开机自启动功能），所以想着使用PicGo的vscode插件，那么以后只需要一个VSCode，就可以不需要PicGo客户端了。而且VSCode还可以在不同设备间进行同步。</p>
 <h2 id="实现">实现</h2>
 <h3 id="安装picgo插件">安装PicGo插件</h3>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331202347.png"
-        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331202347.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331202347.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331202347.png 2x"
-        data-sizes="auto"
-        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331202347.png"
-        title="Alt Text" /></p>
+<p>
+<figure><a class="lightgallery" href="/images/Markdown/20220331202347.png" title=" " data-thumbnail="/images/Markdown/20220331202347.png" data-sub-html="<h2> </h2><p> </p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Markdown/20220331202347.png"
+            data-srcset="/images/Markdown/20220331202347.png, /images/Markdown/20220331202347.png 1.5x, /images/Markdown/20220331202347.png 2x"
+            data-sizes="auto"
+            alt="/images/Markdown/20220331202347.png" />
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <h3 id="配置picgo插件">配置PicGo插件</h3>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331202539.png"
-        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331202539.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331202539.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331202539.png 2x"
-        data-sizes="auto"
-        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331202539.png"
-        title="Alt Text" /></p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331203130.png"
-        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331203130.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331203130.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331203130.png 2x"
-        data-sizes="auto"
-        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331203130.png"
-        title="Alt Text" /></p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331205910.png"
-        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331205910.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331205910.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331205910.png 2x"
-        data-sizes="auto"
-        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331205910.png"
-        title="Alt Text" /></p>
+<p>
+<figure><a class="lightgallery" href="/images/Markdown/20220331202539.png" title=" " data-thumbnail="/images/Markdown/20220331202539.png" data-sub-html="<h2> </h2><p> </p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Markdown/20220331202539.png"
+            data-srcset="/images/Markdown/20220331202539.png, /images/Markdown/20220331202539.png 1.5x, /images/Markdown/20220331202539.png 2x"
+            data-sizes="auto"
+            alt="/images/Markdown/20220331202539.png" />
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
+<p>
+<figure><a class="lightgallery" href="/images/Markdown/20220331203130.png" title=" " data-thumbnail="/images/Markdown/20220331203130.png" data-sub-html="<h2> </h2><p> </p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Markdown/20220331203130.png"
+            data-srcset="/images/Markdown/20220331203130.png, /images/Markdown/20220331203130.png 1.5x, /images/Markdown/20220331203130.png 2x"
+            data-sizes="auto"
+            alt="/images/Markdown/20220331203130.png" />
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
+<p>
+<figure><a class="lightgallery" href="/images/Markdown/20220331205910.png" title=" " data-thumbnail="/images/Markdown/20220331205910.png" data-sub-html="<h2> </h2><p> </p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Markdown/20220331205910.png"
+            data-srcset="/images/Markdown/20220331205910.png, /images/Markdown/20220331205910.png 1.5x, /images/Markdown/20220331205910.png 2x"
+            data-sizes="auto"
+            alt="/images/Markdown/20220331205910.png" />
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <h3 id="使用的快捷键">使用的快捷键</h3>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331203252.png"
-        data-srcset="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331203252.png, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331203252.png 1.5x, https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331203252.png 2x"
-        data-sizes="auto"
-        alt="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331203252.png"
-        title="Alt Text" /></p>
+<p>
+<figure><a class="lightgallery" href="/images/Markdown/20220331203252.png" title=" " data-thumbnail="/images/Markdown/20220331203252.png" data-sub-html="<h2> </h2><p> </p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/Markdown/20220331203252.png"
+            data-srcset="/images/Markdown/20220331203252.png, /images/Markdown/20220331203252.png 1.5x, /images/Markdown/20220331203252.png 2x"
+            data-sizes="auto"
+            alt="/images/Markdown/20220331203252.png" />
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <p>至此，就可以在VSCode中快乐的使用图床了。</p>
 <blockquote>
 <p>tips:
@@ -182,8 +197,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2022-05-01&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/246034e4739de1364628daa10696e52cba4f7df5" target="_blank" title="commit by eebond(1422797591@qq.com) 246034e4739de1364628daa10696e52cba4f7df5: 第一次提交">
-                                    <i class="fas fa-hashtag fa-fw"></i>246034e</a></span>
+                <span>更新于 2022-05-11&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/69d96fa61afa207d07e125be00e3378340155576" target="_blank" title="commit by eebond(1422797591@qq.com) 69d96fa61afa207d07e125be00e3378340155576: update">
+                                    <i class="fas fa-hashtag fa-fw"></i>69d96fa</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>

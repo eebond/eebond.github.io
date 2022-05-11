@@ -9,19 +9,19 @@
 
 ### 安装PicGo插件
 
-![Alt Text]({{< param cdnPrefix >}}/images/Markdown/20220331202347.png)
+![ ](/images/Markdown/20220331202347.png)
 
 ### 配置PicGo插件
 
-![Alt Text]({{< param cdnPrefix >}}/images/Markdown/20220331202539.png)
+![ ](/images/Markdown/20220331202539.png)
 
-![Alt Text]({{< param cdnPrefix >}}/images/Markdown/20220331203130.png)
+![ ](/images/Markdown/20220331203130.png)
 
-![Alt Text]({{< param cdnPrefix >}}/images/Markdown/20220331205910.png)
+![ ](/images/Markdown/20220331205910.png)
 
 ### 使用的快捷键
 
-![Alt Text]({{< param cdnPrefix >}}/images/Markdown/20220331203252.png)
+![ ](/images/Markdown/20220331203252.png)
 
 至此，就可以在VSCode中快乐的使用图床了。
 

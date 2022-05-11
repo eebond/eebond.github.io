@@ -27,12 +27,20 @@
 </div><p>命令执行后会生成两个文件hexo-deploy-key（私钥）和hexo-deploy-key.pub（公钥）。</p>
 <h3 id="添加公钥">添加公钥</h3>
 <h4 id="添加公钥到github-pages仓库中eebondgithubio">添加公钥到GitHub Pages仓库中（eebond.github.io)</h4>
-<p></p>
+<p>
+<figure><a class="lightgallery" href="/images/Markdown/20220331135108.png" title=" " data-thumbnail="/images/Markdown/20220331135108.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <h4 id="添加公钥到私服仓库所在用户">添加公钥到私服仓库所在用户</h4>
 <p>我的私服是在git用户中创建的，所以添加到git用户下的.ssh/authorized_keys文件中。</p>
 <h3 id="添加私钥">添加私钥</h3>
 <p>将私钥添加到blog_backup仓库的Actions secrets：
-</p>
+
+<figure><a class="lightgallery" href="/images/Markdown/20220331142405.png" title=" " data-thumbnail="/images/Markdown/20220331142405.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <h3 id="配置workflow文件">配置workflow文件</h3>
 <p>在blog_backup仓库根目录下创建.github/workflows/autodeploy.yml文件，文件名随意设置。
 文件内容：</p>

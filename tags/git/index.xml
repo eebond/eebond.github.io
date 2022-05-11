@@ -54,7 +54,11 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>目前的历史记录是这样的。<br>
-</p>
+
+<figure><a class="lightgallery" href="/images/Markdown/20211125211136.png" title=" " data-thumbnail="/images/Markdown/20211125211136.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <h3 id="1-建立分支">1. 建立分支</h3>
 <p>创建名为issue1的分支。</p>
 <p>您可以通过branch命令来创建分支。</p>
@@ -89,7 +93,11 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>目前的历史记录是这样的。<br>
-</p>
+
+<figure><a class="lightgallery" href="/images/Markdown/20211125211444.png" title=" " data-thumbnail="/images/Markdown/20211125211444.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <h3 id="2-切换分支">2. 切换分支</h3>
 <p>若要在新建的issue1分支进行提交，需要切换到issue1分支。</p>
 <p>要执行checkout命令以退出分支。</p>
@@ -113,7 +121,11 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>目前的历史记录是这样的。<br>
-</p>
+
+<figure><a class="lightgallery" href="/images/Markdown/20211125211820.png" title=" " data-thumbnail="/images/Markdown/20211125211820.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <p>在checkout命令指定 -b选项执行，可以创建分支并进行切换。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -145,10 +157,18 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>目前的历史记录是这样的。<br>
-</p>
+
+<figure><a class="lightgallery" href="/images/Markdown/20211125212104.png" title=" " data-thumbnail="/images/Markdown/20211125212104.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <h3 id="3-合并分支">3. 合并分支</h3>
 <p>向master分支合并issue1分支的修改。<br>
-</p>
+
+<figure><a class="lightgallery" href="/images/Markdown/20211125212104.png" title=" " data-thumbnail="/images/Markdown/20211125212104.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <p>执行merge命令以合并分支</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -196,7 +216,11 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>master分支指向的提交移动到和issue1同样的位置。这个是fast-forward（快进）合并。</p>
-<p></p>
+<p>
+<figure><a class="lightgallery" href="/images/Markdown/20211125214034.png" title=" " data-thumbnail="/images/Markdown/20211125214034.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <p>打开myfile.txt档案，确认内容。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -242,7 +266,11 @@
 </span></span><span class="line"><span class="cl">* master
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p></p>
+</div><p>
+<figure><a class="lightgallery" href="/images/Markdown/20211125214652.png" title=" " data-thumbnail="/images/Markdown/20211125214652.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <h3 id="5-并行操作">5. 并行操作</h3>
 <p>接下来，创建2个分支来尝试并行操作吧。</p>
 <p>首先创建issue2分支和issue3分支，并切换到issue2分支。</p>
@@ -268,7 +296,11 @@
 </span></span><span class="line"><span class="cl">  master
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><br>
+</div><p>
+<figure><a class="lightgallery" href="/images/Markdown/20211125214850.png" title=" " data-thumbnail="/images/Markdown/20211125214850.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure><br>
 在issue2分支的myfile.txt添加commit命令的说明后提交。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -296,7 +328,11 @@
 </span></span><span class="line"><span class="cl"> <span class="m">1</span> files changed, <span class="m">2</span> insertions<span class="o">(</span>+<span class="o">)</span>, <span class="m">0</span> deletions<span class="o">(</span>-<span class="o">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p></p>
+</div><p>
+<figure><a class="lightgallery" href="/images/Markdown/20211125215801.png" title=" " data-thumbnail="/images/Markdown/20211125215801.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <p>接着，切换到issue3分支。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -336,7 +372,11 @@
 </span></span><span class="line"><span class="cl"> <span class="m">1</span> files changed, <span class="m">2</span> insertions<span class="o">(</span>+<span class="o">)</span>, <span class="m">0</span> deletions<span class="o">(</span>-<span class="o">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><br>
+</div><p>
+<figure><a class="lightgallery" href="/images/Markdown/20211126124912.png" title=" " data-thumbnail="/images/Markdown/20211126124912.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure><br>
 这样，添加commit的说明的操作，和添加pull的说明的操作就并行进行了。</p>
 <h3 id="6-解决合并的冲突">6. 解决合并的冲突</h3>
 <p>把issue2分支和issue3分支的修改合并到master。</p>
@@ -362,7 +402,11 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>执行fast-forward（快进）合并。<br>
-</p>
+
+<figure><a class="lightgallery" href="/images/Markdown/20211126125942.png" title=" " data-thumbnail="/images/Markdown/20211126125942.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <p>接着合并issue3分支。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -430,7 +474,11 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>历史记录如下图所示。因为在这次合并中修改了冲突部分，所以会重新创建合并修改的提交记录。这样，master的HEAD就移动到这里了。这种合并不是fast-forward合并，而是non fast-forward合并。<br>
-</p>
+
+<figure><a class="lightgallery" href="/images/Markdown/20211126130834.png" title=" " data-thumbnail="/images/Markdown/20211126130834.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <h3 id="7-用rebase合并">7. 用rebase合并</h3>
 <p>合并issue3分支的时候，使用rebase可以使提交的历史记录显得更简洁。</p>
 <p>现在暂时取消刚才的合并。</p>
@@ -442,7 +490,11 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git reset --hard HEAD~
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p></p>
+</div><p>
+<figure><a class="lightgallery" href="/images/Markdown/20211126145149.png" title=" " data-thumbnail="/images/Markdown/20211126145149.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <p>切换到issue3分支后，对master执行rebase。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -520,7 +572,11 @@
 </span></span><span class="line"><span class="cl">Applying: 添加pull的说明
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p></p>
+</div><p>
+<figure><a class="lightgallery" href="/images/Markdown/20211126150215.png" title=" " data-thumbnail="/images/Markdown/20211126150215.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <p>这样，在master分支的issue3分支就可以fast-forward合并了。切换到master分支后执行合并。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -543,7 +599,11 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>myfile.txt的最终内容和merge是一样的，但是历史记录如下。<br>
-</p>
+
+<figure><a class="lightgallery" href="/images/Markdown/20211126150327.png" title=" " data-thumbnail="/images/Markdown/20211126150327.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <h2 id="二操作标签">二、操作标签</h2>
 <h3 id="1-添加轻标签">1. 添加轻标签</h3>
 <p>使用tag命令来添加标签，在&lt; tagname &gt;执行标签的名称</p>
@@ -594,7 +654,11 @@
 </span></span><span class="line"><span class="cl">    first commit
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p></p>
+</div><p>
+<figure><a class="lightgallery" href="/images/Markdown/20211128160811.png" title=" " data-thumbnail="/images/Markdown/20211128160811.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <h3 id="2-添加注解标签">2. 添加注解标签</h3>
 <p>若要添加注解标签，可以在tag命令指定 -a选项执行。执行后会启动编辑区，请输入注解，也可以指定-m选项来添加注解。</p>
 <div class="highlight"><div class="chroma">
@@ -627,7 +691,11 @@
 </span></span><span class="line"><span class="cl">banana          连猴子都懂的Git
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p></p>
+</div><p>
+<figure><a class="lightgallery" href="/images/Markdown/20211128161512.png" title=" " data-thumbnail="/images/Markdown/20211128161512.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <h3 id="3-删除标签">3. 删除标签</h3>
 <p>若要删除标签，在tag命令指定 -d选项执行。</p>
 <div class="highlight"><div class="chroma">
@@ -638,7 +706,11 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git tag -d &lt;tagname&gt;
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p></p>
+</div><p>
+<figure><a class="lightgallery" href="/images/Markdown/20211128164422.png" title=" " data-thumbnail="/images/Markdown/20211128164422.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <h2 id="三改写提交">三、改写提交！</h2>
 <p>为了节省时间，这个教程使用现有的历史记录作为本地数据库。</p>
 <div class="highlight"><div class="chroma">
@@ -652,7 +724,11 @@
 </div><h3 id="1-commit---amend">1. commit &ndash;amend</h3>
 <p>我们将修改最近一次的提交。</p>
 <p>首先进入stepup-tutorial/tutorial1目录。本地端的历史记录状态如下图显示。<br>
-</p>
+
+<figure><a class="lightgallery" href="/images/Markdown/20211129195201.png" title=" " data-thumbnail="/images/Markdown/20211129195201.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <p>用log命令确认历史记录。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -710,7 +786,11 @@
 </div>
 </div><p>编辑工具会显示最近一次提交的提交消息，把消息修改为「<strong>添加add和commit的讲解</strong>」并进行保存。</p>
 <p>现在已经修改了提交的内容，然后用log命令确认历史记录和提交消息。<br>
-</p>
+
+<figure><a class="lightgallery" href="/images/Markdown/20211129195423.png" title=" " data-thumbnail="/images/Markdown/20211129195423.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -744,7 +824,11 @@
 </div><h3 id="2-revert">2. revert</h3>
 <p>我们将用revert命令来取消「添加pull的讲解」提交。</p>
 <p>首先进入stepup-tutorial/tutorial2目录。本地端的历史记录的状态如下图显示。<br>
-</p>
+
+<figure><a class="lightgallery" href="/images/Markdown/20211129195640.png" title=" " data-thumbnail="/images/Markdown/20211129195640.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <h3 id="3-reset">3. reset</h3>
 <h3 id="4-cherry-pick">4. cherry-pick</h3>
 <h3 id="5-用rebase--i-汇总提交">5. 用rebase -i 汇总提交</h3>

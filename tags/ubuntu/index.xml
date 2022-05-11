@@ -28,7 +28,11 @@
 </div><p>右键单击，选择run，运行PicGo。</p>
 <h3 id="配置picgo和github图床">配置PicGo和GitHub图床</h3>
 <p>事先准备在GitHub新建一个仓库，用来存放图片，并且添加Token。</p>
-<p></p>
+<p>
+<figure><a class="lightgallery" href="/images/Markdown/20220331205442.png" title=" " data-thumbnail="/images/Markdown/20220331205442.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <p>其中自定义域名为</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -47,10 +51,18 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">https://cdn.jsdelivr.net/gh/用户名/图床仓库名
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p></p>
+</div><p>
+<figure><a class="lightgallery" href="/images/Markdown/20220331185426.png" title=" " data-thumbnail="/images/Markdown/20220331185426.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <p>指定存储路径是在仓库中创建的一个文件夹。</p>
 <p>快捷键设置：
-</p>
+
+<figure><a class="lightgallery" href="/images/Markdown/20220331141114.png" title=" " data-thumbnail="/images/Markdown/20220331141114.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <h3 id="安装必要支撑软件">安装必要支撑软件</h3>
 <p>之前的操作后，PicGo无法正常使用快捷键，缺失支撑软件。</p>
 <div class="highlight"><div class="chroma">

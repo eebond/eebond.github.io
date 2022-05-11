@@ -15,7 +15,7 @@ rz
 ```
 
 输入命令后会弹出文件选择框
-![Alt Text]({{< param cdnPrefix >}}/images/Markdown/20211117155926.png)
+![ ](/images/Markdown/20211117155926.png)
 
 ### Linux端发送文件到windows端
 
@@ -24,5 +24,5 @@ sz [文件路径]
 ```
 
 输入命令后会弹出文件保存位置选择框
-![Alt Text]({{< param cdnPrefix >}}/images/Markdown/20211117160215.png)  
+![ ](/images/Markdown/20211117160215.png)  
 

@@ -13,12 +13,28 @@
     <description><![CDATA[<p><strong>在VMware虚拟机中安装CentOS 7的mini版本，没有UI界面，需要手动配置网络，才能联网。</strong></p>
 <h2 id="vmware虚拟网络编辑器设置">VMware虚拟网络编辑器设置</h2>
 <p>在&lt; 编辑 &gt;选项 中打开虚拟网络编辑器：
-</p>
+
+<figure><a class="lightgallery" href="/images//Markdown/20211201200533.png" title=" " data-thumbnail="/images//Markdown/20211201200533.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <p>虚拟网络编辑器如图所示：
-</p>
+
+<figure><a class="lightgallery" href="/images/Markdown/20211201200712.png" title=" " data-thumbnail="/images/Markdown/20211201200712.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <p>点击右下方的&lt; 更改设置 &gt;选项，然后如图设置
 
-</p>
+<figure><a class="lightgallery" href="/images/Markdown/20211201201141.png" title=" " data-thumbnail="/images/Markdown/20211201201141.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure>
+
+<figure><a class="lightgallery" href="/images/Markdown/20211201201247.png" title=" " data-thumbnail="/images/Markdown/20211201201247.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <h2 id="centos-中配置文件">CentOS 中配置文件</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -29,7 +45,11 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>查看网卡名称为ens33：
-</p>
+
+<figure><a class="lightgallery" href="/images/Markdown/20211201201512.png" title=" " data-thumbnail="/images/Markdown/20211201201512.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <p>更改配置文件/etc/sysconfig/network-scripts/ifcfg-ens33</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -87,7 +107,11 @@
 </div>
 </div><p>让网络配置生效</p>
 <h2 id="对于本地宿主机的配置">对于本地宿主机的配置</h2>
-<p></p>
+<p>
+<figure><a class="lightgallery" href="/images/Markdown/20211201202140.png" title=" " data-thumbnail="/images/Markdown/20211201202140.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
 <p>配置结束虚拟机就可以上网了</p>
 ]]></description>
 </item></channel>
