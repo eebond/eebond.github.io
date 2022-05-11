@@ -6,14 +6,14 @@
 ## VMware虚拟网络编辑器设置
 
 在< 编辑 >选项 中打开虚拟网络编辑器：
-![]({{< param cdnPrefix >}}/images//Markdown/20211201200533.png)
+![Alt Text]({{< param cdnPrefix >}}/images//Markdown/20211201200533.png)
 
 虚拟网络编辑器如图所示：
-![]({{< param cdnPrefix >}}/images/Markdown/20211201200712.png)  
+![Alt Text]({{< param cdnPrefix >}}/images/Markdown/20211201200712.png)  
 
 点击右下方的< 更改设置 >选项，然后如图设置
-![]({{< param cdnPrefix >}}/images/Markdown/20211201201141.png)
-![]({{< param cdnPrefix >}}/images/Markdown/20211201201247.png)  
+![Alt Text]({{< param cdnPrefix >}}/images/Markdown/20211201201141.png)
+![Alt Text]({{< param cdnPrefix >}}/images/Markdown/20211201201247.png)  
 
 ## CentOS 中配置文件
 
@@ -22,7 +22,7 @@ ip addr
 ```
 
 查看网卡名称为ens33：
-![]({{< param cdnPrefix >}}/images/Markdown/20211201201512.png)  
+![Alt Text]({{< param cdnPrefix >}}/images/Markdown/20211201201512.png)  
 
 更改配置文件/etc/sysconfig/network-scripts/ifcfg-ens33
 
@@ -57,7 +57,7 @@ systemctl restart network
 
 ## 对于本地宿主机的配置
 
-![]({{< param cdnPrefix >}}/images/Markdown/20211201202140.png)  
+![Alt Text]({{< param cdnPrefix >}}/images/Markdown/20211201202140.png)  
 
 配置结束虚拟机就可以上网了  
 
