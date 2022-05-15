@@ -5,30 +5,30 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>Linux中安装配置JDK8 - EEBONDの博客</title><meta name="Description" content="程序员的自我修炼手册"><meta property="og:title" content="Linux中安装配置JDK8" />
-<meta property="og:description" content="nothting" />
+        <title>Linux实现免密登录以及密钥生成方法 - EEBONDの博客</title><meta name="Description" content="程序员的自我修炼手册"><meta property="og:title" content="Linux实现免密登录以及密钥生成方法" />
+<meta property="og:description" content="nothing" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://eebond.github.io/linux%E4%B8%AD%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEjdk8/" /><meta property="og:image" content="https://eebond.github.io/images/Markdown/favicon.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-04-17T20:01:48+00:00" />
-<meta property="article:modified_time" content="2022-05-11T17:23:47+08:00" />
+<meta property="og:url" content="https://eebond.github.io/linux%E5%AE%9E%E7%8E%B0%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E4%BB%A5%E5%8F%8A%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95/" /><meta property="og:image" content="https://eebond.github.io/images/Markdown/favicon.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-05-15T19:02:31+08:00" />
+<meta property="article:modified_time" content="2022-05-15T19:58:09+08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://eebond.github.io/images/Markdown/favicon.png"/>
 
-<meta name="twitter:title" content="Linux中安装配置JDK8"/>
-<meta name="twitter:description" content="nothting"/>
+<meta name="twitter:title" content="Linux实现免密登录以及密钥生成方法"/>
+<meta name="twitter:description" content="nothing"/>
 <meta name="application-name" content="EEBONDの博客">
-<meta name="apple-mobile-web-app-title" content="EEBONDの博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/Markdown/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://eebond.github.io/linux%E4%B8%AD%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEjdk8/" /><link rel="prev" href="https://eebond.github.io/centos7%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2trojan-go/" /><link rel="next" href="https://eebond.github.io/linux%E5%AE%9E%E7%8E%B0%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E4%BB%A5%E5%8F%8A%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+<meta name="apple-mobile-web-app-title" content="EEBONDの博客"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/Markdown/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://eebond.github.io/linux%E5%AE%9E%E7%8E%B0%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E4%BB%A5%E5%8F%8A%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95/" /><link rel="prev" href="https://eebond.github.io/linux%E4%B8%AD%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEjdk8/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Linux中安装配置JDK8",
+        "headline": "Linux实现免密登录以及密钥生成方法",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/eebond.github.io\/linux%E4%B8%AD%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEjdk8\/"
-        },"image": ["https:\/\/eebond.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "JDK","wordcount":  264 ,
-        "url": "https:\/\/eebond.github.io\/linux%E4%B8%AD%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEjdk8\/","datePublished": "2022-04-17T20:01:48+00:00","dateModified": "2022-05-11T17:23:47+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@id": "https:\/\/eebond.github.io\/linux%E5%AE%9E%E7%8E%B0%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E4%BB%A5%E5%8F%8A%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95\/"
+        },"image": ["https:\/\/eebond.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "ssh","wordcount":  359 ,
+        "url": "https:\/\/eebond.github.io\/linux%E5%AE%9E%E7%8E%B0%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E4%BB%A5%E5%8F%8A%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95\/","datePublished": "2022-05-15T19:02:31+08:00","dateModified": "2022-05-15T19:58:09+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "EEBOND","logo": "https:\/\/eebond.github.io\/images\/avatar.png"},"author": {
                 "@type": "Person",
@@ -102,10 +102,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content always-active" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">Linux中安装配置JDK8</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>eebond</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/linux/"><i class="far fa-folder fa-fw"></i>Linux</a>&nbsp;<a href="/categories/centos7/"><i class="far fa-folder fa-fw"></i>Centos7</a>&nbsp;<a href="/categories/java/"><i class="far fa-folder fa-fw"></i>Java</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-17">2022-04-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 264 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;<span id="/linux%E4%B8%AD%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEjdk8/" class="leancloud_visitors" data-flag-title="Linux中安装配置JDK8">
+        </div><article class="page single"><h1 class="single-title animated flipInX">Linux实现免密登录以及密钥生成方法</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>eebond</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/linux/"><i class="far fa-folder fa-fw"></i>Linux</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-15">2022-05-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 359 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;<span id="/linux%E5%AE%9E%E7%8E%B0%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E4%BB%A5%E5%8F%8A%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95/" class="leancloud_visitors" data-flag-title="Linux实现免密登录以及密钥生成方法">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
@@ -116,75 +116,25 @@
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#前言">前言</a></li>
-    <li><a href="#安装配置">安装配置</a>
-      <ul>
-        <li><a href="#下载jdk8">下载jdk8</a></li>
-        <li><a href="#配置">配置</a></li>
-        <li><a href="#验证使用jdk">验证使用jdk</a></li>
-      </ul>
-    </li>
+    <li><a href="#生成ssh-key密钥文件">生成SSH KEY密钥文件</a></li>
+    <li><a href="#设置免密登录">设置免密登录</a></li>
+    <li><a href="#尝试免密登录">尝试免密登录</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="前言">前言</h2>
-<blockquote>
-<p>学习JAVA需要安装配置jdk环境，太多数时候会在Linux环境中配置jdk，本篇以Centos7为例配置jdk8，以便日后参考，快速配置环境。</p>
-</blockquote>
+<p>本文主要讲述实现从一台Linux服务器实现对另一台Linux服务器的
+免密登录，还有在linux上生成ssh key密钥的方法。</p>
 <hr>
-<h2 id="安装配置">安装配置</h2>
-<h3 id="下载jdk8">下载jdk8</h3>
-<p>1.通过<a href="https://www.oracle.com/java/technologies/downloads/#java8" target="_blank" rel="noopener noreffer">oracle官网下载</a></p>
-<p>
-<figure><a class="lightgallery" href="/images/Markdown/20220417201328.png" title=" " data-thumbnail="/images/Markdown/20220417201328.png" data-sub-html="<h2> </h2><p> </p>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="/images/Markdown/20220417201328.png"
-            data-srcset="/images/Markdown/20220417201328.png, /images/Markdown/20220417201328.png 1.5x, /images/Markdown/20220417201328.png 2x"
-            data-sizes="auto"
-            alt="/images/Markdown/20220417201328.png" />
-    </a><figcaption class="image-caption"> </figcaption>
-    </figure></p>
-<p>但是官网下载，需要Oracle账号。网上找到得账号：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">1287019365@qq.com
-</span></span><span class="line"><span class="cl">Oracle@1234
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>2.通过wget下载我的私有云盘里的jdk8备份</p>
+<h2 id="生成ssh-key密钥文件">生成SSH KEY密钥文件</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget jdk-8u321-linux-x64.tar.gz https://cloud.eebond.xyz/api/v3/file/get/194/jdk-8u321-linux-x64.tar.gz?sign<span class="o">=</span>bvDVYkfqvYU4jv86no9qpC6Sw7n2opQLA6CtcU_W-EI%3D%3A0
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh-keygen -t rsa
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="配置">配置</h3>
-<p>1、 解压jdk-8u321-linux-x64.tar.gz到指定目录</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir /usr/java <span class="o">&amp;&amp;</span> tar -zxvf jdk-8u321-linux-x64.tar.gz -C /usr/java/
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>2、 配置环境变量</p>
-<p>打开配置文件</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /etc/profile
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>编写配置文件内容</p>
+</div><p>用户家目录中的.ssh目录下出现如下文件：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -192,68 +142,59 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">export JAVA_HOME=/usr/java/jdk1.8.0_321
-</span></span><span class="line"><span class="cl">export PATH=$JAVA_HOME/bin:$PATH
-</span></span><span class="line"><span class="cl">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">authorized_keys  #认证用户的公钥，认证用户可以免密登录当前账户
+</span></span><span class="line"><span class="cl">id_rsa           #当前用户的密钥
+</span></span><span class="line"><span class="cl">id_rsa.pub       #当前用户的公钥  
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>使更新后的配置文件生效</p>
+</div><h2 id="设置免密登录">设置免密登录</h2>
+<p>其实免密登录的原理就是把当前用户的公钥放到被登录用户的authorized_keys文件中去。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">source</span> /etc/profile
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh-copy-id root@144.34.163.167 -p <span class="m">29488</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="验证使用jdk">验证使用jdk</h3>
+</div><p>期间需要输入被登录用户的密码才能将当前用户的公钥放入被登录用户的authorized_keys文件中去。<br>
+还有个办法就是复制当前用户的公钥直接粘贴到被登录用户的authorized_keys文件中去。</p>
+<p>如果被登录的Linux的端口不是默认的22端口，则要用 -p 选项来指定登录端口。</p>
+<h2 id="尝试免密登录">尝试免密登录</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">java -version 
-</span></span><span class="line"><span class="cl">javac
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh root@144.34.163.167 -p <span class="m">29488</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>
-<figure><a class="lightgallery" href="/images/Markdown/20220417203744.png" title=" " data-thumbnail="/images/Markdown/20220417203744.png" data-sub-html="<h2> </h2><p> </p>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="/images/Markdown/20220417203744.png"
-            data-srcset="/images/Markdown/20220417203744.png, /images/Markdown/20220417203744.png 1.5x, /images/Markdown/20220417203744.png 2x"
-            data-sizes="auto"
-            alt="/images/Markdown/20220417203744.png" />
-    </a><figcaption class="image-caption"> </figcaption>
-    </figure></p>
+</div><p>成功免密登录！</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2022-05-11&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/69d96fa61afa207d07e125be00e3378340155576" target="_blank" title="commit by eebond(1422797591@qq.com) 69d96fa61afa207d07e125be00e3378340155576: update">
-                                    <i class="fas fa-hashtag fa-fw"></i>69d96fa</a></span>
+                <span>更新于 2022-05-15&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/9132379f3e3a63334139b322a21d16af9ff1fe03" target="_blank" title="commit by eebond(1422797591@qq.com) 9132379f3e3a63334139b322a21d16af9ff1fe03: update">
+                                    <i class="fas fa-hashtag fa-fw"></i>9132379</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://eebond.github.io/linux%E4%B8%AD%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEjdk8/" data-title="Linux中安装配置JDK8" data-hashtags="JDK"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://eebond.github.io/linux%E4%B8%AD%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEjdk8/" data-hashtag="JDK"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://eebond.github.io/linux%E4%B8%AD%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEjdk8/" data-title="Linux中安装配置JDK8"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://eebond.github.io/linux%E4%B8%AD%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEjdk8/" data-title="Linux中安装配置JDK8"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://eebond.github.io/linux%E4%B8%AD%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEjdk8/" data-title="Linux中安装配置JDK8"><i class="fab fa-weibo fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://eebond.github.io/linux%E5%AE%9E%E7%8E%B0%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E4%BB%A5%E5%8F%8A%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95/" data-title="Linux实现免密登录以及密钥生成方法" data-hashtags="ssh"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://eebond.github.io/linux%E5%AE%9E%E7%8E%B0%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E4%BB%A5%E5%8F%8A%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95/" data-hashtag="ssh"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://eebond.github.io/linux%E5%AE%9E%E7%8E%B0%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E4%BB%A5%E5%8F%8A%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95/" data-title="Linux实现免密登录以及密钥生成方法"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://eebond.github.io/linux%E5%AE%9E%E7%8E%B0%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E4%BB%A5%E5%8F%8A%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95/" data-title="Linux实现免密登录以及密钥生成方法"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://eebond.github.io/linux%E5%AE%9E%E7%8E%B0%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E4%BB%A5%E5%8F%8A%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95/" data-title="Linux实现免密登录以及密钥生成方法"><i class="fab fa-weibo fa-fw"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/jdk/">JDK</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/ssh/">ssh</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/centos7%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2trojan-go/" class="prev" rel="prev" title="CentOS7安装部署Trojan-go"><i class="fas fa-angle-left fa-fw"></i>CentOS7安装部署Trojan-go</a>
-            <a href="/linux%E5%AE%9E%E7%8E%B0%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E4%BB%A5%E5%8F%8A%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95/" class="next" rel="next" title="Linux实现免密登录以及密钥生成方法">Linux实现免密登录以及密钥生成方法<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/linux%E4%B8%AD%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEjdk8/" class="prev" rel="prev" title="Linux中安装配置JDK8"><i class="fas fa-angle-left fa-fw"></i>Linux中安装配置JDK8</a></div>
 </div>
 <div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.

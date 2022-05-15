@@ -1,0 +1,64 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>ssh - 标签 - EEBONDの博客</title>
+        <link>https://eebond.github.io/tags/ssh/</link>
+        <description>ssh - 标签 - EEBONDの博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>eebond0327@gmail.com (eebond)</managingEditor>
+            <webMaster>eebond0327@gmail.com (eebond)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 15 May 2022 19:02:31 &#43;0800</lastBuildDate><atom:link href="https://eebond.github.io/tags/ssh/" rel="self" type="application/rss+xml" /><item>
+    <title>Linux实现免密登录以及密钥生成方法</title>
+    <link>https://eebond.github.io/linux%E5%AE%9E%E7%8E%B0%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E4%BB%A5%E5%8F%8A%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95/</link>
+    <pubDate>Sun, 15 May 2022 19:02:31 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://eebond.github.io/linux%E5%AE%9E%E7%8E%B0%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E4%BB%A5%E5%8F%8A%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95/</guid>
+    <description><![CDATA[<h2 id="前言">前言</h2>
+<p>本文主要讲述实现从一台Linux服务器实现对另一台Linux服务器的
+免密登录，还有在linux上生成ssh key密钥的方法。</p>
+<hr>
+<h2 id="生成ssh-key密钥文件">生成SSH KEY密钥文件</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh-keygen -t rsa
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>用户家目录中的.ssh目录下出现如下文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">authorized_keys  #认证用户的公钥，认证用户可以免密登录当前账户
+</span></span><span class="line"><span class="cl">id_rsa           #当前用户的密钥
+</span></span><span class="line"><span class="cl">id_rsa.pub       #当前用户的公钥  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="设置免密登录">设置免密登录</h2>
+<p>其实免密登录的原理就是把当前用户的公钥放到被登录用户的authorized_keys文件中去。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh-copy-id root@144.34.163.167 -p <span class="m">29488</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>期间需要输入被登录用户的密码才能将当前用户的公钥放入被登录用户的authorized_keys文件中去。<br>
+还有个办法就是复制当前用户的公钥直接粘贴到被登录用户的authorized_keys文件中去。</p>
+<p>如果被登录的Linux的端口不是默认的22端口，则要用 -p 选项来指定登录端口。</p>
+<h2 id="尝试免密登录">尝试免密登录</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh root@144.34.163.167 -p <span class="m">29488</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>成功免密登录！</p>
+]]></description>
+</item></channel>
+</rss>
