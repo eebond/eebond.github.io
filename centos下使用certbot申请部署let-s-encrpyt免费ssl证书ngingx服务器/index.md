@@ -25,7 +25,7 @@ firewall-cmd --reload
 
 （3）需要有自己的域名，并在域名服务器创建一台A记录，指向服务器的公网IP。比如我这里使用blog.eebond.xyz这个域名。等域名解析生效后，访问：<http://blog.eebond.xyz> ,可以看到如下页面则说明域名解析成功、Nginx服务器正常运行：
 
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/2021-11-11_175846.png)
+![ ](https://gitee.com/eebond0327/images/raw/main/Markdown/2021-11-11_175846.png)
 
 ### 2.安装certbot工具
 
@@ -57,7 +57,7 @@ certbot certonly --webroot -w /srv/www/blog  -d eebond.xyz -m eebond0327@gmail.c
 ```
 
 （3）申请成功后，证书会保存在 /etc/letsencrypt/live/demo.hangge.com/ 下面：
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211111184447.png)
+![ ](https://gitee.com/eebond0327/images/raw/main/Markdown/20211111184447.png)
 
 （4）使用如下命令可以查看证书的有效期：
 
@@ -65,7 +65,7 @@ certbot certonly --webroot -w /srv/www/blog  -d eebond.xyz -m eebond0327@gmail.c
 openssl x509 -noout -dates -in /etc/letsencrypt/live/blog.eebond.xyz/cert.pem
 ```
 
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211111184724.png)
+![ ](https://gitee.com/eebond0327/images/raw/main/Markdown/20211111184724.png)
 
 ### 4.证书更新
 
@@ -153,7 +153,7 @@ nginx -s reload
 
 (4)再次使用浏览器访问<http://blog.eebond.xyz> ，如果正常跳转到<https://blog.eebond.xyz> ，并且地址栏有个小锁图标，则说明https配置成功了：
 
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211111190457.png)
+![ ](https://gitee.com/eebond0327/images/raw/main/Markdown/20211111190457.png)
 
 我这里是把我的博客部署到上面了，有时候输入blog.eebond.xyz没有小锁，可能是浏览器之前访问过，有缓存。
 

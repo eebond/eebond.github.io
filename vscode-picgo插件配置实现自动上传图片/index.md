@@ -9,19 +9,19 @@
 
 ### 安装PicGo插件
 
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331202347.png)
+![ ](https://gitee.com/eebond0327/images/raw/main/Markdown/20220331202347.png)
 
 ### 配置PicGo插件
 
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331202539.png)
+![ ](https://gitee.com/eebond0327/images/raw/main/Markdown/20220331202539.png)
 
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331203130.png)
+![ ](https://gitee.com/eebond0327/images/raw/main/Markdown/20220331203130.png)
 
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331205910.png)
+![ ](https://gitee.com/eebond0327/images/raw/main/Markdown/20220331205910.png)
 
 ### 使用的快捷键
 
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331203252.png)
+![ ](https://gitee.com/eebond0327/images/raw/main/Markdown/20220331203252.png)
 
 至此，就可以在VSCode中快乐的使用图床了。
 
