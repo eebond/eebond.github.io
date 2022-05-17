@@ -25,12 +25,12 @@ chmod 777 PicGo-2.3.0.AppImage
 
 事先准备在GitHub新建一个仓库，用来存放图片，并且添加Token。
 
-![ ](/images/Markdown/20220331205442.png)
+![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331205442.png)
 
 其中自定义域名为  
 
 ```bash
-https://raw.githubusercontent.com/eebond/images/main
+https://raw.githubusercontent.com/eebondhttps://cdn.jsdelivr.net/gh/eebond/images/main
 ```
 
 还可以对图片链接进行CDN加速，需要改变自定义域名为：
@@ -39,12 +39,12 @@ https://raw.githubusercontent.com/eebond/images/main
 https://cdn.jsdelivr.net/gh/用户名/图床仓库名
 ```
 
-![ ](/images/Markdown/20220331185426.png)
+![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331185426.png)
 
 指定存储路径是在仓库中创建的一个文件夹。
 
 快捷键设置：
-![ ](/images/Markdown/20220331141114.png)
+![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331141114.png)
 
 ### 安装必要支撑软件
 

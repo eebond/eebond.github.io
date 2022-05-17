@@ -15,7 +15,7 @@ rz
 ```
 
 输入命令后会弹出文件选择框
-![ ](/images/Markdown/20211117155926.png)
+![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211117155926.png)
 
 ### Linux端发送文件到windows端
 
@@ -24,5 +24,5 @@ sz [文件路径]
 ```
 
 输入命令后会弹出文件保存位置选择框
-![ ](/images/Markdown/20211117160215.png)  
+![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211117160215.png)  
 

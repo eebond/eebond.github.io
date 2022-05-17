@@ -42,7 +42,7 @@
 </div>
 </div><p>（3）需要有自己的域名，并在域名服务器创建一台A记录，指向服务器的公网IP。比如我这里使用blog.eebond.xyz这个域名。等域名解析生效后，访问：<a href="http://blog.eebond.xyz" target="_blank" rel="noopener noreffer">http://blog.eebond.xyz</a> ,可以看到如下页面则说明域名解析成功、Nginx服务器正常运行：</p>
 <p>
-<figure><a class="lightgallery" href="/images/Markdown/2021-11-11_175846.png" title=" " data-thumbnail="/images/Markdown/2021-11-11_175846.png" data-sub-html="<h2> </h2><p> </p>">
+<figure><a class="lightgallery" href="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/2021-11-11_175846.png" title=" " data-thumbnail="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/2021-11-11_175846.png" data-sub-html="<h2> </h2><p> </p>">
         
     </a><figcaption class="image-caption"> </figcaption>
     </figure></p>
@@ -88,7 +88,7 @@
 </div>
 </div><p>（3）申请成功后，证书会保存在 /etc/letsencrypt/live/demo.hangge.com/ 下面：
 
-<figure><a class="lightgallery" href="/images/Markdown/20211111184447.png" title=" " data-thumbnail="/images/Markdown/20211111184447.png" data-sub-html="<h2> </h2><p> </p>">
+<figure><a class="lightgallery" href="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211111184447.png" title=" " data-thumbnail="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211111184447.png" data-sub-html="<h2> </h2><p> </p>">
         
     </a><figcaption class="image-caption"> </figcaption>
     </figure></p>
@@ -102,7 +102,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>
-<figure><a class="lightgallery" href="/images/Markdown/20211111184724.png" title=" " data-thumbnail="/images/Markdown/20211111184724.png" data-sub-html="<h2> </h2><p> </p>">
+<figure><a class="lightgallery" href="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211111184724.png" title=" " data-thumbnail="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211111184724.png" data-sub-html="<h2> </h2><p> </p>">
         
     </a><figcaption class="image-caption"> </figcaption>
     </figure></p>
@@ -249,7 +249,7 @@
 </div>
 </div><p>(4)再次使用浏览器访问<a href="http://blog.eebond.xyz" target="_blank" rel="noopener noreffer">http://blog.eebond.xyz</a> ，如果正常跳转到<a href="https://blog.eebond.xyz" target="_blank" rel="noopener noreffer">https://blog.eebond.xyz</a> ，并且地址栏有个小锁图标，则说明https配置成功了：</p>
 <p>
-<figure><a class="lightgallery" href="/images/Markdown/20211111190457.png" title=" " data-thumbnail="/images/Markdown/20211111190457.png" data-sub-html="<h2> </h2><p> </p>">
+<figure><a class="lightgallery" href="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211111190457.png" title=" " data-thumbnail="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211111190457.png" data-sub-html="<h2> </h2><p> </p>">
         
     </a><figcaption class="image-caption"> </figcaption>
     </figure></p>

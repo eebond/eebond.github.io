@@ -13,7 +13,7 @@
 
 1.通过[oracle官网下载](https://www.oracle.com/java/technologies/downloads/#java8)  
 
-![ ](/images/Markdown/20220417201328.png)
+![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220417201328.png)
 
 但是官网下载，需要Oracle账号。网上找到得账号：  
 
@@ -64,4 +64,4 @@ source /etc/profile
 java -version 
 javac
 ```
-![ ](/images/Markdown/20220417203744.png)
+![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220417203744.png)
