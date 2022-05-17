@@ -9,7 +9,7 @@
 
 登录阿里云网页版，点击F12
 
-![ ](https://gitee.com/eebond0327/images/raw/main/Markdown/20220330162759.png)
+![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220330162759.png)
 
 ### 让阿里云盘实现WebDAV功能
 
