@@ -23,7 +23,7 @@ ssh-keygen -f hexo-deploy-key -t rsa
 
 #### 添加公钥到GitHub Pages仓库中（eebond.github.io)
 
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331135108.png)
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20220331135108.png)
 
 #### 添加公钥到私服仓库所在用户
 
@@ -32,7 +32,7 @@ ssh-keygen -f hexo-deploy-key -t rsa
 ### 添加私钥
 
 将私钥添加到blog_backup仓库的Actions secrets：
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331142405.png)
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20220331142405.png)
 
 ### 配置workflow文件
 

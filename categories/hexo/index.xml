@@ -28,7 +28,7 @@
 <h3 id="添加公钥">添加公钥</h3>
 <h4 id="添加公钥到github-pages仓库中eebondgithubio">添加公钥到GitHub Pages仓库中（eebond.github.io)</h4>
 <p>
-<figure><a class="lightgallery" href="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331135108.png" title=" " data-thumbnail="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331135108.png" data-sub-html="<h2> </h2><p> </p>">
+<figure><a class="lightgallery" href="https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20220331135108.png" title=" " data-thumbnail="https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20220331135108.png" data-sub-html="<h2> </h2><p> </p>">
         
     </a><figcaption class="image-caption"> </figcaption>
     </figure></p>
@@ -37,7 +37,7 @@
 <h3 id="添加私钥">添加私钥</h3>
 <p>将私钥添加到blog_backup仓库的Actions secrets：
 
-<figure><a class="lightgallery" href="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331142405.png" title=" " data-thumbnail="https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20220331142405.png" data-sub-html="<h2> </h2><p> </p>">
+<figure><a class="lightgallery" href="https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20220331142405.png" title=" " data-thumbnail="https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20220331142405.png" data-sub-html="<h2> </h2><p> </p>">
         
     </a><figcaption class="image-caption"> </figcaption>
     </figure></p>

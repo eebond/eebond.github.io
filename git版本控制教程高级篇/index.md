@@ -30,7 +30,7 @@ $ git commit -m "first commit"
  ```
 
  目前的历史记录是这样的。  
- ![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211136.png)
+ ![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211125211136.png)
 
 ### 1. 建立分支
 
@@ -57,7 +57,7 @@ $ git branch
 ```
 
 目前的历史记录是这样的。  
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211444.png)
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211125211444.png)
 
 ### 2. 切换分支
 
@@ -77,7 +77,7 @@ Switched to branch 'issue1'
 ```
 
 目前的历史记录是这样的。  
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125211820.png)  
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211125211820.png)  
 
 在checkout命令指定 -b选项执行，可以创建分支并进行切换。
 
@@ -98,12 +98,12 @@ $ git commit -m "添加add的说明"
  ```  
 
 目前的历史记录是这样的。  
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125212104.png)
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211125212104.png)
 
 ### 3. 合并分支
 
 向master分支合并issue1分支的修改。  
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125212104.png)  
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211125212104.png)  
 
 执行merge命令以合并分支  
 
@@ -136,7 +136,7 @@ Fast-forward
 
  master分支指向的提交移动到和issue1同样的位置。这个是fast-forward（快进）合并。  
 
- ![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214034.png)  
+ ![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211125214034.png)  
 
  打开myfile.txt档案，确认内容。
 
@@ -171,7 +171,7 @@ $ git branch
 * master
 ```
 
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214652.png)  
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211125214652.png)  
 
 ### 5. 并行操作
 
@@ -190,7 +190,7 @@ $ git branch
   master
 ```
 
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125214850.png)  
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211125214850.png)  
 在issue2分支的myfile.txt添加commit命令的说明后提交。  
 
 ```txt
@@ -206,7 +206,7 @@ $ git commit -m "添加commit的说明"
  1 files changed, 2 insertions(+), 0 deletions(-)
 ```
 
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211125215801.png)  
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211125215801.png)  
 
 接着，切换到issue3分支。  
 
@@ -232,7 +232,7 @@ $ git commit -m "添加pull的说明"
  1 files changed, 2 insertions(+), 0 deletions(-)
 ```
 
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126124912.png)  
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211126124912.png)  
 这样，添加commit的说明的操作，和添加pull的说明的操作就并行进行了。  
 
 ### 6. 解决合并的冲突
@@ -252,7 +252,7 @@ Fast-forward
  ```
 
 执行fast-forward（快进）合并。  
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126125942.png)  
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211126125942.png)  
 
 接着合并issue3分支。  
 
@@ -294,7 +294,7 @@ nothing to commit (working directory clean)
 ```
 
 历史记录如下图所示。因为在这次合并中修改了冲突部分，所以会重新创建合并修改的提交记录。这样，master的HEAD就移动到这里了。这种合并不是fast-forward合并，而是non fast-forward合并。  
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126130834.png)  
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211126130834.png)  
 
 ### 7. 用rebase合并
 
@@ -306,7 +306,7 @@ nothing to commit (working directory clean)
 git reset --hard HEAD~
 ```
 
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126145149.png)  
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211126145149.png)  
 
 切换到issue3分支后，对master执行rebase。
 
@@ -351,7 +351,7 @@ $ git rebase --continue
 Applying: 添加pull的说明
 ```
 
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126150215.png)  
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211126150215.png)  
 
 这样，在master分支的issue3分支就可以fast-forward合并了。切换到master分支后执行合并。  
 
@@ -366,7 +366,7 @@ Fast-forward
 ```
 
 myfile.txt的最终内容和merge是一样的，但是历史记录如下。  
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211126150327.png)
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211126150327.png)
 
 ## 二、操作标签
 
@@ -402,7 +402,7 @@ Date:   Wed Jul 18 16:43:27 2012 +0900
     first commit
 ```
 
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128160811.png)  
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211128160811.png)  
 
 ### 2. 添加注解标签
 
@@ -426,7 +426,7 @@ apple           first commit
 banana          连猴子都懂的Git
 ```  
 
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128161512.png)  
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211128161512.png)  
 
 ### 3. 删除标签
 
@@ -436,7 +436,7 @@ banana          连猴子都懂的Git
 git tag -d <tagname>
 ```
 
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211128164422.png)
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211128164422.png)
 
 ## 三、改写提交！
 
@@ -451,7 +451,7 @@ wget https://backlog.com/git-tutorial/cn/download/stepup-tutorial.zip
 我们将修改最近一次的提交。
 
 首先进入stepup-tutorial/tutorial1目录。本地端的历史记录状态如下图显示。  
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195201.png)  
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211129195201.png)  
 
 用log命令确认历史记录。  
 
@@ -488,7 +488,7 @@ git commit --amend
 编辑工具会显示最近一次提交的提交消息，把消息修改为「**添加add和commit的讲解**」并进行保存。  
 
 现在已经修改了提交的内容，然后用log命令确认历史记录和提交消息。  
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195423.png)  
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211129195423.png)  
 
 ```shell
 $ git log
@@ -510,7 +510,7 @@ Date:   Mon Jul 16 23:16:14 2012 +0900
 我们将用revert命令来取消「添加pull的讲解」提交。
 
 首先进入stepup-tutorial/tutorial2目录。本地端的历史记录的状态如下图显示。  
-![ ](https://cdn.jsdelivr.net/gh/eebond/images/Markdown/20211129195640.png)  
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211129195640.png)  
 
 ### 3. reset
 
