@@ -4,14 +4,7 @@
         <link>https://eebond.github.io/posts/</link>
         <description>所有文章 | EEBONDの博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>eebond0327@gmail.com (eebond)</managingEditor>
-            <webMaster>eebond0327@gmail.com (eebond)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 17 May 2022 12:28:13 &#43;0800</lastBuildDate><atom:link href="https://eebond.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>如何将博客推送到个人服务器并自动部署</title>
-    <link>https://eebond.github.io/%E5%A6%82%E4%BD%95%E5%B0%86%E5%8D%9A%E5%AE%A2%E6%8E%A8%E9%80%81%E5%88%B0%E4%B8%AA%E4%BA%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B6%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</link>
-    <pubDate>Tue, 17 May 2022 12:28:13 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://eebond.github.io/%E5%A6%82%E4%BD%95%E5%B0%86%E5%8D%9A%E5%AE%A2%E6%8E%A8%E9%80%81%E5%88%B0%E4%B8%AA%E4%BA%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B6%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
+            <webMaster>eebond0327@gmail.com (eebond)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 16 May 2022 22:21:10 &#43;0800</lastBuildDate><atom:link href="https://eebond.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>如何注册购买搬瓦工VPS</title>
     <link>https://eebond.github.io/%E5%A6%82%E4%BD%95%E6%B3%A8%E5%86%8C%E8%B4%AD%E4%B9%B0%E6%90%AC%E7%93%A6%E5%B7%A5vps/</link>
     <pubDate>Mon, 16 May 2022 22:21:10 &#43;0800</pubDate>
@@ -846,5 +839,499 @@
 </div>
 </div><p>之后就可以本地推送后，GitHub自动部署网站了。</p>
 ]]></description>
+</item><item>
+    <title>vps上挂载阿里云盘并用aria2实现离线下载</title>
+    <link>https://eebond.github.io/vps%E4%B8%8A%E6%8C%82%E8%BD%BD%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98%E5%B9%B6%E7%94%A8aria2%E5%AE%9E%E7%8E%B0%E7%A6%BB%E7%BA%BF%E4%B8%8B%E8%BD%BD/</link>
+    <pubDate>Wed, 30 Mar 2022 16:06:46 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://eebond.github.io/vps%E4%B8%8A%E6%8C%82%E8%BD%BD%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98%E5%B9%B6%E7%94%A8aria2%E5%AE%9E%E7%8E%B0%E7%A6%BB%E7%BA%BF%E4%B8%8B%E8%BD%BD/</guid>
+    <description><![CDATA[<h2 id="vps挂载阿里云盘并用aria2实现离线下载">vps挂载阿里云盘并用aria2实现离线下载</h2>
+<p>之前用cloudreve搭建了一个私人网盘，性能可以，但是vps的空间太小，无法存储很多文件。该网盘还有离线下载功能，需要用aria2来实现。所以我想把私人网盘的存储放在阿里云盘里，并且通过aria2实现两个网盘的离线下载。</p>
+<h3 id="首先获得阿里云盘-refreshtoken">首先获得阿里云盘 refreshToken</h3>
+<p>登录阿里云网页版，点击F12</p>
+<p>
+<figure><a class="lightgallery" href="https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20220330162759.png" title=" " data-thumbnail="https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20220330162759.png" data-sub-html="<h2> </h2><p> </p>">
+        
+    </a><figcaption class="image-caption"> </figcaption>
+    </figure></p>
+<h3 id="让阿里云盘实现webdav功能">让阿里云盘实现WebDAV功能</h3>
+<p>使用开源项目<a href="https://github.com/messense/aliyundrive-WebDAV" target="_blank" rel="noopener noreffer">aliyundrive-WebDAV</a>来实现功能。</p>
+<p>以CentOS7为例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install python3-pip -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">pip3 install aliyundrive-WebDAV
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>升级项目：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pip install --upgrade aliyundrive-WebDAV
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>后台启动命令实现WebDAV功能</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nohup aliyundrive-webdav -I -U 用户名 -W 密码 -r 你的token <span class="p">&amp;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="挂载使用阿里云盘">挂载使用阿里云盘</h3>
+<p>Rclone 是一个用于在多平台进行文件同步的命令行工具，支持多家网盘及文件传输协议。这里主要介绍 Linux 端挂载 WebDAV 的使用方式：</p>
+<p>使用官方脚本安装最新 rclone：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl https://rclone.org/install.sh <span class="p">|</span> sudo bash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来使用 rclone 挂载 WebDAV，输入后回车，一步一步跟着 rclone 的提示来即可，下方#号后面的内容为步骤翻译注释，不要全部复制粘贴进去了，仔细看提示根据自己的实际情况来修改，输入命令 rclone config 开始配置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@eebond ~<span class="o">]</span><span class="c1"># rclone config</span>
+</span></span><span class="line"><span class="cl">2022/03/30 16:46:46 NOTICE: Config file <span class="s2">&#34;/root/.config/rclone/rclone.conf&#34;</span> not found - using defaults
+</span></span><span class="line"><span class="cl">No remotes found, make a new one?
+</span></span><span class="line"><span class="cl">n<span class="o">)</span> New remote
+</span></span><span class="line"><span class="cl">s<span class="o">)</span> Set configuration password
+</span></span><span class="line"><span class="cl">q<span class="o">)</span> Quit config
+</span></span><span class="line"><span class="cl">n/s/q&gt; n
+</span></span><span class="line"><span class="cl">name&gt; aliyun
+</span></span><span class="line"><span class="cl">Option Storage.
+</span></span><span class="line"><span class="cl">Type of storage to configure.
+</span></span><span class="line"><span class="cl">Choose a number from below, or <span class="nb">type</span> in your own value.
+</span></span><span class="line"><span class="cl"> <span class="m">1</span> / 1Fichier
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>fichier<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">2</span> / Akamai NetStorage
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>netstorage<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">3</span> / Alias <span class="k">for</span> an existing remote
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span><span class="nb">alias</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">4</span> / Amazon Drive
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>amazon cloud drive<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">5</span> / Amazon S3 Compliant Storage Providers including AWS, Alibaba, Ceph, Digital Ocean, Dreamhost, IBM COS, Lyve Cloud, Minio, RackCorp, SeaweedFS, and Tencent COS
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>s3<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">6</span> / Backblaze B2
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>b2<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">7</span> / Better checksums <span class="k">for</span> other remotes
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>hasher<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">8</span> / Box
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>box<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">9</span> / Cache a remote
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>cache<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">10</span> / Citrix Sharefile
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>sharefile<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">11</span> / Compress a remote
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>compress<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">12</span> / Dropbox
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>dropbox<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">13</span> / Encrypt/Decrypt a remote
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>crypt<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">14</span> / Enterprise File Fabric
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>filefabric<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">15</span> / FTP Connection
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>ftp<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">16</span> / Google Cloud Storage <span class="o">(</span>this is not Google Drive<span class="o">)</span>
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>google cloud storage<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">17</span> / Google Drive
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>drive<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">18</span> / Google Photos
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>google photos<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">19</span> / Hadoop distributed file system
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>hdfs<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">20</span> / Hubic
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>hubic<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">21</span> / In memory object storage system.
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>memory<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">22</span> / Jottacloud
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>jottacloud<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">23</span> / Koofr, Digi Storage and other Koofr-compatible storage providers
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>koofr<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">24</span> / Local Disk
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span><span class="nb">local</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">25</span> / Mail.ru Cloud
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>mailru<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">26</span> / Mega
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>mega<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">27</span> / Microsoft Azure Blob Storage
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>azureblob<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">28</span> / Microsoft OneDrive
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>onedrive<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">29</span> / OpenDrive
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>opendrive<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">30</span> / OpenStack Swift <span class="o">(</span>Rackspace Cloud Files, Memset Memstore, OVH<span class="o">)</span>
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>swift<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">31</span> / Pcloud
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>pcloud<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">32</span> / Put.io
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>putio<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">33</span> / QingCloud Object Storage
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>qingstor<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">34</span> / SSH/SFTP Connection
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>sftp<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">35</span> / Sia Decentralized Cloud
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>sia<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">36</span> / Storj Decentralized Cloud Storage
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>storj<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">37</span> / Sugarsync
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>sugarsync<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">38</span> / Transparently chunk/split large files
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>chunker<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">39</span> / Union merges the contents of several upstream fs
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>union<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">40</span> / Uptobox
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>uptobox<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">41</span> / Webdav
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>webdav<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">42</span> / Yandex Disk
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>yandex<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">43</span> / Zoho
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>zoho<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">44</span> / http Connection
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>http<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">45</span> / premiumize.me
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>premiumizeme<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="m">46</span> / seafile
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>seafile<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Storage&gt; <span class="m">41</span>
+</span></span><span class="line"><span class="cl">Option url.
+</span></span><span class="line"><span class="cl">URL of http host to connect to.
+</span></span><span class="line"><span class="cl">E.g. https://example.com.
+</span></span><span class="line"><span class="cl">Enter a value.
+</span></span><span class="line"><span class="cl">url&gt; http://127.0.0.1:8080
+</span></span><span class="line"><span class="cl">Option vendor.
+</span></span><span class="line"><span class="cl">Name of the Webdav site/service/software you are using.
+</span></span><span class="line"><span class="cl">Choose a number from below, or <span class="nb">type</span> in your own value.
+</span></span><span class="line"><span class="cl">Press Enter to leave empty.
+</span></span><span class="line"><span class="cl"> <span class="m">1</span> / Nextcloud
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>nextcloud<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">2</span> / Owncloud
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>owncloud<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">3</span> / Sharepoint Online, authenticated by Microsoft account
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>sharepoint<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">4</span> / Sharepoint with NTLM authentication, usually self-hosted or on-premises
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>sharepoint-ntlm<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">5</span> / Other site/service or software
+</span></span><span class="line"><span class="cl">   <span class="se">\ </span><span class="o">(</span>other<span class="o">)</span>
+</span></span><span class="line"><span class="cl">vendor&gt; <span class="m">5</span>
+</span></span><span class="line"><span class="cl">Option user.
+</span></span><span class="line"><span class="cl">User name.
+</span></span><span class="line"><span class="cl">In <span class="k">case</span> NTLM authentication is used, the username should be in the format <span class="s1">&#39;Domain\User&#39;</span>.
+</span></span><span class="line"><span class="cl">Enter a value. Press Enter to leave empty.
+</span></span><span class="line"><span class="cl">user&gt; eebond
+</span></span><span class="line"><span class="cl">Option pass.
+</span></span><span class="line"><span class="cl">Password.
+</span></span><span class="line"><span class="cl">Choose an alternative below. Press Enter <span class="k">for</span> the default <span class="o">(</span>n<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">y<span class="o">)</span> Yes, <span class="nb">type</span> in my own password
+</span></span><span class="line"><span class="cl">g<span class="o">)</span> Generate random password
+</span></span><span class="line"><span class="cl">n<span class="o">)</span> No, leave this optional password blank <span class="o">(</span>default<span class="o">)</span>
+</span></span><span class="line"><span class="cl">y/g/n&gt; y
+</span></span><span class="line"><span class="cl">Enter the password:
+</span></span><span class="line"><span class="cl">password:
+</span></span><span class="line"><span class="cl">Confirm the password:
+</span></span><span class="line"><span class="cl">password:
+</span></span><span class="line"><span class="cl">Option bearer_token.
+</span></span><span class="line"><span class="cl">Bearer token instead of user/pass <span class="o">(</span>e.g. a Macaroon<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">Enter a value. Press Enter to leave empty.
+</span></span><span class="line"><span class="cl">bearer_token&gt; 
+</span></span><span class="line"><span class="cl">Edit advanced config?
+</span></span><span class="line"><span class="cl">y<span class="o">)</span> Yes
+</span></span><span class="line"><span class="cl">n<span class="o">)</span> No <span class="o">(</span>default<span class="o">)</span>
+</span></span><span class="line"><span class="cl">y/n&gt; 
+</span></span><span class="line"><span class="cl">--------------------
+</span></span><span class="line"><span class="cl"><span class="o">[</span>aliyun<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">type</span> <span class="o">=</span> webdav
+</span></span><span class="line"><span class="cl"><span class="nv">url</span> <span class="o">=</span> http://127.0.0.1:8080
+</span></span><span class="line"><span class="cl"><span class="nv">vendor</span> <span class="o">=</span> other
+</span></span><span class="line"><span class="cl"><span class="nv">user</span> <span class="o">=</span> eebond
+</span></span><span class="line"><span class="cl"><span class="nv">pass</span> <span class="o">=</span> *** ENCRYPTED ***
+</span></span><span class="line"><span class="cl">--------------------
+</span></span><span class="line"><span class="cl">y<span class="o">)</span> Yes this is OK <span class="o">(</span>default<span class="o">)</span>
+</span></span><span class="line"><span class="cl">e<span class="o">)</span> Edit this remote
+</span></span><span class="line"><span class="cl">d<span class="o">)</span> Delete this remote
+</span></span><span class="line"><span class="cl">y/e/d&gt; 
+</span></span><span class="line"><span class="cl">Current remotes:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Name                 <span class="nv">Type</span>
+</span></span><span class="line"><span class="cl"><span class="o">====</span>                 <span class="o">====</span>
+</span></span><span class="line"><span class="cl">aliyun               webdav
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">e<span class="o">)</span> Edit existing remote
+</span></span><span class="line"><span class="cl">n<span class="o">)</span> New remote
+</span></span><span class="line"><span class="cl">d<span class="o">)</span> Delete remote
+</span></span><span class="line"><span class="cl">r<span class="o">)</span> Rename remote
+</span></span><span class="line"><span class="cl">c<span class="o">)</span> Copy remote
+</span></span><span class="line"><span class="cl">s<span class="o">)</span> Set configuration password
+</span></span><span class="line"><span class="cl">q<span class="o">)</span> Quit config
+</span></span><span class="line"><span class="cl">e/n/d/r/c/s/q&gt; q
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>创建挂载目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir aliyun
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装fuse</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yum install fuse
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>后台挂载</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nohup rclone mount aliyun:/ /root/aliyun --cache-dir /tmp --allow-other --vfs-cache-mode writes --allow-non-empty <span class="p">&amp;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="安装aria2">安装Aria2</h3>
+<p>下载脚本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget -N git.io/aria2.sh <span class="o">&amp;&amp;</span> chmod +x aria2.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行脚本安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./aria2.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装成功后修改配置文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /root/.aria2c/aria2.conf
+</span></span><span class="line"><span class="cl"><span class="c1"># 下载完成后执行的命令</span>
+</span></span><span class="line"><span class="cl">on-download-complete<span class="o">=</span>/root/.aria2c/upload.sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">vim /root/.aria2c/script.conf
+</span></span><span class="line"><span class="cl"><span class="c1"># 网盘名称(RCLONE 配置时填写的 name)</span>
+</span></span><span class="line"><span class="cl">drive-name<span class="o">=</span>aliyun
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>之后在<a href="https://chrome.google.com/webstore/detail/aria2-for-chrome/mpkodccbngfoacfalldjimigbofkhgjn?hl=zh-CN" target="_blank" rel="noopener noreffer">aria2-for-chrome</a>上使用。</p>
+<h3 id="私人云盘将文件存储放在阿里云盘中">私人云盘将文件存储放在阿里云盘中</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ln -s /root/aliyun/uploads/ uploads
+</span></span></code></pre></td></tr></table>
+</div>
+</div>]]></description>
 </item></channel>
 </rss>
