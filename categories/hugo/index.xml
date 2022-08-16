@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Hugo - 分类 - EEBONDの博客</title>
+        <link>https://eebond.github.io/categories/hugo/</link>
+        <description>Hugo - 分类 - EEBONDの博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>eebond0327@gmail.com (eebond)</managingEditor>
+            <webMaster>eebond0327@gmail.com (eebond)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 16 Aug 2022 18:44:56 &#43;0800</lastBuildDate><atom:link href="https://eebond.github.io/categories/hugo/" rel="self" type="application/rss+xml" /><item>
+    <title>Hugo博客服务器迁移操作记录</title>
+    <link>https://eebond.github.io/hugo%E5%8D%9A%E5%AE%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%81%E7%A7%BB%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/</link>
+    <pubDate>Tue, 16 Aug 2022 18:44:56 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://eebond.github.io/hugo%E5%8D%9A%E5%AE%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%81%E7%A7%BB%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/</guid>
+    <description><![CDATA[<h2 id="前言">前言</h2>
+<p>博客一开始部署在搬瓦工的美西服务器上，但是线路太差，博客访问延迟比较高，现在将博客迁移到DMIT上。</p>
+<h2 id="迁移">迁移</h2>
+]]></description>
+</item></channel>
+</rss>
