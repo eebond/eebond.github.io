@@ -15,6 +15,7 @@
     <description><![CDATA[<h2 id="前言">前言</h2>
 <p>博客一开始部署在搬瓦工的美西服务器上，但是线路太差，博客访问延迟比较高，现在将博客迁移到DMIT上。</p>
 <h2 id="迁移">迁移</h2>
+<h3 id="创建blog文件目录">创建blog文件目录</h3>
 ]]></description>
 </item><item>
     <title>如何注册购买搬瓦工VPS</title>
