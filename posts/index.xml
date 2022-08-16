@@ -13,7 +13,73 @@
     <description><![CDATA[<h2 id="前言">前言</h2>
 <p>博客一开始部署在搬瓦工的美西服务器上，但是线路太差，博客访问延迟比较高，现在将博客迁移到DMIT上。</p>
 <h2 id="迁移">迁移</h2>
-<h3 id="创建blog文件目录">创建blog文件目录</h3>
+<p>以下操作在DMIT服务器上操作，由于DMIT服务器的访问特殊性，只能通过密钥或者添加公钥去登录访问服务器（以root身份），创建的普通用户无法通过密码或者公密钥访问（一个大坑，目前还不知道如何解决），所以这次是git仓库建在git用户目录下，通过root身份去访问。</p>
+<h3 id="新增git用户">新增git用户</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">useradd git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="创建git版本库">创建git版本库</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">su git <span class="o">&amp;&amp;</span> <span class="nb">cd</span>
+</span></span><span class="line"><span class="cl">mkdir blog.git <span class="o">&amp;&amp;</span> <span class="nb">cd</span> blog.git <span class="o">&amp;&amp;</span> git init --bare
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="编写钩子文件">编写钩子文件</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /home/git/blog.git/hooks <span class="o">&amp;&amp;</span> vim post-receive
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>添加下面的命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">git --work-tree=/srv/www/blog checkout -f
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最后给钩子文件添加执行权限</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod +x post-receive
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="创建blog文件目录">创建blog文件目录</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir /srv/www/blog
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>修改blog目录的所有者</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chown git:git /srv/www/blog
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="本地博客仓库处理">本地博客仓库处理</h3>
 ]]></description>
 </item><item>
     <title>如何注册购买搬瓦工VPS</title>

@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/eebond.github.io\/hugo%E5%8D%9A%E5%AE%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%81%E7%A7%BB%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95\/"
-        },"image": ["https:\/\/eebond.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Hugo","wordcount":  64 ,
+        },"image": ["https:\/\/eebond.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Hugo","wordcount":  298 ,
         "url": "https:\/\/eebond.github.io\/hugo%E5%8D%9A%E5%AE%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%81%E7%A7%BB%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95\/","datePublished": "2022-08-16T18:44:56+08:00","dateModified": "2022-08-16T18:44:56+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "EEBOND","logo": "https:\/\/eebond.github.io\/images\/avatar.png"},"author": {
@@ -104,7 +104,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Hugo博客服务器迁移操作记录</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>eebond</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/hugo/"><i class="far fa-folder fa-fw"></i>Hugo</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-08-16">2022-08-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 64 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-08-16">2022-08-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 298 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;<span id="/hugo%E5%8D%9A%E5%AE%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%81%E7%A7%BB%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/" class="leancloud_visitors" data-flag-title="Hugo博客服务器迁移操作记录">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
@@ -118,7 +118,11 @@
     <li><a href="#前言">前言</a></li>
     <li><a href="#迁移">迁移</a>
       <ul>
+        <li><a href="#新增git用户">新增git用户</a></li>
+        <li><a href="#创建git版本库">创建git版本库</a></li>
+        <li><a href="#编写钩子文件">编写钩子文件</a></li>
         <li><a href="#创建blog文件目录">创建blog文件目录</a></li>
+        <li><a href="#本地博客仓库处理">本地博客仓库处理</a></li>
       </ul>
     </li>
   </ul>
@@ -126,7 +130,73 @@
             </div><div class="content" id="content"><h2 id="前言">前言</h2>
 <p>博客一开始部署在搬瓦工的美西服务器上，但是线路太差，博客访问延迟比较高，现在将博客迁移到DMIT上。</p>
 <h2 id="迁移">迁移</h2>
-<h3 id="创建blog文件目录">创建blog文件目录</h3>
+<p>以下操作在DMIT服务器上操作，由于DMIT服务器的访问特殊性，只能通过密钥或者添加公钥去登录访问服务器（以root身份），创建的普通用户无法通过密码或者公密钥访问（一个大坑，目前还不知道如何解决），所以这次是git仓库建在git用户目录下，通过root身份去访问。</p>
+<h3 id="新增git用户">新增git用户</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">useradd git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="创建git版本库">创建git版本库</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">su git <span class="o">&amp;&amp;</span> <span class="nb">cd</span>
+</span></span><span class="line"><span class="cl">mkdir blog.git <span class="o">&amp;&amp;</span> <span class="nb">cd</span> blog.git <span class="o">&amp;&amp;</span> git init --bare
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="编写钩子文件">编写钩子文件</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /home/git/blog.git/hooks <span class="o">&amp;&amp;</span> vim post-receive
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>添加下面的命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">git --work-tree=/srv/www/blog checkout -f
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最后给钩子文件添加执行权限</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod +x post-receive
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="创建blog文件目录">创建blog文件目录</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir /srv/www/blog
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>修改blog目录的所有者</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chown git:git /srv/www/blog
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="本地博客仓库处理">本地博客仓库处理</h3>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
