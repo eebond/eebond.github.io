@@ -112,7 +112,7 @@
 <p>以下方法适用于 CentOS 7 与 CentOS 8</p>
 <p>开机时可以看到目前系统里有 4 个版本的 kernel（rescue 不算）</p>
 <p>
-<figure><a class="lightgallery" href="/images/Markdown/20211125223359.png" title=" " data-thumbnail="/images/Markdown/20211125223359.png" data-sub-html="<h2> </h2><p> </p>">
+<figure><a class="lightgallery" href="https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211125223359.png" title=" " data-thumbnail="https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211125223359.png" data-sub-html="<h2> </h2><p> </p>">
         
     </a><figcaption class="image-caption"> </figcaption>
     </figure></p>
@@ -148,7 +148,7 @@
 （个人建议 /boot 空间最好大于 500MB，就不太会碰到这个问题了）</p>
 <p>重开机看一下
 
-<figure><a class="lightgallery" href="/images/Markdown/20211125223805.png" title=" " data-thumbnail="/images/Markdown/20211125223805.png" data-sub-html="<h2> </h2><p> </p>">
+<figure><a class="lightgallery" href="https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211125223805.png" title=" " data-thumbnail="https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211125223805.png" data-sub-html="<h2> </h2><p> </p>">
         
     </a><figcaption class="image-caption"> </figcaption>
     </figure></p>

@@ -6,7 +6,7 @@
 
 开机时可以看到目前系统里有 4 个版本的 kernel（rescue 不算）
 
-![ ](/images/Markdown/20211125223359.png)
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211125223359.png)
 
 编辑 /etc/yum.conf，并将下面的参数更改为 2 或 3  
 
@@ -32,7 +32,7 @@ package-cleanup --oldkernels --count=2
 （个人建议 /boot 空间最好大于 500MB，就不太会碰到这个问题了）
 
 重开机看一下
-![ ](/images/Markdown/20211125223805.png)
+![ ](https://fastly.jsdelivr.net/gh/eebond/images/Markdown/20211125223805.png)
 
 剩下两个 kernel 了
 
