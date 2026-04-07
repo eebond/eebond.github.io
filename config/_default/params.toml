@@ -6,9 +6,9 @@
 # FixIt 0.2.15 | CHANGED FixIt theme version
 version = "0.4.X" # e.g. "0.2.X", "0.2.15", "v0.2.15" etc.
 # site description
-description = ""
+description = "程序员的自我修炼手册"
 # site keywords
-keywords = []
+keywords = ["IT", "程序员","Java"]
 # site default theme ["light", "dark", "auto"]
 defaultTheme = "auto"
 # which hash function used for SRI, when empty, no SRI is used
@@ -47,15 +47,15 @@ disableThemeInject = false
 
 # Author Configuration
 [author]
-name = ""
-email = ""
-link = ""
-avatar = ""
+name = "eebond"
+email = "eebond0327@gmail.com"
+link = "https://github.com/eebond/"
+avatar = "/images/favicon.png"
 
 # FixIt 0.3.0 | NEW public Git repository information only then enableGitInfo is true
 [gitInfo]
 # e.g. "https://github.com/hugo-fixit/docs"
-repo = ""
+repo = "https://github.com/eebond/eebond.github.io"
 branch = "main"
 # the content directory path relative to the root of the repository
 dir = "content"
@@ -66,11 +66,11 @@ issueTpl = "title=[BUG]%20{title}&body=|Field|Value|%0A|-|-|%0A|Title|{title}|%0
 # App icon config
 [app]
 # optional site title override for the app when added to an iOS home screen or Android launcher
-title = "FixIt"
+title = "EEBONDの博客"
 # whether to omit favicon resource links
 noFavicon = false
 # modern SVG favicon to use in place of older style .png and .ico files
-svgFavicon = ""
+svgFavicon = "/images/favicon.png"
 # Safari mask icon color
 iconColor = "#5bbad5"
 # Windows v8-10 tile color
@@ -83,7 +83,7 @@ dark = "#252627"
 
 # Search config
 [search]
-enable = false
+enable = true
 # type of search engine ["algolia", "fuse", "cse", "post-chat"]
 type = "fuse"
 # max index length of the chunked content
@@ -145,7 +145,7 @@ mobileMode = "auto"
 # URL of the LOGO
 logo = ""
 # title name
-name = ""
+name = "EEBONDの博客"
 # you can add extra information before the name (HTML format is supported), such as icons
 pre = ""
 # you can add extra information after the name (HTML format is supported), such as icons
@@ -158,7 +158,7 @@ typeit = false
 # subtitle name
 name = ""
 # whether to use typeit animation for subtitle name
-typeit = false
+typeit = true
 
 # FixIt 0.2.18 | NEW Breadcrumb config
 [breadcrumb]
@@ -184,7 +184,7 @@ copyright = true
 # whether to show the author
 author = true
 # Site creation year
-since = ""
+since = "2022"
 # FixIt 0.2.12 | NEW Public network security only in China (HTML format is supported)
 gov = ""
 # ICP info only in China (HTML format is supported)
@@ -195,8 +195,8 @@ license = ""
 # FixIt 0.3.0 | NEW whether to show Hugo and theme info
 [footer.powered]
 enable = true
-hugoLogo = true
-themeLogo = true
+hugoLogo = false
+themeLogo = false
 
 # FixIt 0.2.17 | CHANGED Site creation time
 [footer.siteTime]
@@ -271,19 +271,19 @@ orderby = "name" # Order of tags, optional values: ["name", "count"]
 
 # Home page profile
 [home.profile]
-enable = false
+enable = true
 # FixIt 0.4.0 | NEW Whether to show profile and content only in the first home page
 onlyFirstPage = false
 # Gravatar Email for preferred avatar in home page
 gravatarEmail = ""
 # URL of avatar shown in home page, default is author's avatar
-avatarURL = ""
+avatarURL = "/images/avatar.jpg"
 # FixIt 0.2.17 | NEW identifier of avatar menu link
 avatarMenu = ""
 # title shown in home page (HTML format is supported)
-title = ""
+title = "程序员修炼手册"
 # subtitle shown in home page (HTML format is supported)
-subtitle = ""
+subtitle = "每天学习、记录成长过程！"
 # whether to use typeit animation for subtitle
 typeit = true
 # whether to show social links
@@ -387,7 +387,7 @@ Credly = ""
 Bluesky = ""
 Phone = ""
 Email = ""
-RSS = true
+RSS = false
 
 # custom social links like the following
 # [params.social.twitter]

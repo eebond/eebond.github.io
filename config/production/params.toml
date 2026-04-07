@@ -2,18 +2,18 @@ description = "This is my new Hugo FixIt site"
 keywords = ["Hugo", "FixIt"]
 
 [author]
-name = "Lruihao"
-email = ""
-link = "https://github.com/Lruihao"
-avatar = "https://lruihao.cn/images/avatar.jpg"
+name = "eebond"
+email = "eebond0327@gmail.com"
+link = "https://github.com/eebond/"
+avatar = "/images/avatar.jpg"
 
 [app]
-title = "Hugo FixIt Blog"
+title = "EEBONDの博客"
 
 [header]
 
 [header.title]
-logo = "/hugo-fixit-starter/images/fixit.min.svg"
+logo = "/images/favicon.png"
 
 [home]
 
