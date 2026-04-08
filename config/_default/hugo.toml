@@ -4,7 +4,7 @@
 # -------------------------------------------------------------------------------------
 
 # website title
-title = "EEBONDの博客"
+title = ""
 # Hostname (and path) to the root
 baseURL = "http://localhost:1313"
 # theme list
