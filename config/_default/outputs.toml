@@ -16,7 +16,6 @@ home = [
   "rss",
   "archives",
   "offline",
-  "link",
   "search"
 ]
 page = [

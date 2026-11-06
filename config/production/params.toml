@@ -4,6 +4,7 @@ keywords = ["Hugo", "FixIt"]
 [author]
 name = "eebond"
 email = "eebond0327@gmail.com"
+link = "https://github.com/eebond/"
 avatar = "/images/avatar.jpg"
 
 [app]
